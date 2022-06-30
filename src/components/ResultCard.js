@@ -42,14 +42,14 @@ export const ResultCard = ({ movie }) => {
             disabled={watchlistDisabled}
             onClick={() => addMovieToWatchlist(movie)}
           >
-            Add to watchlist
+            <i class="fa-solid fa-circle-plus"></i> watchlist
           </button>
           <button
             className='btn'
             disabled={watchedDisabled}
             onClick={() => addMovieToWatched(movie)}
           >
-            Add to Watched
+            <i class="fa-solid fa-circle-check"></i> watched
           </button>
         </div>
       </div>

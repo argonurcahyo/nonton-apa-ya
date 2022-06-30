@@ -12,15 +12,20 @@ export const Header = () => {
 
                     <ul className="nav-links">
                         <li>
-                            <Link to="/">WatchList</Link>
+                            <Link to="/">
+                                <i class="fa-solid fa-list"></i>
+                                WatchList
+                            </Link>
                         </li>
                         <li>
-                            <Link to="/watched">Watched</Link>
+                            <Link to="/watched">
+                                <i class="fa-solid fa-circle-check"></i>
+                                Watched</Link>
                         </li>
                         <li>
                             <Link to="/add" className="btn btn-main">
-                            <i className="fa-plus"></i> Add
-                                </Link>
+                                <i class="fa-solid fa-circle-plus"></i> Add
+                            </Link>
                         </li>
                     </ul>
                 </div>
