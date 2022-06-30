@@ -18,7 +18,9 @@ export const Header = () => {
                             <Link to="/watched">Watched</Link>
                         </li>
                         <li>
-                            <Link to="/add" className="btn btn-main">+ Add</Link>
+                            <Link to="/add" className="btn btn-main">
+                            <i className="fa-plus"></i> Add
+                                </Link>
                         </li>
                     </ul>
                 </div>
