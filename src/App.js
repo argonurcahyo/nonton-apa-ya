@@ -9,6 +9,7 @@ import "./lib/fontawesome6/css/all.min.css";
 import { GlobalProvider } from "./context/GlobalState";
 
 function App() {
+  useTitle("NontonApaYa")
   return (
     <GlobalProvider>
       <Router>
@@ -21,6 +22,17 @@ function App() {
       </Router>
     </GlobalProvider>
   );
+}
+
+const useTitle = (title) => {
+  React.useEffect(() => {
+    const prevTitle = document.title;
+    document.title = title;
+
+    return () => {
+      document.title = prevTitle;
+    };
+  }, []);
 }
 
 export default App;
