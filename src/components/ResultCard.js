@@ -1,19 +1,19 @@
-import React, { useContext } from 'react'
-import Moment from 'react-moment';
-import { GlobalContext } from '../context/GlobalState'
+import React, { useContext } from "react";
+import Moment from "react-moment";
+import { GlobalContext } from "../context/GlobalState";
 
 export const ResultCard = ({ movie }) => {
-  const {
-    addMovieToWatchlist,
-    addMovieToWatched,
-    watchlist,
-    watched,
-  } = useContext(GlobalContext);
+  const { addMovieToWatchlist, addMovieToWatched, watchlist, watched } =
+    useContext(GlobalContext);
 
   let storedMovie = watchlist.find((o) => o.id === movie.id);
   let storedMovieWatched = watched.find((o) => o.id === movie.id);
 
-  const watchlistDisabled = storedMovie ? true : storedMovieWatched ? true : false;
+  const watchlistDisabled = storedMovie
+    ? true
+    : storedMovieWatched
+    ? true
+    : false;
   const watchedDisabled = storedMovieWatched ? true : false;
 
   return (
@@ -32,9 +32,9 @@ export const ResultCard = ({ movie }) => {
       <div className="info">
         <div className="header">
           <h3 className="title">{movie.title}</h3>
-          <h4 className="release-date">{
-            <Moment format="YYYY">{movie.release_date}</Moment>
-          }</h4>
+          <h4 className="release-date">
+            {<Moment format="YYYY">{movie.release_date}</Moment>}
+          </h4>
         </div>
         <div className="controls">
           <button
@@ -42,17 +42,17 @@ export const ResultCard = ({ movie }) => {
             disabled={watchlistDisabled}
             onClick={() => addMovieToWatchlist(movie)}
           >
-            <i class="fa-solid fa-circle-plus"></i> watchlist
+            <i class="fa-solid fa-plus"></i> watchlist
           </button>
           <button
-            className='btn'
+            className="btn"
             disabled={watchedDisabled}
             onClick={() => addMovieToWatched(movie)}
           >
-            <i class="fa-solid fa-circle-check"></i> watched
+            <i class="fa-solid fa-check"></i> watched
           </button>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

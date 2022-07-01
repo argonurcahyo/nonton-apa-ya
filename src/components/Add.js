@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ResultCard } from "./ResultCard";
+import Transitions from "./Transition";
 
 export const Add = () => {
   const [query, setQuery] = useState("");
@@ -24,29 +25,31 @@ export const Add = () => {
   };
 
   return (
-    <div className="add-page">
-      <div className="container">
-        <div className="add-content">
-          <div className="input-wrapper">
-            <input
-              type="text"
-              placeholder="Cari film"
-              value={query}
-              onChange={onChange}
-            />
-          </div>
+    <Transitions>
+      <div className="add-page">
+        <div className="container">
+          <div className="add-content">
+            <div className="input-wrapper">
+              <input
+                type="text"
+                placeholder="Cari film"
+                value={query}
+                onChange={onChange}
+              />
+            </div>
 
-          {results.length > 0 && (
-            <ul className="results">
-              {results.map((movie) => (
-                <li key={movie.id}>
-                  <ResultCard movie={movie} />
-                </li>
-              ))}
-            </ul>
-          )}
+            {results.length > 0 && (
+              <ul className="results">
+                {results.map((movie) => (
+                  <li key={movie.id}>
+                    <ResultCard movie={movie} />
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </Transitions>
   );
 };
