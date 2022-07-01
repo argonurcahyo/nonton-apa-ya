@@ -9,7 +9,7 @@ export const Header = () => {
     <div className="inner-content">
      <div className="brand">
       <Link to="/">
-       <img src={popcorn} alt="NontonApaYa" />
+       {/* <img src={popcorn} alt="NontonApaYa" /> */}
       </Link>
      </div>
 
