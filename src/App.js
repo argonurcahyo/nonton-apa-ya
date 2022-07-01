@@ -7,9 +7,11 @@ import { Add } from "./components/Add";
 import "./App.css";
 import "./lib/fontawesome6/css/all.min.css";
 import { GlobalProvider } from "./context/GlobalState";
+import { Popular } from "./components/Popular";
 
 function App() {
-  useTitle("NontonApaYa")
+  useTitle("NontonApaYa");
+
   return (
     <GlobalProvider>
       <Router>
@@ -18,6 +20,7 @@ function App() {
           <Route exact path="/" element={<Watchlist />} />
           <Route exact path="/watched" element={<Watched />} />
           <Route exact path="/add" element={<Add />} />
+          <Route exact path="/popular" element={<Popular />} />
         </Routes>
       </Router>
     </GlobalProvider>
@@ -33,6 +36,6 @@ const useTitle = (title) => {
       document.title = prevTitle;
     };
   }, [title]);
-}
+};
 
 export default App;

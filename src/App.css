@@ -238,6 +238,12 @@ header .nav-links li:last-child {
   display: block;
 }
 
+.movie-card img.darken {
+  width: 100%;
+  display: block;
+  filter: brightness(25%);
+}
+
 .movie-card .overlay {
   position: absolute;
   top: 0;

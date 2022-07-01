@@ -3,8 +3,15 @@ import Moment from "react-moment";
 import { GlobalContext } from "../context/GlobalState";
 
 export const ResultCard = ({ movie }) => {
-  const { addMovieToWatchlist, addMovieToWatched, watchlist, watched } =
+  const {
+    addMovieToWatchlist,
+    addMovieToWatched,
+    watchlist,
+    watched
+  } =
     useContext(GlobalContext);
+    
+  const BASE_IMG_URL = "https://image.tmdb.org/t/p/w200";
 
   let storedMovie = watchlist.find((o) => o.id === movie.id);
   let storedMovieWatched = watched.find((o) => o.id === movie.id);
@@ -12,8 +19,9 @@ export const ResultCard = ({ movie }) => {
   const watchlistDisabled = storedMovie
     ? true
     : storedMovieWatched
-    ? true
-    : false;
+      ? true
+      : false;
+
   const watchedDisabled = storedMovieWatched ? true : false;
 
   return (
@@ -21,7 +29,7 @@ export const ResultCard = ({ movie }) => {
       <div className="poster-wrapper">
         {movie.poster_path ? (
           <img
-            src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+            src={`${BASE_IMG_URL}${movie.poster_path}`}
             alt={`${movie.title}`}
           />
         ) : (
