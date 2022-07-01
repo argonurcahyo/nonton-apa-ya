@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import popcorn from ".img/popcorn.png";
+import popcorn from "../img/popcorn.png";
 
 export const Header = () => {
  return (
