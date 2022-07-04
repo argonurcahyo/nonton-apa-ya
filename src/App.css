@@ -197,6 +197,10 @@ header .nav-links li:last-child {
   margin-bottom: 30px;
 }
 
+.modal-header h1 {
+  margin : 0px
+}
+
 .count-pill {
   display: block;
   background-color: var(--secondary);
@@ -238,7 +242,7 @@ header .nav-links li:last-child {
   display: block;
 }
 
-.movie-card img.darken {
+img.darken {
   width: 100%;
   display: block;
   filter: brightness(25%);
@@ -295,4 +299,8 @@ header .nav-links li:last-child {
   color: #c4c4c4;
   font-size: 3rem;
   text-align: center;
+}
+
+img.detail-backdrop{
+  border-radius: 5px;
 }

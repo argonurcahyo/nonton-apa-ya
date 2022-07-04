@@ -31,7 +31,7 @@ export const Header = () => {
             </li>
             <li>
               <Link to="/add" className="btn btn-main">
-                <i class="fa-solid fa-plus"></i> Add
+                <i className="fa-solid fa-plus"></i> Add
               </Link>
             </li>
           </ul>

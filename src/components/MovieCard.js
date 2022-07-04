@@ -8,7 +8,7 @@ import ProgressiveImage from "react-progressive-graceful-image";
 Modal.setAppElement("#root");
 
 export const MovieCard = ({ movie, type }) => {
-  const BASE_IMG_URL = "https://image.tmdb.org/t/p/w200";
+  const BASE_IMG_URL = "https://image.tmdb.org/t/p/original";
   const BASE_BD_URL = "https://image.tmdb.org/t/p/original";
   const { watchlist, watched } = useContext(GlobalContext);
   //React Modal
@@ -54,7 +54,7 @@ export const MovieCard = ({ movie, type }) => {
         style={customStyles}
       >
         <div
-          className="header"
+          className="modal-header"
           style={{
             display: "flex",
             alignItems: "center",
@@ -64,15 +64,23 @@ export const MovieCard = ({ movie, type }) => {
           <h1>{movie.title}</h1>
           {/* <span className="count-pill">{movie.original_language}</span> */}
           <button className="btn" onClick={handleCloseModal}>
-            <i class="fa fa-times"></i>
+            <i className="fa fa-times"></i>
           </button>
         </div>
+        <p>{movie.release_date}</p>
 
         <ProgressiveImage
           src={`${BASE_BD_URL}${movie.backdrop_path}`}
           placeholder="https://placekitten.com/500/300"
         >
-          {(src) => <img width="100%" src={src} alt={movie.title} />}
+          {(src) => (
+            <img
+              className="detail-backdrop"
+              width="100%"
+              src={src}
+              alt={movie.title}
+            />
+          )}
         </ProgressiveImage>
 
         <p>{movie.overview}</p>

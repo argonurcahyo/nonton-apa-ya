@@ -3,14 +3,9 @@ import Moment from "react-moment";
 import { GlobalContext } from "../context/GlobalState";
 
 export const ResultCard = ({ movie }) => {
-  const {
-    addMovieToWatchlist,
-    addMovieToWatched,
-    watchlist,
-    watched
-  } =
+  const { addMovieToWatchlist, addMovieToWatched, watchlist, watched } =
     useContext(GlobalContext);
-    
+
   const BASE_IMG_URL = "https://image.tmdb.org/t/p/w200";
 
   let storedMovie = watchlist.find((o) => o.id === movie.id);
@@ -19,8 +14,8 @@ export const ResultCard = ({ movie }) => {
   const watchlistDisabled = storedMovie
     ? true
     : storedMovieWatched
-      ? true
-      : false;
+    ? true
+    : false;
 
   const watchedDisabled = storedMovieWatched ? true : false;
 
@@ -29,6 +24,7 @@ export const ResultCard = ({ movie }) => {
       <div className="poster-wrapper">
         {movie.poster_path ? (
           <img
+            className={!watchlistDisabled ? "able" : "darken"}
             src={`${BASE_IMG_URL}${movie.poster_path}`}
             alt={`${movie.title}`}
           />
@@ -50,14 +46,14 @@ export const ResultCard = ({ movie }) => {
             disabled={watchlistDisabled}
             onClick={() => addMovieToWatchlist(movie)}
           >
-            <i class="fa-solid fa-plus"></i> watchlist
+            <i className="fa-solid fa-plus"></i> watchlist
           </button>
           <button
             className="btn"
             disabled={watchedDisabled}
             onClick={() => addMovieToWatched(movie)}
           >
-            <i class="fa-solid fa-check"></i> watched
+            <i className="fa-solid fa-check"></i> watched
           </button>
         </div>
       </div>
