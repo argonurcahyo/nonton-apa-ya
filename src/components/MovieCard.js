@@ -7,11 +7,13 @@ import ProgressiveImage from "react-progressive-graceful-image";
 
 Modal.setAppElement("#root");
 
-export const MovieCard = ({ movie, type }) => {
+export const MovieCard = ({ movie, type, index }) => {
   const BASE_IMG_URL = "https://image.tmdb.org/t/p/original";
   const BASE_BD_URL = "https://image.tmdb.org/t/p/original";
   const { watchlist, watched } = useContext(GlobalContext);
+
   //React Modal
+  //---------------
   const [showModal, setShowModal] = useState(false);
   const handleOpenModal = () => {
     console.log(movie);
@@ -29,6 +31,7 @@ export const MovieCard = ({ movie, type }) => {
       transform: "translate(-40%, -10%)",
     },
   };
+  // ---------------
 
   let storedMovie = watchlist.find((o) => o.id === movie.id);
   let storedMovieWatched = watched.find((o) => o.id === movie.id);
@@ -36,17 +39,28 @@ export const MovieCard = ({ movie, type }) => {
   const watchlistDisabled = storedMovie
     ? true
     : storedMovieWatched
-    ? true
-    : false;
+      ? true
+      : false;
 
   return (
+
     <motion.div
+      key={movie.id}
+      initial={{
+        opacity: 0,
+        translateX: 0,
+        translateY: 50,
+      }}
+      animate={{ opacity: 1, translateX: 0, translateY: 0 }}
+      transition={{ duration: 0.3, delay: index * 0.2 }}
       whileHover={{
         scale: 1.05,
         transition: { duration: 0.5 },
       }}
       whileTap={{ scale: 1 }}
     >
+      {/* React Modal */}
+      {/* -------------- */}
       <Modal
         isOpen={showModal}
         onRequestClose={handleCloseModal}
@@ -62,7 +76,6 @@ export const MovieCard = ({ movie, type }) => {
           }}
         >
           <h1>{movie.title}</h1>
-          {/* <span className="count-pill">{movie.original_language}</span> */}
           <button className="btn" onClick={handleCloseModal}>
             <i className="fa fa-times"></i>
           </button>
@@ -73,31 +86,47 @@ export const MovieCard = ({ movie, type }) => {
           src={`${BASE_BD_URL}${movie.backdrop_path}`}
           placeholder="https://placekitten.com/500/300"
         >
-          {(src) => (
+          {(src, loading) => (
             <img
               className="detail-backdrop"
               width="100%"
               src={src}
               alt={movie.title}
+              style={{ opacity: loading ? 0.5 : 1 }}
             />
           )}
         </ProgressiveImage>
 
         <p>{movie.overview}</p>
       </Modal>
+      {/* -------------- */}
 
-      <div className="movie-card" role="button" onClick={handleOpenModal}>
-        <div className="overlay"></div>
-        <img
+      <div
+        className="movie-card"
+      >
+        <div
+          className="overlay"
           role="button"
-          className={
-            type === "popular" && watchlistDisabled ? "darken" : "able"
-          }
-          style={{ pointerEvents: "auto" }}
-          src={`${BASE_IMG_URL}${movie.poster_path}`}
-          alt={`${movie.title}`}
+          onClick={handleOpenModal}
         />
-        <MovieControls type={type} movie={movie} />
+
+        <ProgressiveImage
+          src={`${BASE_IMG_URL}${movie.poster_path}`}
+          placeholder="https://placekitten.com/169/256"
+        >
+          {(src, loading) => (
+            <img
+              role="button"
+              className={
+                type === "popular" && watchlistDisabled ? "darken" : "able"
+              }
+              style={{ opacity: loading ? 0.5 : 1 }}
+              src={src}
+              alt={`${movie.title}`}
+            />
+          )}
+        </ProgressiveImage>
+        {(type === "popular" && watchlistDisabled) ? <></> : <MovieControls type={type} movie={movie} />}
       </div>
     </motion.div>
   );

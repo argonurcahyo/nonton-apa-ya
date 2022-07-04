@@ -11,9 +11,7 @@ export const Watchlist = () => {
       <div className="movie-page">
         <div className="container">
           <div className="header">
-            <h1 className="heading">
-              My Watchlist
-            </h1>
+            <h1 className="heading">My Watchlist</h1>
 
             <span className="count-pill">
               {watchlist.length} {watchlist.length === 1 ? "Movie" : "Movies"}
@@ -22,11 +20,12 @@ export const Watchlist = () => {
 
           {watchlist.length > 0 ? (
             <div className="movie-grid">
-              {watchlist.map((movie) => (
+              {watchlist.map((movie, index) => (
                 <MovieCard
                   movie={movie}
                   key={movie.id}
-                  type="watchlist" />
+                  type="watchlist"
+                  index={index} />
               ))}
             </div>
           ) : (
