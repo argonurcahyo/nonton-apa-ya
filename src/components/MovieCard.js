@@ -4,6 +4,7 @@ import { GlobalContext } from "../context/GlobalState";
 import { motion } from "framer-motion";
 import Modal from "react-modal";
 import ProgressiveImage from "react-progressive-graceful-image";
+import Moment from 'react-moment';
 
 Modal.setAppElement("#root");
 
@@ -80,16 +81,20 @@ export const MovieCard = ({ movie, type, index }) => {
             <i className="fa fa-times"></i>
           </button>
         </div>
-        <p>{movie.release_date}</p>
+        <p>
+          {<Moment format="MMM Do, YYYY">{movie.release_date}</Moment>}
+        </p>
 
         <ProgressiveImage
           src={`${BASE_BD_URL}${movie.backdrop_path}`}
-          placeholder="https://placekitten.com/500/300"
+          // placeholder="https://placekitten.com/500/300"
+          placeholder="https://i.pinimg.com/originals/3d/6a/a9/3d6aa9082f3c9e285df9970dc7b762ac.gif"
         >
           {(src, loading) => (
             <img
               className="detail-backdrop"
               width="100%"
+              height="100%"
               src={src}
               alt={movie.title}
               style={{ opacity: loading ? 0.5 : 1 }}
@@ -112,7 +117,8 @@ export const MovieCard = ({ movie, type, index }) => {
 
         <ProgressiveImage
           src={`${BASE_IMG_URL}${movie.poster_path}`}
-          placeholder="https://placekitten.com/169/256"
+          // placeholder="https://placekitten.com/169/256"
+          placeholder="https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-12.jpg"
         >
           {(src, loading) => (
             <img

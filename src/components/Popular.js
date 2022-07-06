@@ -1,30 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { MovieCard } from "./MovieCard";
 import Transitions from "./Transition";
+import tmdb from '../apis/tmdb';
 
 export const Popular = () => {
   const [popular, setPopular] = useState([]);
 
   useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        if (!data.errors) {
-          setPopular(data.results);
-        } else {
-          setPopular([]);
-        }
-      });
+    const fetchPopularMovies = async () => {
+      try {
+        const fetchedPopulars = await tmdb.get("movie/popular");
+        setPopular(fetchedPopulars.data.results);
+      } catch (error) {
+        console.log(error);
+        setPopular([]);
+      }
+    }
+    fetchPopularMovies();
   }, []);
 
   return (
     <Transitions>
       <div className="movie-page">
         <div className="container">
-          <div className="header">
+          <div className="header" style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}>
             <h1 className="heading">Popular</h1>
+            <div>
+              <button className="btn">
+                <i className="fas fa-sort"></i>  SORT
+              </button>
+            </div>
           </div>
           {popular.length > 0 ? (
             <div className="movie-grid">
