@@ -64,6 +64,8 @@ export const MovieCard = ({ movie, type, index }) => {
     : storedMovieWatched
       ? true
       : false;
+  const isWatchlist = storedMovie ? true : false;
+  const isWatched = storedMovieWatched ? true : false;
 
   return (
 
@@ -76,15 +78,53 @@ export const MovieCard = ({ movie, type, index }) => {
       }}
       animate={{ opacity: 1, translateX: 0, translateY: 0 }}
       transition={{ duration: 0.3, delay: index * 0.2 }}
-      whileHover={{
-        scale: 1.05,
-        transition: { duration: 0.5, delay: 0 },
-      }}
-      whileTap={{
-        scale: 1,
-        transition: { delay: 0 }
-      }}
+    // whileHover={{
+    //   scale: 1.05,
+    //   transition: { duration: 0.5, delay: 0 },
+    // }}
+    // whileTap={{
+    //   scale: 1,
+    //   transition: { delay: 0 }
+    // }}
     >
+
+      <div
+        className="movie-card"
+      >
+        {(type === "popular" || type === "search") ?
+          (isWatchlist ?
+            <div class="ribbon blue"><span>WATCHLIST</span></div>
+            : isWatched ?
+              <div class="ribbon red"><span>WATCHED</span></div>
+              : <></>)
+          : <></>}
+
+        <div
+          className="overlay"
+          role="button"
+          onClick={handleOpenModal}
+        />
+
+        <ProgressiveImage
+          src={`${BASE_IMG_URL}${movie.poster_path}`}
+          // placeholder="https://placekitten.com/169/256"
+          placeholder="https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-12.jpg"
+        >
+          {(src, loading) => (
+            <img
+              role="button"
+              className={
+                type === "popular" && watchlistDisabled ? "darken" : "able"
+              }
+              style={{ opacity: loading ? 0.5 : 1 }}
+              src={src}
+              alt={`${movie.title}`}
+            />
+          )}
+        </ProgressiveImage>
+        {((type === "popular" || type === "search") &&
+          watchlistDisabled) ? <></> : <MovieControls type={type} movie={movie} />}
+      </div>
       {/* React Modal */}
       {/* -------------- */}
       <Modal
@@ -145,60 +185,23 @@ export const MovieCard = ({ movie, type, index }) => {
           <i><code>{movieDetail.tagline}</code></i>
         )}
         <p>{movie.overview}</p>
-        <h4>Casts</h4>
         {movieDetail && (
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-evenly",
-            }}
-          >
+          <div className="cast-box">
             {movieDetail.credits.cast.slice(0, 5).map((c) =>
-              <>
+              <div className="profile-box" key={c.id}>
                 <div className="profile">
                   <img
                     alt={c.name}
                     src={`${BASE_IMG_URL}${c.profile_path}`} />
-
-                </div><br/>
-                <small>{c.name}</small>
-              </>)}
+                </div>
+                <span className="actor-name">{c.name}</span>
+              </div>)}
           </div>
 
         )}
 
       </Modal>
       {/* -------------- */}
-
-      <div
-        className="movie-card"
-      >
-        <div
-          className="overlay"
-          role="button"
-          onClick={handleOpenModal}
-        />
-
-        <ProgressiveImage
-          src={`${BASE_IMG_URL}${movie.poster_path}`}
-          // placeholder="https://placekitten.com/169/256"
-          placeholder="https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-12.jpg"
-        >
-          {(src, loading) => (
-            <img
-              role="button"
-              className={
-                type === "popular" && watchlistDisabled ? "darken" : "able"
-              }
-              style={{ opacity: loading ? 0.5 : 1 }}
-              src={src}
-              alt={`${movie.title}`}
-            />
-          )}
-        </ProgressiveImage>
-        {(type === "popular" && watchlistDisabled) ? <></> : <MovieControls type={type} movie={movie} />}
-      </div>
     </motion.div>
   );
 };

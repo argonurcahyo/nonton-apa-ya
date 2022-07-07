@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import tmdb from "../apis/tmdb";
-import { ResultCard } from "./ResultCard";
+// import { ResultCard } from "./ResultCard";
+import { MovieCard } from "./MovieCard";
 import Transitions from "./Transition";
 
 export const Add = () => {
@@ -40,13 +41,14 @@ export const Add = () => {
             <div className="input-wrapper">
               <input
                 type="text"
-                placeholder="Cari film"
+                placeholder="Search film..."
                 value={query}
                 onChange={onChange}
               />
             </div>
+            <br/>
 
-            {results.length > 0 && (
+            {/* {results.length > 0 && (
               <ul className="results">
                 {results.map((movie) => (
                   <li key={movie.id}>
@@ -54,6 +56,21 @@ export const Add = () => {
                   </li>
                 ))}
               </ul>
+            )} */}
+
+            {results.length > 0 ? (
+              <div className="movie-grid">
+                {results.map((movie, index) => (
+                  <MovieCard
+                    movie={movie}
+                    index={index}
+                    key={movie.id}
+                    type="search"
+                  />
+                ))}
+              </div>
+            ) : (
+              <h2 className="no-movies">Search something...</h2>
             )}
           </div>
         </div>

@@ -4,6 +4,7 @@ import { GlobalContext } from "../context/GlobalState";
 export const MovieControls = ({ type, movie }) => {
   const {
     addMovieToWatched,
+    addMovieToWatchlist,
     removeMovieFromWatchlist,
     moveToWatchlist,
     removeFromWatched,
@@ -13,7 +14,10 @@ export const MovieControls = ({ type, movie }) => {
     <div className="inner-card-controls">
       {type === "watchlist" && (
         <>
-          <button className="ctrl-btn" onClick={() => addMovieToWatched(movie)}>
+          <button
+            className="ctrl-btn"
+            onClick={() => addMovieToWatched(movie)}
+          >
             <i className="fa-fw far fa-eye"></i>
           </button>
           <button
@@ -27,7 +31,10 @@ export const MovieControls = ({ type, movie }) => {
 
       {type === "watched" && (
         <>
-          <button className="ctrl-btn" onClick={() => moveToWatchlist(movie)}>
+          <button
+            className="ctrl-btn"
+            onClick={() => moveToWatchlist(movie)}
+          >
             <i className="fa-fw far fa-eye-slash"></i>
           </button>
           <button
@@ -41,13 +48,28 @@ export const MovieControls = ({ type, movie }) => {
 
       {type === "popular" && (
         <>
-          <button className="ctrl-btn" onClick={() => moveToWatchlist(movie)}>
+          <button
+            className="ctrl-btn"
+            onClick={() => addMovieToWatchlist(movie)}>
             <i className="fa-fw far fa-plus"></i>
           </button>
         </>
       )}
 
-      {type === "popular-watchlist" && <></>}
-    </div>
+      {type === "search" && (
+        <>
+          <button className="ctrl-btn" onClick={() => addMovieToWatchlist(movie)}>
+            <i className="fa-fw far fa-plus"></i>
+          </button>
+          <button className="ctrl-btn" onClick={() => {
+            addMovieToWatchlist(movie);
+            addMovieToWatched(movie);
+          }}>
+            <i className="fa-fw far fa-eye"></i>
+          </button>
+        </>
+      )
+      }
+    </div >
   );
 };

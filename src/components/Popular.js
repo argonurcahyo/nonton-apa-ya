@@ -21,6 +21,7 @@ export const Popular = () => {
 
   return (
     <Transitions>
+      
       <div className="movie-page">
         <div className="container">
           <div className="header" style={{

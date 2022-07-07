@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalState";
 // import popcorn from "../img/popcorn.png";
 
@@ -18,23 +18,37 @@ export const Header = () => {
 
           <ul className="nav-links">
             <li>
-              <Link to="/popular">Popular</Link>
+              <NavLink
+                to="/popular"
+                className={({ isActive }) => isActive ? "btn" : undefined}>
+                Popular
+              </NavLink>
             </li>
             <li>
-              <Link to="/">
+              <NavLink
+                to="/"
+                className={({ isActive }) => isActive ? "btn" : undefined}>
                 WatchList
                 <small>
                   {watchlist.length > 0 && "  (" + watchlist.length + ")"}
                 </small>
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link to="/watched">Watched</Link>
+              <NavLink
+                to="/watched"
+                className={({ isActive }) => isActive ? "btn" : undefined}>
+                Watched
+              </NavLink>
             </li>
             <li>
-              <Link to="/add" className="btn btn-main">
+              <NavLink
+                to="/add"
+                // className={`btn btn-main ${({ isActive }) => isActive ? "active" : ""}}`}
+                className={({ isActive }) => isActive ? "btn" : undefined}
+              >
                 <i className="fa-solid fa-plus"></i> Add
-              </Link>
+              </NavLink>
             </li>
           </ul>
         </div>
