@@ -83,7 +83,7 @@ header {
 
 header .inner-content {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   padding: 10px 0;
 }
@@ -230,13 +230,13 @@ header .nav-links li:last-child {
 .header-pill {
   padding: 6px;
   margin-left: 10px;
-  background-color: var(--secondary);
+  background-color: var(--white);
   color: var(--primary);
   border-radius: 50%;
-  font-weight: 600;
+  font-weight: 700;
   display: inline-block;
   border: none;
-  font-size: smaller;
+  font-size: small;
   transition: all 0.3s ease;
   line-height: 1.1;
 }

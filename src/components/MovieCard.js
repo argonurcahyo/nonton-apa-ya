@@ -103,12 +103,11 @@ export const MovieCard = ({ movie, type, index }) => {
           onClick={handleOpenModal}
         />
         <ProgressiveImage
-          src={`${BASE_IMG_URL}${movie.poster_path}`}
-          placeholder="https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-12.jpg"
+          src={movie.poster_path ? `${BASE_IMG_URL}${movie.poster_path}` : "https://placekitten.com/141/213"}
+          placeholder="https://i.stack.imgur.com/h6viz.gif"
         >
           {(src, loading) => (
             <img
-              role="button"
               className={
                 (type === "popular" || type === "search") ?
                   (isWatchlist ? "watchlist" : isWatched ? "watched" : "")
@@ -172,7 +171,7 @@ export const MovieCard = ({ movie, type, index }) => {
         </div>
 
         <ProgressiveImage
-          src={`${BASE_BD_URL}${movie.backdrop_path}`}
+          src={movie.backdrop_path ? `${BASE_BD_URL}${movie.backdrop_path}` : "https://placekitten.com/458/305"}
           placeholder="https://i.pinimg.com/originals/3d/6a/a9/3d6aa9082f3c9e285df9970dc7b762ac.gif"
         >
           {(src, loading) => (
@@ -190,11 +189,11 @@ export const MovieCard = ({ movie, type, index }) => {
         {movieDetail && (
           <i><code>{movieDetail.tagline}</code></i>
         )}
-        
+
         <p className="movie-overview">{movie.overview}</p>
         {movieDetail && (
           <div className="cast-grid cast-box">
-            {movieDetail.credits.cast.slice(0, 8).map((c) =>
+            {movieDetail.credits.cast.slice(0, 5).map((c) =>
               <div className="profile-box" key={c.id}>
                 <div className="profile">
                   <img

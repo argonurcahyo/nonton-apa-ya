@@ -1,31 +1,31 @@
-import React, { useEffect, useState } from "react";
-import { MovieCard } from "./MovieCard";
-import Transitions from "./Transition";
+import React, { useEffect, useState } from 'react'
 import tmdb from '../apis/tmdb';
+import { MovieCard } from './MovieCard';
+import Transitions from './Transition';
 
-export const Popular = () => {
-  const [popular, setPopular] = useState([]);
+const Upcoming = () => {
+  const [upcoming, setUpcoming] = useState([]);
 
   useEffect(() => {
-    const fetchPopularMovies = async () => {
+    const fetchUpcomingMovies = async () => {
       try {
-        const fetchedPopulars = await tmdb.get("movie/popular",{
-          params:{
-            language:"en-US"
+        const fetchedUpcoming = await tmdb.get("movie/upcoming", {
+          params: {
+            language: "en-US",
+            region: "US"
           }
         });
-        setPopular(fetchedPopulars.data.results);
+        setUpcoming(fetchedUpcoming.data.results);
       } catch (error) {
         console.log(error);
-        setPopular([]);
+        setUpcoming([]);
       }
     }
-    fetchPopularMovies();
+    fetchUpcomingMovies();
   }, []);
 
   return (
     <Transitions>
-      
       <div className="movie-page">
         <div className="container">
           <div className="header" style={{
@@ -33,16 +33,16 @@ export const Popular = () => {
             alignItems: "center",
             justifyContent: "space-between",
           }}>
-            <h1 className="heading">Popular</h1>
+            <h1 className="heading">Upcoming</h1>
             <div>
               <button className="btn">
                 <i className="fas fa-sort"></i>  SORT
               </button>
             </div>
           </div>
-          {popular.length > 0 ? (
+          {upcoming.length > 0 ? (
             <div className="movie-grid">
-              {popular.map((movie, index) => (
+              {upcoming.map((movie, index) => (
                 <MovieCard
                   movie={movie}
                   index={index}
@@ -57,5 +57,7 @@ export const Popular = () => {
         </div>
       </div>
     </Transitions>
-  );
-};
+  )
+}
+
+export default Upcoming

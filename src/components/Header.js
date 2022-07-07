@@ -5,6 +5,7 @@ import { GlobalContext } from "../context/GlobalState";
 
 export const Header = () => {
   const { watchlist } = useContext(GlobalContext);
+  const activeClassname = "btn";
 
   return (
     <header>
@@ -19,17 +20,30 @@ export const Header = () => {
           <ul className="nav-links">
             <li>
               <NavLink
+                to="/toprated"
+                className={({ isActive }) => isActive ? activeClassname : undefined}>
+                <i className="fa fas fa-star"></i>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/upcoming"
+                className={({ isActive }) => isActive ? activeClassname : undefined}>
+                <i className="fa fas fa-hourglass"></i>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
                 to="/popular"
-                className={({ isActive }) => isActive ? "btn" : undefined}>
-                Popular
+                className={({ isActive }) => isActive ? activeClassname : undefined}>
+                <i className="fa fas fa-fire-flame-curved"></i>
               </NavLink>
             </li>
             <li>
               <NavLink
                 to="/"
-                className={({ isActive }) => isActive ? "btn" : undefined}>
-                WatchList
-
+                className={({ isActive }) => isActive ? activeClassname : undefined}>
+                <i className="fa fas fa-list"></i>
                 {watchlist.length > 0 && (
                   <span className="header-pill">
                     {watchlist.length}
@@ -41,17 +55,17 @@ export const Header = () => {
             <li>
               <NavLink
                 to="/watched"
-                className={({ isActive }) => isActive ? "btn" : undefined}>
-                Watched
+                className={({ isActive }) => isActive ? activeClassname : undefined}>
+                <i className="fa fas fa-eye"></i>
               </NavLink>
             </li>
             <li>
               <NavLink
                 to="/add"
                 // className={`btn btn-main ${({ isActive }) => isActive ? "active" : ""}}`}
-                className={({ isActive }) => isActive ? "btn" : undefined}
+                className={({ isActive }) => isActive ? activeClassname : undefined}
               >
-                <i className="fa-solid fa-plus"></i> Add
+                <i className="fa-solid fa-search"></i>
               </NavLink>
             </li>
           </ul>
