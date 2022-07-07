@@ -29,9 +29,13 @@ export const Header = () => {
                 to="/"
                 className={({ isActive }) => isActive ? "btn" : undefined}>
                 WatchList
-                <small>
-                  {watchlist.length > 0 && "  (" + watchlist.length + ")"}
-                </small>
+
+                {watchlist.length > 0 && (
+                  <span className="header-pill">
+                    {watchlist.length}
+                  </span>
+                )}
+
               </NavLink>
             </li>
             <li>

@@ -46,7 +46,7 @@ export const Add = () => {
                 onChange={onChange}
               />
             </div>
-            <br/>
+            <br />
 
             {/* {results.length > 0 && (
               <ul className="results">

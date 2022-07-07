@@ -6,6 +6,7 @@ import Modal from "react-modal";
 import ProgressiveImage from "react-progressive-graceful-image";
 import Moment from 'react-moment';
 import tmdb from "../apis/tmdb";
+import ReactToolTip from 'react-tooltip';
 
 Modal.setAppElement("#root");
 
@@ -39,7 +40,8 @@ export const MovieCard = ({ movie, type, index }) => {
   const [showModal, setShowModal] = useState(false);
 
   const handleOpenModal = () => {
-    console.log(movieDetail.credits.cast);
+    console.log(movieDetail);
+    ReactToolTip.hide();
     setShowModal(true);
   };
   const handleCloseModal = () => setShowModal(false);
@@ -50,7 +52,7 @@ export const MovieCard = ({ movie, type, index }) => {
       right: "auto",
       bottom: "auto",
       // marginRight: "40%",
-      width: "600px",
+      width: "500px",
       transform: "translate(-40%, -10%)",
     },
   };
@@ -78,14 +80,7 @@ export const MovieCard = ({ movie, type, index }) => {
       }}
       animate={{ opacity: 1, translateX: 0, translateY: 0 }}
       transition={{ duration: 0.3, delay: index * 0.2 }}
-    // whileHover={{
-    //   scale: 1.05,
-    //   transition: { duration: 0.5, delay: 0 },
-    // }}
-    // whileTap={{
-    //   scale: 1,
-    //   transition: { delay: 0 }
-    // }}
+
     >
 
       <div
@@ -93,28 +88,31 @@ export const MovieCard = ({ movie, type, index }) => {
       >
         {(type === "popular" || type === "search") ?
           (isWatchlist ?
-            <div class="ribbon blue"><span>WATCHLIST</span></div>
+            <div className="ribbon blue"><span>WATCHLIST</span></div>
             : isWatched ?
-              <div class="ribbon red"><span>WATCHED</span></div>
+              <div className="ribbon red"><span>WATCHED</span></div>
               : <></>)
           : <></>}
 
         <div
           className="overlay"
           role="button"
+          data-tip={movie.title}
+          data-for="tooltip"
+          data-event-off='focusout'
           onClick={handleOpenModal}
         />
-
         <ProgressiveImage
           src={`${BASE_IMG_URL}${movie.poster_path}`}
-          // placeholder="https://placekitten.com/169/256"
           placeholder="https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-12.jpg"
         >
           {(src, loading) => (
             <img
               role="button"
               className={
-                type === "popular" && watchlistDisabled ? "darken" : "able"
+                (type === "popular" || type === "search") ?
+                  (isWatchlist ? "watchlist" : isWatched ? "watched" : "")
+                  : ""
               }
               style={{ opacity: loading ? 0.5 : 1 }}
               src={src}
@@ -163,10 +161,18 @@ export const MovieCard = ({ movie, type, index }) => {
             {movieDetail.status}
           </span>}
         </div>
+        <div className="genre-box">
+          {movieDetail && (
+            movieDetail.genres.map((g) => (
+              <span
+                key={g.id}
+                className="genre-pill">{g.name}</span>
+            ))
+          )}
+        </div>
 
         <ProgressiveImage
           src={`${BASE_BD_URL}${movie.backdrop_path}`}
-          // placeholder="https://placekitten.com/500/300"
           placeholder="https://i.pinimg.com/originals/3d/6a/a9/3d6aa9082f3c9e285df9970dc7b762ac.gif"
         >
           {(src, loading) => (
@@ -184,10 +190,11 @@ export const MovieCard = ({ movie, type, index }) => {
         {movieDetail && (
           <i><code>{movieDetail.tagline}</code></i>
         )}
-        <p>{movie.overview}</p>
+        
+        <p className="movie-overview">{movie.overview}</p>
         {movieDetail && (
-          <div className="cast-box">
-            {movieDetail.credits.cast.slice(0, 5).map((c) =>
+          <div className="cast-grid cast-box">
+            {movieDetail.credits.cast.slice(0, 8).map((c) =>
               <div className="profile-box" key={c.id}>
                 <div className="profile">
                   <img

@@ -1,14 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;900&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
   --primary: #032541;
   --secondary: #21d07a;
   --white: #fff;
+  --watchlist: #2989d8;
+  --watched: #F70505
 }
 
 body {
-  font-family: "Inter", sans-serif;
+  font-family: "Source Sans Pro", "Poppins", "Inter", sans-serif;
   padding: 0;
   margin: 0;
 }
@@ -202,13 +205,54 @@ header .nav-links li:last-child {
 }
 
 .count-pill {
-  display: block;
   background-color: var(--secondary);
   padding: 5px 15px;
   font-size: 1.125rem;
   font-weight: 600;
   border-radius: 999px;
   color: var(--primary);
+}
+
+.genre-box {
+  display: flex;
+}
+
+.genre-pill {
+  display: block;
+  background-color: var(--primary);
+  padding: 3px 10px 5px 10px;
+  font-size: xx-small;
+  margin-right: 2px;
+  border-radius: 999px;
+  color: var(--white);
+}
+
+.header-pill {
+  padding: 6px;
+  margin-left: 10px;
+  background-color: var(--secondary);
+  color: var(--primary);
+  border-radius: 50%;
+  font-weight: 600;
+  display: inline-block;
+  border: none;
+  font-size: smaller;
+  transition: all 0.3s ease;
+  line-height: 1.1;
+}
+
+.btn .header-pill {
+  padding: 5px;
+  margin-left: 10px;
+  background-color: var(--primary);
+  color: var(--white);
+  border-radius: 50%;
+  font-weight: 600;
+  display: inline-block;
+  border: none;
+  font-size: smaller;
+  transition: all 0.3s ease;
+  line-height: 1.1;
 }
 
 .movie-page .heading {
@@ -228,6 +272,12 @@ header .nav-links li:last-child {
   }
 }
 
+.cast-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 10px;
+}
+
 .movie-card {
   width: 100%;
   border-radius: 10px;
@@ -242,8 +292,20 @@ header .nav-links li:last-child {
   display: block;
 }
 
-img.darken {
+img.watchlist {
   opacity: 0.5;
+  border: 3px solid var(--watchlist);
+  border-radius: 10px;
+}
+
+input {
+  font-family: "Source Sans Pro";
+}
+
+img.watched {
+  opacity: 0.5;
+  border: 3px solid var(--watched);
+  border-radius: 10px;
 }
 
 .movie-card .overlay {
@@ -258,6 +320,7 @@ img.darken {
 
 .movie-card:hover .overlay {
   border: 3px solid var(--secondary);
+  border-radius: 10px;
 }
 
 .movie-card .inner-card-controls {
@@ -301,7 +364,8 @@ img.darken {
 }
 
 img.detail-backdrop {
-  border-radius: 5px;
+  border-radius: 10px;
+  margin-top: 10px;
 }
 
 .ReactModal__Overlay {
@@ -318,11 +382,11 @@ img.detail-backdrop {
   transition: opacity 100ms ease-in-out;
 }
 
-.cast-box {
+/* .cast-box {
   display: flex;
   align-items: flex-start;
   justify-content: space-evenly;
-}
+} */
 
 .profile {
   position: relative;
@@ -342,8 +406,8 @@ img.detail-backdrop {
 }
 
 span.actor-name {
-  margin: 10px 10px 0 0;
-  font-size: smaller;
+  margin: 5px 0px 5px 0;
+  font-size: x-small;
   display: block;
 }
 
@@ -369,8 +433,8 @@ span.actor-name {
   top: -5px;
   /* z-index: 1; */
   overflow: hidden;
-  width: 75px;
-  height: 75px;
+  width: 100px;
+  height: 100px;
   text-align: right;
 }
 
