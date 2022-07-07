@@ -13,8 +13,10 @@ Modal.setAppElement("#root");
 export const MovieCard = ({ movie, type, index }) => {
   const BASE_IMG_URL = "https://image.tmdb.org/t/p/original";
   const BASE_BD_URL = "https://image.tmdb.org/t/p/original";
+  const BASE_PRV_URL = "https://image.tmdb.org/t/p/w200";
   const { watchlist, watched } = useContext(GlobalContext);
   const [movieDetail, setMovieDetail] = useState("");
+  const [providers, setProviders] = useState([]);
 
   useEffect(() => {
     const movieId = movie.id;
@@ -22,7 +24,7 @@ export const MovieCard = ({ movie, type, index }) => {
       try {
         const fetchedMovieDetails = await tmdb.get(`movie/${id}`, {
           params: {
-            append_to_response: "credits",
+            append_to_response: "credits, watch",
           }
         });
         setMovieDetail(fetchedMovieDetails.data);
@@ -35,12 +37,24 @@ export const MovieCard = ({ movie, type, index }) => {
     fetchMovieDetails(movieId);
   }, [movie, movieDetail]);
 
+  useEffect(() => {
+    const fetchWatchProviders = async (id) => {
+      try {
+        const fetchedProviders = await tmdb.get(`movie/${id}/watch/providers`);
+        setProviders(fetchedProviders.data.results.ID);
+      } catch (error) {
+        setProviders([])
+      }
+    }
+    movie.id && fetchWatchProviders(movie.id);
+  }, [movie])
+
   //React Modal
   //---------------
   const [showModal, setShowModal] = useState(false);
 
   const handleOpenModal = () => {
-    console.log(movieDetail);
+    console.log(providers);
     ReactToolTip.hide();
     setShowModal(true);
   };
@@ -204,6 +218,36 @@ export const MovieCard = ({ movie, type, index }) => {
               </div>)}
           </div>
 
+        )}
+        {providers && (
+          <div className="modal-header">
+            <div className="provider-grid">
+              {providers.flatrate?.map(c => (
+                <div className="provider-box">
+                  <img
+                    alt={c.name}
+                    src={`${BASE_PRV_URL}${c.logo_path}`} />
+                  {/* <span>{c.provider_name}</span> */}
+                </div>
+              ))}
+              {providers.buy?.map(c => (
+                <div className="provider-box">
+                  <img
+                    alt={c.name}
+                    src={`${BASE_PRV_URL}${c.logo_path}`} />
+                  {/* <span>{c.provider_name}</span> */}
+                </div>
+              ))}
+              {providers.rent?.map(c => (
+                <div className="provider-box">
+                  <img
+                    alt={c.name}
+                    src={`${BASE_PRV_URL}${c.logo_path}`} />
+                  {/* <span>{c.provider_name}</span> */}
+                </div>
+              ))}
+            </div>
+          </div>
         )}
 
       </Modal>

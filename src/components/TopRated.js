@@ -13,7 +13,7 @@ const TopRated = () => {
                 const fetchedTopRated = await tmdb.get("movie/top_rated", {
                     params: {
                         language: "en-US",
-                        region: "KR"
+                        region: "US"
                     }
                 });
                 setTopRated(fetchedTopRated.data.results);
