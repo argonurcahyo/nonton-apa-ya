@@ -1,10 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MovieControls } from "./MovieControls";
 import { GlobalContext } from "../context/GlobalState";
 import { motion } from "framer-motion";
 import Modal from "react-modal";
 import ProgressiveImage from "react-progressive-graceful-image";
 import Moment from 'react-moment';
+import tmdb from "../apis/tmdb";
 
 Modal.setAppElement("#root");
 
@@ -12,23 +13,44 @@ export const MovieCard = ({ movie, type, index }) => {
   const BASE_IMG_URL = "https://image.tmdb.org/t/p/original";
   const BASE_BD_URL = "https://image.tmdb.org/t/p/original";
   const { watchlist, watched } = useContext(GlobalContext);
+  const [movieDetail, setMovieDetail] = useState("");
+
+  useEffect(() => {
+    const movieId = movie.id;
+    const fetchMovieDetails = async (id) => {
+      try {
+        const fetchedMovieDetails = await tmdb.get(`movie/${id}`, {
+          params: {
+            append_to_response: "credits",
+          }
+        });
+        setMovieDetail(fetchedMovieDetails.data);
+      } catch (error) {
+        setMovieDetail("");
+      }
+
+    }
+
+    fetchMovieDetails(movieId);
+  }, [movie, movieDetail]);
 
   //React Modal
   //---------------
   const [showModal, setShowModal] = useState(false);
+
   const handleOpenModal = () => {
-    console.log(movie);
+    console.log(movieDetail.credits.cast);
     setShowModal(true);
   };
   const handleCloseModal = () => setShowModal(false);
   const customStyles = {
     content: {
-      top: "20%",
-      left: "50%",
+      top: "100px",
+      left: "40%",
       right: "auto",
       bottom: "auto",
-      marginRight: "-50%",
-      width: "60%",
+      // marginRight: "40%",
+      width: "600px",
       transform: "translate(-40%, -10%)",
     },
   };
@@ -56,13 +78,17 @@ export const MovieCard = ({ movie, type, index }) => {
       transition={{ duration: 0.3, delay: index * 0.2 }}
       whileHover={{
         scale: 1.05,
-        transition: { duration: 0.5 },
+        transition: { duration: 0.5, delay: 0 },
       }}
-      whileTap={{ scale: 1 }}
+      whileTap={{
+        scale: 1,
+        transition: { delay: 0 }
+      }}
     >
       {/* React Modal */}
       {/* -------------- */}
       <Modal
+        key={movie.id}
         isOpen={showModal}
         onRequestClose={handleCloseModal}
         contentLabel="Example Modal"
@@ -76,14 +102,27 @@ export const MovieCard = ({ movie, type, index }) => {
             justifyContent: "space-between",
           }}
         >
+
           <h1>{movie.title}</h1>
           <button className="btn" onClick={handleCloseModal}>
             <i className="fa fa-times"></i>
           </button>
         </div>
-        <p>
-          {<Moment format="MMM Do, YYYY">{movie.release_date}</Moment>}
-        </p>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <p>
+            {<Moment format="MMMM Do, YYYY">{movie.release_date}</Moment>}
+          </p>
+
+          {movieDetail && <span className="count-pill">
+            {movieDetail.status}
+          </span>}
+        </div>
 
         <ProgressiveImage
           src={`${BASE_BD_URL}${movie.backdrop_path}`}
@@ -94,15 +133,41 @@ export const MovieCard = ({ movie, type, index }) => {
             <img
               className="detail-backdrop"
               width="100%"
-              height="100%"
               src={src}
               alt={movie.title}
               style={{ opacity: loading ? 0.5 : 1 }}
             />
           )}
         </ProgressiveImage>
+        <br />
 
+        {movieDetail && (
+          <i><code>{movieDetail.tagline}</code></i>
+        )}
         <p>{movie.overview}</p>
+        <h4>Casts</h4>
+        {movieDetail && (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-evenly",
+            }}
+          >
+            {movieDetail.credits.cast.slice(0, 5).map((c) =>
+              <>
+                <div className="profile">
+                  <img
+                    alt={c.name}
+                    src={`${BASE_IMG_URL}${c.profile_path}`} />
+
+                </div><br/>
+                <small>{c.name}</small>
+              </>)}
+          </div>
+
+        )}
+
       </Modal>
       {/* -------------- */}
 

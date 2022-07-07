@@ -198,7 +198,7 @@ header .nav-links li:last-child {
 }
 
 .modal-header h1 {
-  margin : 0px
+  margin: 0px
 }
 
 .count-pill {
@@ -219,7 +219,7 @@ header .nav-links li:last-child {
 .movie-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 30px;
+  grid-gap: 10px;
 }
 
 @media (min-width: 992px) {
@@ -230,7 +230,7 @@ header .nav-links li:last-child {
 
 .movie-card {
   width: 100%;
-  border-radius: 5px;
+  border-radius: 10px;
   overflow: hidden;
   position: relative;
   border: 0;
@@ -243,9 +243,7 @@ header .nav-links li:last-child {
 }
 
 img.darken {
-  width: 100%;
-  display: block;
-  filter: brightness(25%);
+  opacity: 0.5;
 }
 
 .movie-card .overlay {
@@ -301,6 +299,34 @@ img.darken {
   text-align: center;
 }
 
-img.detail-backdrop{
+img.detail-backdrop {
   border-radius: 5px;
+}
+
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 500ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+  transition: opacity 100ms ease-in-out;
+}
+
+.profile {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.profile img {
+  width: 100%;
+  height: auto;
+  margin-top: -15px;
 }

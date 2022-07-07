@@ -10,9 +10,11 @@ export const Header = () => {
     <header>
       <div className="container">
         <div className="inner-content">
-          <div className="brand">
-            <Link to="/">{/* <img src={popcorn} alt="NontonApaYa" /> */}</Link>
-          </div>
+          {/* <div className="brand">
+            <Link to="/">
+            <img src={popcorn} alt="NontonApaYa" />
+            </Link>
+          </div> */}
 
           <ul className="nav-links">
             <li>
