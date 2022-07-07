@@ -13,8 +13,10 @@ Modal.setAppElement("#root");
 export const MovieCard = ({ movie, type, index }) => {
   const BASE_IMG_URL = "https://image.tmdb.org/t/p/original";
   const BASE_BD_URL = "https://image.tmdb.org/t/p/original";
+  const BASE_PRV_URL = "https://image.tmdb.org/t/p/w200";
   const { watchlist, watched } = useContext(GlobalContext);
   const [movieDetail, setMovieDetail] = useState("");
+  const [providers, setProviders] = useState([]);
 
   useEffect(() => {
     const movieId = movie.id;
@@ -22,7 +24,7 @@ export const MovieCard = ({ movie, type, index }) => {
       try {
         const fetchedMovieDetails = await tmdb.get(`movie/${id}`, {
           params: {
-            append_to_response: "credits",
+            append_to_response: "credits, watch",
           }
         });
         setMovieDetail(fetchedMovieDetails.data);
@@ -35,12 +37,24 @@ export const MovieCard = ({ movie, type, index }) => {
     fetchMovieDetails(movieId);
   }, [movie, movieDetail]);
 
+  useEffect(() => {
+    const fetchWatchProviders = async (id) => {
+      try {
+        const fetchedProviders = await tmdb.get(`movie/${id}/watch/providers`);
+        setProviders(fetchedProviders.data.results.ID);
+      } catch (error) {
+        setProviders([])
+      }
+    }
+    movie.id && fetchWatchProviders(movie.id);
+  }, [movie])
+
   //React Modal
   //---------------
   const [showModal, setShowModal] = useState(false);
 
   const handleOpenModal = () => {
-    console.log(movieDetail);
+    console.log(providers);
     ReactToolTip.hide();
     setShowModal(true);
   };
@@ -52,7 +66,9 @@ export const MovieCard = ({ movie, type, index }) => {
       right: "auto",
       bottom: "auto",
       // marginRight: "40%",
-      width: "500px",
+      maxHeight: "calc(100vh-2rem)",
+      maxWidth: "calc(100vw-2rem)",
+      width: "auto",
       transform: "translate(-40%, -10%)",
     },
   };
@@ -160,6 +176,7 @@ export const MovieCard = ({ movie, type, index }) => {
             {movieDetail.status}
           </span>}
         </div>
+
         <div className="genre-box">
           {movieDetail && (
             movieDetail.genres.map((g) => (
@@ -168,7 +185,21 @@ export const MovieCard = ({ movie, type, index }) => {
                 className="genre-pill">{g.name}</span>
             ))
           )}
-        </div>
+        </div><br/>
+        {providers && (
+          <div>
+            <div className="provider-grid">
+              {providers.flatrate?.map(c => (
+                <div className="provider-box">
+                  <img
+                    alt={c.name}
+                    src={`${BASE_PRV_URL}${c.logo_path}`} />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
 
         <ProgressiveImage
           src={movie.backdrop_path ? `${BASE_BD_URL}${movie.backdrop_path}` : "https://placekitten.com/458/305"}
@@ -205,7 +236,6 @@ export const MovieCard = ({ movie, type, index }) => {
           </div>
 
         )}
-
       </Modal>
       {/* -------------- */}
     </motion.div>

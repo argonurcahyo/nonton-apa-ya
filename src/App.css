@@ -513,3 +513,30 @@ span.actor-name {
 .nav-links .active {
   text-decoration: underline;
 }
+
+.provider-box {
+  width: 20px;
+}
+
+.provider-box img {
+  width: 100%;
+}
+
+.provider-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-gap: 10px;
+}
+
+@media (min-width: 100px) {
+  .provider-grid {
+    display: grid;
+    grid-gap: 10px;
+  }
+
+  .cast-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+  }
+}
