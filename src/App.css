@@ -528,15 +528,15 @@ span.actor-name {
   grid-gap: 10px;
 }
 
-@media (min-width: 100px) {
+@media only screen and (max-width: 480px) {
   .provider-grid {
     display: grid;
     grid-gap: 10px;
   }
 
-  /* .cast-grid {
+  .cast-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
-  } */
+  }
 }

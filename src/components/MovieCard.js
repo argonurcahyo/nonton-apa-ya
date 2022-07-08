@@ -68,7 +68,6 @@ export const MovieCard = ({ movie, type, index }) => {
       // marginRight: "40%",
       maxHeight: "calc(100vh-2rem)",
       maxWidth: "calc(100vw-2rem)",
-      overflowY: "auto",
       width: "auto",
       transform: "translate(-40%, -10%)",
     },
