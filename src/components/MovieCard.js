@@ -68,6 +68,7 @@ export const MovieCard = ({ movie, type, index }) => {
       // marginRight: "40%",
       maxHeight: "calc(100vh-2rem)",
       maxWidth: "calc(100vw-2rem)",
+      overflowY: "auto",
       width: "auto",
       transform: "translate(-40%, -10%)",
     },
@@ -185,7 +186,7 @@ export const MovieCard = ({ movie, type, index }) => {
                 className="genre-pill">{g.name}</span>
             ))
           )}
-        </div><br/>
+        </div><br />
         {providers && (
           <div>
             <div className="provider-grid">
