@@ -185,7 +185,7 @@ export const MovieCard = ({ movie, type, index }) => {
                 className="genre-pill">{g.name}</span>
             ))
           )}
-        </div><br/>
+        </div><br />
         {providers && (
           <div>
             <div className="provider-grid">
