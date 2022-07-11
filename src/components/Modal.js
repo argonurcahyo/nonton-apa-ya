@@ -39,14 +39,16 @@ const OVERLAY_STYLES = {
     bottom: 0,
     backgroundColor: 'rgba(0,0,0,.7)',
     zIndex: 1000,
+    transition: "all 500ms ease-in -out"
+
 }
 
 const Modal = ({ open, children, onClose }) => {
     if (!open) return null;
 
     return ReactDom.createPortal(
-        <>
-            <div style={OVERLAY_STYLES} />
+        <div className="modal">
+            <div className="modal-overlay" style={OVERLAY_STYLES} />
             <div style={MODAL_STYLES2}>
                 <div style={{
                     display: 'flex',
@@ -63,7 +65,7 @@ const Modal = ({ open, children, onClose }) => {
 
                 {children}
             </div>
-        </>,
+        </div>,
         document.getElementById('portal')
     )
 }

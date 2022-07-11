@@ -581,3 +581,58 @@ span.actor-name {
   padding: 3px 10px 5px 10px;
   border-radius: 15px;
 }
+
+.status-pill {
+  font-size: smaller;
+  font-weight: 600;
+  padding: 3px 10px 5px 10px;
+  border-radius: 15px;
+}
+
+span.returning {
+  background-color: var(--returning);
+  color: var(--white)
+}
+
+span.canceled {
+  background-color: var(--cancelled);
+  color: var(--white);
+}
+
+span.ended {
+  background-color: var(--ended);
+  color: var(--white);
+}
+
+i.status-icon {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-style: normal;
+  font-size: smaller;
+  margin-right: .2rem;
+}
+
+span.returning i.status-icon:before {
+  content: "\e551";
+}
+
+span.canceled i.status-icon:before {
+  content: "\f00d";
+}
+
+span.ended i.status-icon:before {
+  content: "\f11e";
+}
+
+.movie-card .tv-network-label {
+  display: inline;
+  background-color: red;
+  position: absolute;
+  top: 10px;
+  left: 30px;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 5px;
+  padding: 3px;
+  transition: all 0.3s ease;
+}
