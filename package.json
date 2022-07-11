@@ -12,6 +12,7 @@
     "framer-motion-3d": "^6.3.16",
     "moment": "^2.29.3",
     "react": "^18.2.0",
+    "react-animated-text": "^0.1.4",
     "react-dom": "^18.2.0",
     "react-intersection-observer": "^9.3.5",
     "react-modal": "^3.15.1",

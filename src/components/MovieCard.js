@@ -8,12 +8,13 @@ import Moment from 'react-moment';
 import tmdb from "../apis/tmdb";
 import ReactToolTip from 'react-tooltip';
 
-Modal.setAppElement("#root");
+Modal.setAppElement("#portal");
 
 export const MovieCard = ({ movie, type, index }) => {
   const BASE_IMG_URL = "https://image.tmdb.org/t/p/original";
   const BASE_BD_URL = "https://image.tmdb.org/t/p/original";
   const BASE_PRV_URL = "https://image.tmdb.org/t/p/w200";
+
   const { watchlist, watched } = useContext(GlobalContext);
   const [movieDetail, setMovieDetail] = useState("");
   const [providers, setProviders] = useState([]);
@@ -54,7 +55,7 @@ export const MovieCard = ({ movie, type, index }) => {
   const [showModal, setShowModal] = useState(false);
 
   const handleOpenModal = () => {
-    console.log(providers);
+    console.log(movieDetail);
     ReactToolTip.hide();
     setShowModal(true);
   };
@@ -144,7 +145,7 @@ export const MovieCard = ({ movie, type, index }) => {
         key={movie.id}
         isOpen={showModal}
         onRequestClose={handleCloseModal}
-        contentLabel="Example Modal"
+        contentLabel="Movie Modal"
         style={customStyles}
       >
         <div
@@ -185,21 +186,7 @@ export const MovieCard = ({ movie, type, index }) => {
                 className="genre-pill">{g.name}</span>
             ))
           )}
-        </div><br />
-        {providers && (
-          <div>
-            <div className="provider-grid">
-              {providers.flatrate?.map(c => (
-                <div className="provider-box">
-                  <img
-                    alt={c.name}
-                    src={`${BASE_PRV_URL}${c.logo_path}`} />
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
+        </div>
 
         <ProgressiveImage
           src={movie.backdrop_path ? `${BASE_BD_URL}${movie.backdrop_path}` : "https://placekitten.com/458/305"}
@@ -215,10 +202,22 @@ export const MovieCard = ({ movie, type, index }) => {
             />
           )}
         </ProgressiveImage>
-        <br />
+        {providers && (
+          <div>
+            <div className="provider-grid">
+              {providers.flatrate?.map(c => (
+                <div key={c.id} className="provider-box">
+                  <img
+                    alt={c.name}
+                    src={`${BASE_PRV_URL}${c.logo_path}`} />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {movieDetail && (
-          <i><code>{movieDetail.tagline}</code></i>
+          <div className="tagline"><i><code>"{movieDetail.tagline}"</code></i></div>
         )}
 
         <p className="movie-overview">{movie.overview}</p>

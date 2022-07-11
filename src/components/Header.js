@@ -68,6 +68,13 @@ export const Header = () => {
                 <i className="fa-solid fa-search"></i>
               </NavLink>
             </li>
+            <li>
+              <NavLink to="/tvsearch"
+                className={({ isActive }) => isActive ? activeClassname : undefined}>
+                <i className="fa fas fa-tv"></i>
+
+              </NavLink>
+            </li>
           </ul>
         </div>
       </div>

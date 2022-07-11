@@ -10,6 +10,7 @@ import { GlobalProvider } from "./context/GlobalState";
 import { Popular } from "./components/Popular";
 import Upcoming from "./components/Upcoming";
 import TopRated from "./components/TopRated";
+import TVSearch from "./components/TVSearch";
 
 function App() {
   useTitle("NontonApaYa");
@@ -25,6 +26,7 @@ function App() {
           <Route exact path="/popular" element={<Popular />} />
           <Route exact path="/upcoming" element={<Upcoming />} />
           <Route exact path="/toprated" element={<TopRated />} />
+          <Route exact path="/tvsearch" element={<TVSearch />} />
         </Routes>
       </Router>
     </GlobalProvider>

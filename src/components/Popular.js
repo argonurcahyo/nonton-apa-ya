@@ -2,19 +2,24 @@ import React, { useEffect, useState } from "react";
 import { MovieCard } from "./MovieCard";
 import Transitions from "./Transition";
 import tmdb from '../apis/tmdb';
+import { useSearchParams } from "react-router-dom";
 
 export const Popular = () => {
   const [popular, setPopular] = useState([]);
+  const [moviesReady, setMoviesReady] = useState(false);
+  const [queryParams, setQueryParams] = useSearchParams();
+  const [sortAsc, setSortAsc] = useState(true);
 
   useEffect(() => {
     const fetchPopularMovies = async () => {
       try {
-        const fetchedPopulars = await tmdb.get("movie/popular",{
-          params:{
-            language:"en-US"
+        const fetchedPopulars = await tmdb.get("movie/popular", {
+          params: {
+            language: "en-US"
           }
         });
         setPopular(fetchedPopulars.data.results);
+        setMoviesReady(true);
       } catch (error) {
         console.log(error);
         setPopular([]);
@@ -23,9 +28,32 @@ export const Popular = () => {
     fetchPopularMovies();
   }, []);
 
+  useEffect(() => {
+    if (!moviesReady) return;
+    const sortMovies = (type) => {
+      if (type === 'asc') {
+        const sorted = [...popular].sort((a, b) => a.vote_average - b.vote_average);
+        setPopular(sorted);
+      }
+      if (type === 'desc') {
+        const sorted = [...popular].sort((a, b) => b.vote_average - a.vote_average);
+        setPopular(sorted);
+      }
+
+    }
+    sortMovies(queryParams.get('sort'));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [queryParams, moviesReady]);
+
+  const setSortParam = () => {
+    setSortAsc(!sortAsc);
+    sortAsc ? queryParams.set("sort", "asc") : queryParams.set("sort", "desc");
+    setQueryParams(queryParams);
+  }
+
   return (
     <Transitions>
-      
+
       <div className="movie-page">
         <div className="container">
           <div className="header" style={{
@@ -35,8 +63,10 @@ export const Popular = () => {
           }}>
             <h1 className="heading">Popular</h1>
             <div>
-              <button className="btn">
-                <i className="fas fa-sort"></i>  SORT
+              <button
+                className="btn"
+                onClick={() => setSortParam()}>
+                <i className={sortAsc ? "fas fa-sort-desc" : "fas fa-sort-asc"}></i>  SORT
               </button>
             </div>
           </div>

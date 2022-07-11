@@ -7,7 +7,10 @@
   --secondary: #21d07a;
   --white: #fff;
   --watchlist: #2989d8;
-  --watched: #F70505
+  --watched: #F70505;
+  --cancelled: #ff1515;
+  --returning: #2788d8;
+  --ended: #03003e;
 }
 
 body {
@@ -79,6 +82,9 @@ input:focus {
 /* Header Styles */
 header {
   background-color: var(--primary);
+  position: sticky;
+  top: 0;
+  z-index: 99;
 }
 
 header .inner-content {
@@ -285,6 +291,7 @@ header .nav-links li:last-child {
   position: relative;
   border: 0;
   display: block;
+  transition: 1s;
 }
 
 .movie-card img {
@@ -515,17 +522,25 @@ span.actor-name {
 }
 
 .provider-box {
-  width: 20px;
+  width: 30px;
+  align-items: center;
 }
 
 .provider-box img {
   width: 100%;
+  border: 1px solid var(--primary);
+  border-radius: 25%;
 }
 
 .provider-grid {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-gap: 10px;
+  align-items: center;
+}
+
+.tagline {
+  font-size: smaller;
 }
 
 @media only screen and (max-width: 480px) {
@@ -539,4 +554,30 @@ span.actor-name {
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
   }
+}
+
+.movie-overview {
+  font-size: small;
+  text-align: justify;
+  margin-top: 3px;
+}
+
+.modal-close {
+  background-color: #fff;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+}
+
+.modal-close:hover {
+  color: #525252;
+}
+
+.season-count {
+  background-color: var(--secondary);
+  color: var(--primary);
+  font-size: smaller;
+  font-weight: 600;
+  padding: 3px 10px 5px 10px;
+  border-radius: 15px;
 }
