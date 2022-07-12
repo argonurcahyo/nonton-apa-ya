@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
-
 import Transitions from "./Transition";
 import tmdb from '../apis/tmdb';
-
-import AnimateCards from "./AnimateCards";
 import TVCard from "./TVCard";
 
 export const TVPopular = () => {

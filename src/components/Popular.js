@@ -3,7 +3,6 @@ import { MovieCard } from "./MovieCard";
 import Transitions from "./Transition";
 import tmdb from '../apis/tmdb';
 import { useSearchParams } from "react-router-dom";
-import AnimateCards from "./AnimateCards";
 
 export const Popular = () => {
   const [popular, setPopular] = useState([]);
@@ -54,7 +53,6 @@ export const Popular = () => {
 
   return (
     <Transitions>
-
       <div className="movie-page">
         <div className="container">
           <div className="header" style={{
@@ -73,7 +71,7 @@ export const Popular = () => {
           </div>
           {popular.length > 0 ? (
             <div className="movie-grid">
-              <AnimateCards>
+              
                 {popular.map((movie, index) => (
                   <MovieCard
                     movie={movie}
@@ -82,7 +80,7 @@ export const Popular = () => {
                     type="popular"
                   />
                 ))}
-              </AnimateCards>
+              
             </div>
           ) : (
             <h2 className="no-movies">No movies!! Get some!</h2>
