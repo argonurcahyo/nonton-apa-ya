@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { forwardRef, useContext, useEffect, useState } from "react";
 import { MovieControls } from "./MovieControls";
 import { GlobalContext } from "../context/GlobalState";
 import { motion } from "framer-motion";
@@ -8,7 +8,7 @@ import tmdb from "../apis/tmdb";
 import { MovieDetail } from "./MovieDetail";
 import TVNetworkLabel from "./TVNetworkLabel";
 
-export const MovieCard = ({ movie, type, index }) => {
+export const MovieCard = forwardRef(({ movie, type, index }, ref) => {
   const BASE_IMG_URL = "https://image.tmdb.org/t/p/original";
 
   const { watchlist, watched } = useContext(GlobalContext);
@@ -50,8 +50,8 @@ export const MovieCard = ({ movie, type, index }) => {
   const [openModal, setOpenModal] = useState(false);
 
   const handleOpenModal = () => {
-    console.log(movieDetail);
     setOpenModal(true);
+    console.log(movieDetail);
   };
   const handleCloseModal = () => setOpenModal(false);
 
@@ -70,6 +70,7 @@ export const MovieCard = ({ movie, type, index }) => {
 
   return (
     <motion.div
+      ref={ref}
       key={movie.id}
       initial={{
         opacity: 0,
@@ -123,7 +124,6 @@ export const MovieCard = ({ movie, type, index }) => {
           />
         )}
 
-
         {((type === "popular" || type === "search") &&
           watchlistDisabled) ? <></> : <MovieControls type={type} movie={movie} />}
       </div>
@@ -134,4 +134,5 @@ export const MovieCard = ({ movie, type, index }) => {
 
     </motion.div>
   );
-};
+}
+)

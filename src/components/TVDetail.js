@@ -15,9 +15,10 @@ const TVDetail = ({ tvDetail }) => {
         <div style={{
           display: "flex",
           justifyContent: 'space-between',
-          alignItems: 'center'
+          alignItems: 'center',
+          marginBottom: '3px'
         }}>
-          <h1 style={{ margin: '0px' }}>{tvDetail.name} </h1>
+          <span className='movie-title'>{tvDetail.name} </span>
           <span className={`status-pill ${(tvDetail.status?.replace(/ Series/gi, "")).toLowerCase()}`}>
             <i className="status-icon"></i>
             {tvDetail.status?.replace(/ Series/gi, "")}
@@ -28,9 +29,9 @@ const TVDetail = ({ tvDetail }) => {
           justifyContent: 'space-between',
           alignItems: 'center'
         }}>
-          <p style={{ margin: '5px 0px' }}>
+          <span className='release-date'>
             {<Moment format="MMMM Do, YYYY">{tvDetail.first_air_date}</Moment>}
-          </p>
+          </span>
           <span className="season-count">{tvDetail.number_of_seasons} seasons</span>
         </div>
         <div className="genre-box">
@@ -57,7 +58,7 @@ const TVDetail = ({ tvDetail }) => {
           )}
         </ProgressiveImage>
 
-        {tvDetail && (
+        {tvDetail.tagline && (
           <div className="tagline"><i><code>"{tvDetail.tagline}"</code></i></div>
         )}
 

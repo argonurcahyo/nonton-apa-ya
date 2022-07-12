@@ -8,6 +8,8 @@ ReactModal.setAppElement("#root");
 export const MovieDetail = ({ movieDetail, providers }) => {
   const BASE_IMG_URL = "https://image.tmdb.org/t/p/original";
   const BASE_PRV_URL = "https://image.tmdb.org/t/p/w200";
+  const crews = movieDetail?.credits?.crew;
+  const directors = crews.filter(c => c.job === "Director");
 
   return (
     movieDetail && (
@@ -67,6 +69,10 @@ export const MovieDetail = ({ movieDetail, providers }) => {
           )}
         </div>
 
+        <span className="movie-director">
+          Directed by : <b>{directors.map(dir => dir.name).join(", ")}</b>
+        </span>
+
         <ProgressiveImage
           src={movieDetail.backdrop_path ? `${BASE_IMG_URL}${movieDetail.backdrop_path}` : "https://placekitten.com/458/305"}
           placeholder="https://i.pinimg.com/originals/3d/6a/a9/3d6aa9082f3c9e285df9970dc7b762ac.gif"
@@ -87,6 +93,7 @@ export const MovieDetail = ({ movieDetail, providers }) => {
         )}
 
         <p className="movie-overview">{movieDetail.overview}</p>
+
         {movieDetail && (
           <div className="cast-grid cast-box">
             {movieDetail.credits.cast.slice(0, 5).map((c) =>
