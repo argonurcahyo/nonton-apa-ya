@@ -11,6 +11,7 @@ import { Popular } from "./components/Popular";
 import Upcoming from "./components/Upcoming";
 import TopRated from "./components/TopRated";
 import TVSearch from "./components/TVSearch";
+import { TVPopular } from "./components/TVPopular";
 
 function App() {
   useTitle("NontonApaYa");
@@ -27,6 +28,7 @@ function App() {
           <Route exact path="/upcoming" element={<Upcoming />} />
           <Route exact path="/toprated" element={<TopRated />} />
           <Route exact path="/tvsearch" element={<TVSearch />} />
+          <Route exact path="/tvpopular" element={<TVPopular />} />
         </Routes>
       </Router>
     </GlobalProvider>
