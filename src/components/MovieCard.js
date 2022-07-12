@@ -6,6 +6,7 @@ import Modal from "./Modal";
 import ProgressiveImage from "react-progressive-graceful-image";
 import tmdb from "../apis/tmdb";
 import { MovieDetail } from "./MovieDetail";
+import TVNetworkLabel from "./TVNetworkLabel";
 
 export const MovieCard = ({ movie, type, index }) => {
   const BASE_IMG_URL = "https://image.tmdb.org/t/p/original";
@@ -27,7 +28,6 @@ export const MovieCard = ({ movie, type, index }) => {
       } catch (error) {
         setMovieDetail("");
       }
-
     }
 
     fetchMovieDetails(movieId);
@@ -116,6 +116,14 @@ export const MovieCard = ({ movie, type, index }) => {
             />
           )}
         </ProgressiveImage>
+
+        {providers?.flatrate && (
+          <TVNetworkLabel
+            networks={providers.flatrate}
+          />
+        )}
+
+
         {((type === "popular" || type === "search") &&
           watchlistDisabled) ? <></> : <MovieControls type={type} movie={movie} />}
       </div>

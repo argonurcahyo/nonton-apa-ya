@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import ProgressiveImage from 'react-progressive-graceful-image';
 import Moment from 'react-moment'
 
 const TVDetail = ({ tvDetail }) => {
   const BASE_IMG_URL = "https://image.tmdb.org/t/p/original";
 
-  useEffect(() => {
-    console.log(tvDetail);
-  }, []);
+  // useEffect(() => {
+  //   console.log(tvDetail);
+  // }, []);
 
   return (
     tvDetail && (

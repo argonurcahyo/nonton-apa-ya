@@ -1,20 +1,26 @@
 import React from 'react'
 import { useEffect } from 'react';
 
-const TVNetworkLabel = ({ network }) => {
- const BASE_IMG_URL = "https://image.tmdb.org/t/p/original";
+const TVNetworkLabel = ({ networks }) => {
+  const BASE_IMG_URL = "https://image.tmdb.org/t/p/original";
 
- useEffect(() => {
-  console.log(network)
- }, []);
+  useEffect(() => {
+    console.log(networks)
+  }, [networks])
+  return (
+    <div className="tv-network-label">
+      {networks && networks.map(n => (
+        <div className='tv-network'>
+          <img
+            src={n.logo_path ? `${BASE_IMG_URL}${n.logo_path}` : ""}
+            alt={n.name} />
+        </div>
+      ))}
 
- return (
-  <div className="tv-network-label">
-   <img
-    src={network.logo_path ? `${BASE_IMG_URL}${network.logo_path}` : ""}
-    alt={network.name} />
-  </div >
- )
+
+
+    </div >
+  )
 }
 
 export default TVNetworkLabel

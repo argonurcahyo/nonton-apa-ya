@@ -130,7 +130,7 @@ header .nav-links li:last-child {
 /* Add Page */
 .add-content {
   padding: 50px 0;
-  max-width: 600px;
+  /* max-width: 600px; */
   margin: 0 auto;
 }
 
@@ -229,6 +229,7 @@ header .nav-links li:last-child {
   padding: 3px 10px 5px 10px;
   font-size: xx-small;
   margin-right: 2px;
+  height: 20px;
   border-radius: 999px;
   color: var(--white);
 }
@@ -372,7 +373,11 @@ img.watched {
 
 img.detail-backdrop {
   border-radius: 10px;
-  margin-top: 10px;
+  margin-top: 5px;
+}
+
+span.release-date {
+  font-size: small;
 }
 
 .ReactModal__Overlay {
@@ -524,6 +529,7 @@ span.actor-name {
 .provider-box {
   width: 30px;
   align-items: center;
+  margin-right: 2px;
 }
 
 .provider-box img {
@@ -533,9 +539,9 @@ span.actor-name {
 }
 
 .provider-grid {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  grid-gap: 10px;
+  display: flex;
+  /* grid-template-columns: repeat(10, 1fr);
+  grid-gap: 10px; */
   align-items: center;
 }
 
@@ -544,10 +550,10 @@ span.actor-name {
 }
 
 @media only screen and (max-width: 480px) {
-  .provider-grid {
+  /* .provider-grid {
     display: grid;
     grid-gap: 10px;
-  }
+  } */
 
   .cast-grid {
     display: grid;
@@ -566,7 +572,7 @@ span.actor-name {
   background-color: #fff;
   width: 24px;
   height: 24px;
-  align-items: center;
+  text-align: right;
 }
 
 .modal-close:hover {
@@ -587,6 +593,7 @@ span.actor-name {
   font-weight: 600;
   padding: 3px 10px 5px 10px;
   border-radius: 15px;
+  border: 1px solid var(--primary);
 }
 
 span.returning {
@@ -625,14 +632,30 @@ span.ended i.status-icon:before {
 }
 
 .movie-card .tv-network-label {
-  display: inline;
-  background-color: red;
+  display: flex;
   position: absolute;
   top: 10px;
-  left: 30px;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.8);
-  border-radius: 5px;
+  left: 10px;
   padding: 3px;
   transition: all 0.3s ease;
+}
+
+.modal-content {
+  max-height: 700px;
+  /* overflow-y: scroll; */
+}
+
+.movie-title {
+  font-size: larger;
+  font-weight: 700;
+}
+
+.tv-network {
+  width: 25px;
+  margin-right: 2px;
+}
+
+.tv-network img {
+  border-radius: 5px;
+
 }

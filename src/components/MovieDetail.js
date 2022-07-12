@@ -21,31 +21,49 @@ export const MovieDetail = ({ movieDetail, providers }) => {
           }}
         >
 
-          <h1>{movieDetail.title}</h1>
+          <span className="movie-title">{movieDetail.title}</span>
         </div>
         <div
           style={{
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
+            marginBottom: "2px",
           }}
         >
-          <p>
+          <span className="release-date">
             {<Moment format="MMMM Do, YYYY">{movieDetail.release_date}</Moment>}
-          </p>
+          </span>
 
           {movieDetail && <span className="status-pill">
             {movieDetail.status}
           </span>}
         </div>
 
-        <div className="genre-box">
-          {movieDetail && (
-            movieDetail.genres.map((g) => (
-              <span
-                key={g.id}
-                className="genre-pill">{g.name}</span>
-            ))
+        <div style={{
+          display: "flex",
+          justifyContent: 'space-between'
+        }}>
+          <div className="genre-box">
+            {movieDetail && (
+              movieDetail.genres.map((g) => (
+                <span
+                  key={g.id}
+                  className="genre-pill">{g.name}</span>
+              ))
+            )}
+          </div>
+
+          {providers && (
+            <div className="provider-grid">
+              {providers.flatrate?.map(c => (
+                <div key={c.id} className="provider-box">
+                  <img
+                    alt={c.name}
+                    src={`${BASE_PRV_URL}${c.logo_path}`} />
+                </div>
+              ))}
+            </div>
           )}
         </div>
 
@@ -63,21 +81,8 @@ export const MovieDetail = ({ movieDetail, providers }) => {
             />
           )}
         </ProgressiveImage>
-        {providers && (
-          <div>
-            <div className="provider-grid">
-              {providers.flatrate?.map(c => (
-                <div key={c.id} className="provider-box">
-                  <img
-                    alt={c.name}
-                    src={`${BASE_PRV_URL}${c.logo_path}`} />
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
 
-        {movieDetail && (
+        {movieDetail.tagline && (
           <div className="tagline"><i><code>"{movieDetail.tagline}"</code></i></div>
         )}
 
