@@ -32,11 +32,11 @@ export const Popular = () => {
     if (!moviesReady) return;
     const sortMovies = (type) => {
       if (type === 'asc') {
-        const sorted = [...popular].sort((a, b) => a.vote_average - b.vote_average);
+        const sorted = [...popular].sort((a, b) => a.revenue - b.revenue);
         setPopular(sorted);
       }
       if (type === 'desc') {
-        const sorted = [...popular].sort((a, b) => b.vote_average - a.vote_average);
+        const sorted = [...popular].sort((a, b) => b.revenue - a.revenue);
         setPopular(sorted);
       }
 
@@ -71,16 +71,16 @@ export const Popular = () => {
           </div>
           {popular.length > 0 ? (
             <div className="movie-grid">
-              
-                {popular.map((movie, index) => (
-                  <MovieCard
-                    movie={movie}
-                    index={index}
-                    key={movie.id}
-                    type="popular"
-                  />
-                ))}
-              
+
+              {popular.map((movie, index) => (
+                <MovieCard
+                  movie={movie}
+                  index={index}
+                  key={movie.id}
+                  type="popular"
+                />
+              ))}
+
             </div>
           ) : (
             <h2 className="no-movies">No movies!! Get some!</h2>

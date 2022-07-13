@@ -16,7 +16,7 @@ import ReactDom from 'react-dom'
 // }
 
 const MODAL_STYLES2 = {
- backgroundColor: '#FFF',
+ backgroundColor: '#ffffff',
  padding: '10px 10px',
  borderRadius: '15px',
  position: 'fixed',

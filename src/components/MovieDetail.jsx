@@ -8,7 +8,13 @@ ReactModal.setAppElement("#root");
 export const MovieDetail = ({ movieDetail, providers }) => {
   const BASE_IMG_URL = "https://image.tmdb.org/t/p/original";
   const BASE_PRV_URL = "https://image.tmdb.org/t/p/w200";
+  const BASE_FLAG_URL = 'https://countryflagsapi.com/png/';
+
   const crews = movieDetail?.credits?.crew;
+  const countries = movieDetail?.production_countries;
+  const companies = movieDetail?.production_companies;
+  const title = movieDetail?.title;
+  const original_title = movieDetail?.original_title;
   const directors = crews.filter(c => c.job === "Director");
 
   return (
@@ -23,7 +29,25 @@ export const MovieDetail = ({ movieDetail, providers }) => {
           }}
         >
 
-          <span className="movie-title">{movieDetail.title}</span>
+          <span className="movie-title">
+            {title}
+            {title !== original_title && (
+              <span className="original-title">  ({`${original_title}`})</span>
+            )}
+          </span>
+
+          <div className="countries-row">
+            {countries && (
+              countries.map((c, i) => (
+                <div key={i} className='country-flag'>
+                  <img
+                    src={c.iso_3166_1 ? `${BASE_FLAG_URL}${c.iso_3166_1.toLowerCase()}` : ""}
+                    alt={c.name} />
+                </div>
+              ))
+
+            )}
+          </div>
         </div>
         <div
           style={{
@@ -44,7 +68,8 @@ export const MovieDetail = ({ movieDetail, providers }) => {
 
         <div style={{
           display: "flex",
-          justifyContent: 'space-between'
+          justifyContent: 'space-between',
+          alignItems: "center"
         }}>
           <div className="genre-box">
             {movieDetail && (
@@ -87,6 +112,16 @@ export const MovieDetail = ({ movieDetail, providers }) => {
             />
           )}
         </ProgressiveImage>
+
+        {companies && (
+          <div className="companies-row">
+            {companies.map((comp, i) => (
+              <div className="companies">
+                &copy;  {comp.name}
+              </div>
+            ))}
+          </div>
+        )}
 
         {movieDetail.tagline && (
           <div className="tagline"><i><code>"{movieDetail.tagline}"</code></i></div>

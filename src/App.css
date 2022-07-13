@@ -569,7 +569,6 @@ span.actor-name {
 }
 
 .modal-close {
-  background-color: #fff;
   width: 24px;
   height: 24px;
   text-align: right;
@@ -666,15 +665,19 @@ span.ended i.status-icon:before {
 .countries-box {
   display: flex;
   position: absolute;
-  right: 10px;
-  top: 10px;
-  padding: 3px;
+  right: 5px;
+  top: 5px;
   transition: all 0.3s ease;
 }
 
+.countries-row {
+  display: flex;
+}
+
 .country-flag {
-  width: 24px;
-  height: 15px;
+  width: 18px;
+  height: 12px;
+  margin-right: 2px;
 }
 
 .country-flag img {
@@ -683,5 +686,20 @@ span.ended i.status-icon:before {
 }
 
 .movie-director {
-  font-size: smaller;
+  font-size: x-small;
+}
+
+.companies-row {
+  display: flex;
+  font-size: xx-small;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+.companies {
+  margin-left: 5px;
+}
+
+.original-title{
+  font-size: small;
 }
