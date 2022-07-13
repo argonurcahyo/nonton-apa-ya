@@ -46,17 +46,7 @@ export const MovieControls = ({ type, movie }) => {
         </>
       )}
 
-      {type === "popular" && (
-        <>
-          <button
-            className="ctrl-btn"
-            onClick={() => addMovieToWatchlist(movie)}>
-            <i className="fa-fw far fa-plus"></i>
-          </button>
-        </>
-      )}
-
-      {type === "search" && (
+      {(type === "search" || type === "popular") && (
         <>
           <button className="ctrl-btn" onClick={() => addMovieToWatchlist(movie)}>
             <i className="fa-fw far fa-plus"></i>

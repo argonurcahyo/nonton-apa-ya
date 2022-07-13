@@ -3,6 +3,7 @@ import { useCallback } from 'react'
 import { useRef } from 'react'
 import { useState } from 'react'
 import useBookSearch from '../hooks/useBookSearch'
+import LoadingCard from './LoadingCard'
 import { MovieCard } from './MovieCard'
 import Transitions from './Transition'
 
@@ -35,7 +36,7 @@ const BookSearch = () => {
   <Transitions>
    <div className="movie-page">
     <div className="container add-content" style={{ margin: "0 80px" }}>
-     <div className="input-wrapper">
+     <div className="input-wrapper" style={{ marginBottom: "10px" }}>
       <input
        type="text"
        value={query}
@@ -69,9 +70,9 @@ const BookSearch = () => {
          />
         }
        })}
+       <div>{loading && <LoadingCard />}</div>
       </div>
      )}
-     <div>{loading && 'Loading...'}</div>
      <div>{error && 'Error'}</div>
     </div>
    </div>

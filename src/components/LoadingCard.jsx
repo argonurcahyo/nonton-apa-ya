@@ -2,7 +2,9 @@ import React from 'react'
 
 const LoadingCard = () => {
   return (
-    <div>LoadingCard</div>
+    <div className='loading-card'>
+      Loading...
+    </div>
   )
 }
 

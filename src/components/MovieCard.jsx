@@ -10,6 +10,7 @@ import TVNetworkLabel from "./TVNetworkLabel";
 
 export const MovieCard = forwardRef(({ movie, type, index }, ref) => {
   const BASE_IMG_URL = "https://image.tmdb.org/t/p/original";
+  const NO_IMG_URL = "https://i.mydramalist.com/ZN5Ak_4c.jpg";
 
   const { watchlist, watched } = useContext(GlobalContext);
   const [movieDetail, setMovieDetail] = useState("");
@@ -101,7 +102,7 @@ export const MovieCard = forwardRef(({ movie, type, index }, ref) => {
             onClick={handleOpenModal}
           />
           <ProgressiveImage
-            src={movie.poster_path ? `${BASE_IMG_URL}${movie.poster_path}` : "https://placekitten.com/141/213"}
+            src={movie.poster_path ? `${BASE_IMG_URL}${movie.poster_path}` : NO_IMG_URL}
             placeholder="https://i.stack.imgur.com/h6viz.gif"
           >
             {(src, loading) => (

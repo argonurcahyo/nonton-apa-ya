@@ -1,55 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { MovieCard } from "./MovieCard";
 import Transitions from "./Transition";
-import tmdb from '../apis/tmdb';
-import { useSearchParams } from "react-router-dom";
+import LoadingCard from "./LoadingCard";
+import usePopularFetch from "../hooks/usePopularFetch"
 
 export const Popular = () => {
-  const [popular, setPopular] = useState([]);
-  const [moviesReady, setMoviesReady] = useState(false);
-  const [queryParams, setQueryParams] = useSearchParams();
-  const [sortAsc, setSortAsc] = useState(true);
+  const [pageNumber, setPageNumber] = useState(1)
 
-  useEffect(() => {
-    const fetchPopularMovies = async () => {
-      try {
-        const fetchedPopulars = await tmdb.get("movie/popular", {
-          params: {
-            language: "en-US"
-          }
-        });
-        setPopular(fetchedPopulars.data.results);
-        setMoviesReady(true);
-      } catch (error) {
-        console.log(error);
-        setPopular([]);
+  const {
+    hasMore, loading, error, movies
+  } = usePopularFetch(pageNumber)
+
+  const observer = useRef()
+  const lastGridElementRef = useCallback(node => {
+    if (loading) return
+    if (observer.current) observer.current.disconnect()
+    observer.current = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && hasMore) {
+        setPageNumber(prevPageNumber => prevPageNumber + 1)
       }
-    }
-    fetchPopularMovies();
-  }, []);
-
-  useEffect(() => {
-    if (!moviesReady) return;
-    const sortMovies = (type) => {
-      if (type === 'asc') {
-        const sorted = [...popular].sort((a, b) => a.revenue - b.revenue);
-        setPopular(sorted);
-      }
-      if (type === 'desc') {
-        const sorted = [...popular].sort((a, b) => b.revenue - a.revenue);
-        setPopular(sorted);
-      }
-
-    }
-    sortMovies(queryParams.get('sort'));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [queryParams, moviesReady]);
-
-  const setSortParam = () => {
-    setSortAsc(!sortAsc);
-    sortAsc ? queryParams.set("sort", "asc") : queryParams.set("sort", "desc");
-    setQueryParams(queryParams);
-  }
+    })
+    if (node) observer.current.observe(node)
+  }, [loading, hasMore])
 
   return (
     <Transitions>
@@ -61,25 +33,21 @@ export const Popular = () => {
             justifyContent: "space-between",
           }}>
             <h1 className="heading">Popular</h1>
-            <div>
-              <button
-                className="btn"
-                onClick={() => setSortParam()}>
-                <i className={sortAsc ? "fas fa-sort-desc" : "fas fa-sort-asc"}></i>  SORT
-              </button>
-            </div>
+
           </div>
-          {popular.length > 0 ? (
+          {movies.length > 0 ? (
             <div className="movie-grid">
 
-              {popular.map((movie, index) => (
+              {movies.map((movie, index) => (
                 <MovieCard
+                  ref={lastGridElementRef}
                   movie={movie}
                   index={index}
                   key={movie.id}
                   type="popular"
                 />
               ))}
+              {loading && <LoadingCard />}
 
             </div>
           ) : (
