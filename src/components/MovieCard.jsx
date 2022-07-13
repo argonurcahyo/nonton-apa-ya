@@ -69,70 +69,70 @@ export const MovieCard = forwardRef(({ movie, type, index }, ref) => {
   const isWatched = storedMovieWatched ? true : false;
 
   return (
-    <motion.div
-      ref={ref}
-      key={movie.id}
-      initial={{
-        opacity: 0,
-        translateX: 0,
-        translateY: 50,
-      }}
-      animate={{ opacity: 1, translateX: 0, translateY: 0 }}
-      transition={{ duration: 0.3, delay: index * 0.2 }}
-    >
-
-      <div
-        className="movie-card"
+    <div ref={ref}>
+      <motion.div
+        key={movie.id}
+        initial={{
+          opacity: 0,
+          translateX: 0,
+          translateY: 50,
+        }}
+        animate={{ opacity: 1, translateX: 0, translateY: 0 }}
+        transition={{ duration: 0.3, delay: index * 0.2 }}
       >
-        {(type === "popular" || type === "search") ?
-          (isWatchlist ?
-            <div className="ribbon blue"><span>WATCHLIST</span></div>
-            : isWatched ?
-              <div className="ribbon red"><span>WATCHED</span></div>
-              : <></>)
-          : <></>}
 
         <div
-          className="overlay"
-          role="button"
-          data-tip={movie.title}
-          data-for="tooltip"
-          data-event-off='focusout'
-          onClick={handleOpenModal}
-        />
-        <ProgressiveImage
-          src={movie.poster_path ? `${BASE_IMG_URL}${movie.poster_path}` : "https://placekitten.com/141/213"}
-          placeholder="https://i.stack.imgur.com/h6viz.gif"
+          className="movie-card"
         >
-          {(src, loading) => (
-            <img
-              className={
-                (type === "popular" || type === "search") ?
-                  (isWatchlist ? "watchlist" : isWatched ? "watched" : "")
-                  : ""
-              }
-              style={{ opacity: loading ? 0.5 : 1 }}
-              src={src}
-              alt={`${movie.title}`}
+          {(type === "popular" || type === "search") ?
+            (isWatchlist ?
+              <div className="ribbon blue"><span>WATCHLIST</span></div>
+              : isWatched ?
+                <div className="ribbon red"><span>WATCHED</span></div>
+                : <></>)
+            : <></>}
+
+          <div
+            className="overlay"
+            role="button"
+            data-tip={movie.title}
+            data-for="tooltip"
+            data-event-off='focusout'
+            onClick={handleOpenModal}
+          />
+          <ProgressiveImage
+            src={movie.poster_path ? `${BASE_IMG_URL}${movie.poster_path}` : "https://placekitten.com/141/213"}
+            placeholder="https://i.stack.imgur.com/h6viz.gif"
+          >
+            {(src, loading) => (
+              <img
+                className={
+                  (type === "popular" || type === "search") ?
+                    (isWatchlist ? "watchlist" : isWatched ? "watched" : "")
+                    : ""
+                }
+                style={{ opacity: loading ? 0.5 : 1 }}
+                src={src}
+                alt={`${movie.title}`}
+              />
+            )}
+          </ProgressiveImage>
+
+          {providers?.flatrate && (
+            <TVNetworkLabel
+              networks={providers.flatrate}
             />
           )}
-        </ProgressiveImage>
 
-        {providers?.flatrate && (
-          <TVNetworkLabel
-            networks={providers.flatrate}
-          />
-        )}
+          {((type === "popular" || type === "search") &&
+            watchlistDisabled) ? <></> : <MovieControls type={type} movie={movie} />}
+        </div>
 
-        {((type === "popular" || type === "search") &&
-          watchlistDisabled) ? <></> : <MovieControls type={type} movie={movie} />}
-      </div>
-
-      <Modal open={openModal} onClose={handleCloseModal}>
-        <MovieDetail movieDetail={movieDetail} providers={providers} />
-      </Modal>
-
-    </motion.div>
+        <Modal open={openModal} onClose={handleCloseModal}>
+          <MovieDetail movieDetail={movieDetail} providers={providers} />
+        </Modal>
+      </motion.div>
+    </div>
   );
 }
 )
