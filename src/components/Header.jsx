@@ -42,7 +42,6 @@ export const Header = () => {
           {watchlist.length}
          </span>
         )}
-
        </NavLink>
       </li>
       <li>

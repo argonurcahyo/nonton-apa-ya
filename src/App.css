@@ -234,7 +234,7 @@ header .nav-links li:last-child {
   color: var(--white);
 }
 
-.header-pill {
+/* .header-pill {
   padding: 6px;
   margin-left: 10px;
   background-color: var(--white);
@@ -246,9 +246,9 @@ header .nav-links li:last-child {
   font-size: small;
   transition: all 0.3s ease;
   line-height: 1.1;
-}
+} */
 
-.btn .header-pill {
+/* .btn .header-pill {  
   padding: 5px;
   margin-left: 10px;
   background-color: var(--primary);
@@ -260,6 +260,30 @@ header .nav-links li:last-child {
   font-size: smaller;
   transition: all 0.3s ease;
   line-height: 1.1;
+} */
+
+.btn .header-pill {
+  position: relative;
+  top: -8px;
+  left: -8px;
+  padding: 3px 4px 3px 4px;
+  font-weight: 600;
+  font-size: xx-small;
+  background-color: var(--primary);
+  color: var(--white);
+  border-radius: 50%;
+}
+
+.header-pill {
+  position: relative;
+  top: -8px;
+  left: -8px;
+  padding: 3px 4px 3px 4px;
+  font-weight: 600;
+  font-size: xx-small;
+  background-color: var(--white);
+  color: var(--primary);
+  border-radius: 50%;
 }
 
 .movie-page .heading {
@@ -566,6 +590,7 @@ span.actor-name {
   font-size: small;
   text-align: justify;
   margin-top: 3px;
+  padding: 0px 5px;
 }
 
 .modal-close {
@@ -696,10 +721,15 @@ span.ended i.status-icon:before {
   flex-wrap: wrap;
   margin-bottom: 4px;
 }
+
 .companies {
   margin-left: 5px;
 }
 
-.original-title{
+.original-title {
   font-size: small;
+}
+.nav-links li a:hover {
+  color: var(--secondary);
+  opacity: 1;
 }
