@@ -94,9 +94,18 @@ export const MovieDetail = ({ movieDetail, providers }) => {
           )}
         </div>
 
-        <span className="movie-director">
-          Directed by : <b>{directors.map(dir => dir.name).join(", ")}</b>
-        </span>
+        <div style={{
+          display: "flex",
+          justifyContent: 'space-between',
+          alignItems: "center"
+        }}>
+          <span className="movie-director">
+            Directed by : <b>{directors.map(dir => dir.name).join(", ")}</b>
+          </span>
+          <span className="rating">
+            {movieDetail.vote_average}
+          </span>
+        </div>
 
         <ProgressiveImage
           src={movieDetail.backdrop_path ? `${BASE_IMG_URL}${movieDetail.backdrop_path}` : "https://placekitten.com/458/305"}

@@ -11,6 +11,9 @@
   --cancelled: #ff1515;
   --returning: #2788d8;
   --ended: #03003e;
+  --rotten: #ff1414;
+  --good: #efd518;
+  --fresh: #32d61b;
 }
 
 body {
@@ -266,7 +269,7 @@ header .nav-links li:last-child {
   position: relative;
   top: -8px;
   left: -8px;
-  padding: 3px 5px;
+  padding: 3px 6px;
   font-weight: 600;
   font-size: xx-small;
   background-color: var(--primary);
@@ -278,7 +281,7 @@ header .nav-links li:last-child {
   position: relative;
   top: -8px;
   left: -8px;
-  padding: 3px 5px;
+  padding: 3px 6px;
   font-weight: 600;
   font-size: xx-small;
   background-color: var(--white);
@@ -311,6 +314,7 @@ header .nav-links li:last-child {
 
 .movie-card {
   width: 100%;
+  box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
   border-radius: 10px;
   overflow: hidden;
   position: relative;
@@ -657,7 +661,7 @@ span.ended i.status-icon:before {
 .movie-card .tv-network-label {
   display: flex;
   position: absolute;
-  top: 10px;
+  bottom: 10px;
   left: 10px;
   padding: 3px;
   opacity: 1;
@@ -756,4 +760,47 @@ span.ended i.status-icon:before {
   to {
     background-position-x: -200%;
   }
+}
+
+.rating {
+  font-size: small;
+  font-weight: 800;
+}
+
+.rating-card {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: auto;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  font-size: x-small;
+  font-weight: 600;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  background-color: #fff;
+  box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+}
+
+.rating-card:hover {
+  opacity: 1;
+}
+
+.rating-card.rotten {
+  background-color: var(--rotten);
+  color: var(--white);
+}
+
+.rating-card.good {
+  background-color: var(--good);
+  color: var(--primary);
+}
+
+.rating-card.fresh {
+  background-color: var(--secondary);
+  color: var(--primary);
 }

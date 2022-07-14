@@ -7,6 +7,7 @@ import ProgressiveImage from "react-progressive-graceful-image";
 import tmdb from "../apis/tmdb";
 import { MovieDetail } from "./MovieDetail";
 import TVNetworkLabel from "./TVNetworkLabel";
+import Rating from "./Rating";
 
 export const MovieCard = forwardRef(({ movie, type, index }, ref) => {
   const BASE_IMG_URL = "https://image.tmdb.org/t/p/w200";
@@ -122,6 +123,11 @@ export const MovieCard = forwardRef(({ movie, type, index }, ref) => {
           {providers?.flatrate && (
             <TVNetworkLabel
               networks={providers.flatrate}
+            />
+          )}
+          {movieDetail?.vote_average && (
+            <Rating
+              rating={movieDetail.vote_average}
             />
           )}
 

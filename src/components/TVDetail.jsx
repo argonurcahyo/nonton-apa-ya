@@ -3,7 +3,7 @@ import ProgressiveImage from 'react-progressive-graceful-image';
 import Moment from 'react-moment'
 
 const TVDetail = ({ tvDetail }) => {
-  const BASE_IMG_URL = "https://image.tmdb.org/t/p/original";
+  const BASE_IMG_URL = "https://image.tmdb.org/t/p/w500";
 
   // useEffect(() => {
   //   console.log(tvDetail);
