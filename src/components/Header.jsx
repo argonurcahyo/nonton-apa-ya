@@ -13,21 +13,21 @@ export const Header = () => {
      <ul className="nav-links">
       <li>
        <NavLink
-        to="/toprated"
+        to="/movie/toprated"
         className={({ isActive }) => isActive ? activeClassname : undefined}>
         <i className="fa fas fa-star"></i>
        </NavLink>
       </li>
       <li>
        <NavLink
-        to="/upcoming"
+        to="/movie/upcoming"
         className={({ isActive }) => isActive ? activeClassname : undefined}>
         <i className="fa fas fa-hourglass"></i>
        </NavLink>
       </li>
       <li>
        <NavLink
-        to="/popular"
+        to="/movie/popular"
         className={({ isActive }) => isActive ? activeClassname : undefined}>
         <i className="fa fas fa-fire-flame-curved"></i>
        </NavLink>
@@ -46,21 +46,22 @@ export const Header = () => {
       </li>
       <li>
        <NavLink
-        to="/watched"
+        to="/movie/watched"
         className={({ isActive }) => isActive ? activeClassname : undefined}>
         <i className="fa fas fa-eye"></i>
        </NavLink>
       </li>
       <li>
        <NavLink
-        to="/add"
+        to="/movie/search"
         className={({ isActive }) => isActive ? activeClassname : undefined}
        >
         <i className="fa-solid fa-search"></i>
        </NavLink>
       </li>
       <li>
-       <NavLink to="/tvsearch"
+       <NavLink
+        to="/tv/search"
         className={({ isActive }) => isActive ? activeClassname : undefined}>
         <i className="fa fas fa-tv"></i>
 

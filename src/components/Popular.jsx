@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import { MovieCard } from "./MovieCard";
 import Transitions from "./Transition";
 import LoadingCard from "./LoadingCard";
@@ -53,7 +53,9 @@ export const Popular = () => {
           ) : (
             <h2 className="no-movies">No movies!! Get some!</h2>
           )}
+          {error && <>Error...</>}
         </div>
+
       </div>
     </Transitions>
   );

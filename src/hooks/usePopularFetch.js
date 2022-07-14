@@ -20,7 +20,10 @@ const usePopularFetch = (pageNumber) => {
         }).then(res => {
             console.log(res.config.params)
             setMovies(prevMovies => {
-                return [...prevMovies, ...res.data.results]
+                let newState = [...prevMovies, ...res.data.results]
+                let uniqueList = [...new Map(newState?.map((item) => [item["id"], item]))]
+                console.log(uniqueList)
+                return uniqueList.map(i => i[1])
             })
             setHasMore(res.data.results.length > 0)
             setLoading(false)

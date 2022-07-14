@@ -6,7 +6,7 @@ import Moment from 'react-moment';
 ReactModal.setAppElement("#root");
 
 export const MovieDetail = ({ movieDetail, providers }) => {
-  const BASE_IMG_URL = "https://image.tmdb.org/t/p/original";
+  const BASE_IMG_URL = "https://image.tmdb.org/t/p/w500";
   const BASE_PRV_URL = "https://image.tmdb.org/t/p/w200";
   const BASE_FLAG_URL = 'https://countryflagsapi.com/png/';
 

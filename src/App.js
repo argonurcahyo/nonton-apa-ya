@@ -23,13 +23,15 @@ function App() {
         <Header />
         <Routes>
           <Route exact path="/" element={<Watchlist />} />
-          <Route exact path="/watched" element={<Watched />} />
-          <Route exact path="/add" element={<Add />} />
-          <Route exact path="/popular" element={<Popular />} />
-          <Route exact path="/upcoming" element={<Upcoming />} />
-          <Route exact path="/toprated" element={<TopRated />} />
-          <Route exact path="/tvsearch" element={<TVSearch />} />
-          <Route exact path="/tvpopular" element={<TVPopular />} />
+          <Route exact path="/movie" element={<Watchlist />} />
+          <Route exact path="/movie/watched" element={<Watched />} />
+          <Route exact path="/movie/search" element={<Add />} />
+          <Route exact path="/movie/popular" element={<Popular />} />
+          <Route exact path="/movie/upcoming" element={<Upcoming />} />
+          <Route exact path="/movie/toprated" element={<TopRated />} />
+          <Route exact path="/tv/search" element={<TVSearch />} />
+          <Route exact path="/tv/popular" element={<TVPopular />} />
+
           <Route exact path="/book" element={<BookSearch />} />
         </Routes>
       </Router>
