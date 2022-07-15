@@ -125,11 +125,11 @@ export const MovieCard = forwardRef(({ movie, type, index }, ref) => {
               networks={providers.flatrate}
             />
           )}
-          {movieDetail?.vote_average && (
+          {(movieDetail?.vote_average && movieDetail.vote_average !== 0) ? (
             <Rating
               rating={movieDetail.vote_average}
             />
-          )}
+          ) : <></>}
 
           {((type === "popular" || type === "search") &&
             watchlistDisabled) ? <></> : <MovieControls type={type} movie={movie} />}

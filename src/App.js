@@ -13,6 +13,7 @@ import TopRated from "./components/TopRated";
 import TVSearch from "./components/TVSearch";
 import { TVPopular } from "./components/TVPopular";
 import BookSearch from "./components/BookSearch";
+import Actor from "./components/Actor";
 
 function App() {
   useTitle("NontonApaYa");
@@ -33,6 +34,7 @@ function App() {
           <Route exact path="/tv/popular" element={<TVPopular />} />
 
           <Route exact path="/book" element={<BookSearch />} />
+          <Route path="/actor/:id" element={<Actor />} />
         </Routes>
       </Router>
     </GlobalProvider>

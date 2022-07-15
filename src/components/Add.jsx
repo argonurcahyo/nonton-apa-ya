@@ -19,7 +19,7 @@ export const Add = () => {
           params: {
             language: "en-US",
             page: "1",
-            include_adult: "false",
+            include_adult: "true",
             query: e.target.value
           }
         });
