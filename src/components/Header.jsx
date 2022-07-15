@@ -11,7 +11,7 @@ export const Header = () => {
    <div className="container">
     <div className="inner-content">
      <ul className="nav-links">
-      <li>
+      {/* <li>
        <NavLink
         to="/movie/toprated"
         className={({ isActive }) => isActive ? activeClassname : undefined}>
@@ -24,7 +24,7 @@ export const Header = () => {
         className={({ isActive }) => isActive ? activeClassname : undefined}>
         <i className="fa fas fa-hourglass"></i>
        </NavLink>
-      </li>
+      </li> */}
       <li>
        <NavLink
         to="/movie/popular"
@@ -59,14 +59,14 @@ export const Header = () => {
         <i className="fa-solid fa-search"></i>
        </NavLink>
       </li>
-      <li>
+      {/* <li>
        <NavLink
         to="/tv/search"
         className={({ isActive }) => isActive ? activeClassname : undefined}>
         <i className="fa fas fa-tv"></i>
 
        </NavLink>
-      </li>
+      </li> */}
      </ul>
     </div>
    </div>

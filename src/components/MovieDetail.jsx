@@ -2,6 +2,7 @@ import React from "react";
 import ReactModal from "react-modal";
 import ProgressiveImage from "react-progressive-graceful-image";
 import Moment from 'react-moment';
+import { Link } from 'react-router-dom'
 
 ReactModal.setAppElement("#root");
 
@@ -9,13 +10,14 @@ export const MovieDetail = ({ movieDetail, providers }) => {
   const BASE_IMG_URL = "https://image.tmdb.org/t/p/w500";
   const BASE_PRV_URL = "https://image.tmdb.org/t/p/w200";
   const BASE_FLAG_URL = 'https://countryflagsapi.com/png/';
+  const BD_LOADING = "https://i.pinimg.com/originals/3d/6a/a9/3d6aa9082f3c9e285df9970dc7b762ac.gif";
 
   const crews = movieDetail?.credits?.crew;
   const countries = movieDetail?.production_countries;
   const companies = movieDetail?.production_companies;
   const title = movieDetail?.title;
   const original_title = movieDetail?.original_title;
-  const directors = crews.filter(c => c.job === "Director");
+  const directors = crews?.filter(c => c.job === "Director");
 
   return (
     movieDetail && (
@@ -73,9 +75,9 @@ export const MovieDetail = ({ movieDetail, providers }) => {
         }}>
           <div className="genre-box">
             {movieDetail && (
-              movieDetail.genres.map((g) => (
+              movieDetail.genres.map((g, i) => (
                 <span
-                  key={g.id}
+                  key={i}
                   className="genre-pill">{g.name}</span>
               ))
             )}
@@ -83,8 +85,8 @@ export const MovieDetail = ({ movieDetail, providers }) => {
 
           {providers && (
             <div className="provider-grid">
-              {providers.flatrate?.map(c => (
-                <div key={c.id} className="provider-box">
+              {providers.flatrate?.map((c, i) => (
+                <div key={i} className="provider-box">
                   <img
                     alt={c.name}
                     src={`${BASE_PRV_URL}${c.logo_path}`} />
@@ -100,7 +102,8 @@ export const MovieDetail = ({ movieDetail, providers }) => {
           alignItems: "center"
         }}>
           <span className="movie-director">
-            Directed by : <b>{directors.map(dir => dir.name).join(", ")}</b>
+            Directed by : <b>{directors.map(dir => <Link to={`/actor/${dir.id}`} target="_blank">{dir.name}     </Link>)}</b>
+
           </span>
           <span className="rating">
             {movieDetail.vote_average}
@@ -108,8 +111,12 @@ export const MovieDetail = ({ movieDetail, providers }) => {
         </div>
 
         <ProgressiveImage
-          src={movieDetail.backdrop_path ? `${BASE_IMG_URL}${movieDetail.backdrop_path}` : "https://placekitten.com/458/305"}
-          placeholder="https://i.pinimg.com/originals/3d/6a/a9/3d6aa9082f3c9e285df9970dc7b762ac.gif"
+          key={movieDetail.id}
+          src={movieDetail.backdrop_path ?
+            `${BASE_IMG_URL}${movieDetail.backdrop_path}`
+            // BD_LOADING
+            : "https://placekitten.com/458/305"}
+          placeholder={BD_LOADING}
         >
           {(src, loading) => (
             <img
@@ -143,11 +150,18 @@ export const MovieDetail = ({ movieDetail, providers }) => {
             {movieDetail.credits.cast.slice(0, 5).map((c) =>
               <div className="profile-box" key={c.id}>
                 <div className="profile">
-                  <img
-                    alt={c.name}
-                    src={`${BASE_IMG_URL}${c.profile_path}`} />
+                  <Link to={`/actor/${c.id}`} target="_blank">
+                    <img
+                      alt={c.name}
+                      src={`${BASE_IMG_URL}${c.profile_path}`} />
+                  </Link>
                 </div>
-                <span className="actor-name">{c.name}</span>
+                <span className="actor-name">
+                  <Link to={`/actor/${c.id}`} target="_blank">
+                    {c.name}
+                  </Link>
+
+                </span>
               </div>)}
           </div>
 
