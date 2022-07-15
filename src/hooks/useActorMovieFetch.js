@@ -20,7 +20,8 @@ const useActorMovieFetch = (id, pageNumber) => {
                 api_key: API_KEY,
                 with_cast: id,
                 sort_by: "primary_release_date.desc",
-                without_genres: "99, 10770"
+                without_genres: "99, 10770",
+                include_adult: "true",
             },
             cancelToken: new axios.CancelToken(c => cancel = c)
         }).then(res => {
