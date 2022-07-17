@@ -80,7 +80,7 @@ export const MovieCard = forwardRef(({ movie, type, index }, ref) => {
           translateY: 50,
         }}
         animate={{ opacity: 1, translateX: 0, translateY: 0 }}
-        transition={{ duration: 0.3, delay: index * 0.2 }}
+        transition={{ duration: 0.3, delay: 0.2 }}
       >
 
         <div

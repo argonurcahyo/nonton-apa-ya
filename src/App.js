@@ -14,6 +14,9 @@ import TVSearch from "./components/TVSearch";
 import { TVPopular } from "./components/TVPopular";
 import BookSearch from "./components/BookSearch";
 import Actor from "./components/Actor";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Movie from "./components/Movie";
 
 function App() {
   useTitle("NontonApaYa");
@@ -23,6 +26,9 @@ function App() {
       <Router>
         <Header />
         <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+
           <Route exact path="/" element={<Watchlist />} />
           <Route exact path="/movie" element={<Watchlist />} />
           <Route exact path="/movie/watched" element={<Watched />} />
@@ -35,6 +41,7 @@ function App() {
 
           <Route exact path="/book" element={<BookSearch />} />
           <Route path="/actor/:id" element={<Actor />} />
+          <Route path="/movie/:movieId" element={<Movie />} />
         </Routes>
       </Router>
     </GlobalProvider>
