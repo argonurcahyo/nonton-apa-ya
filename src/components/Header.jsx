@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalState";
 import { auth } from '../config/firebase'
 import { signOut } from 'firebase/auth'
@@ -75,6 +75,15 @@ export const Header = () => {
         <i className="fa-solid fa-search"></i>
        </NavLink>
       </li>
+      {user &&
+       <li>
+        <a href="#"
+         onClick={onLogout}
+        >
+         <i className="fa-solid fa-power-off"></i>
+        </a>
+       </li>
+      }
       {/* <li>
        <NavLink
         to="/tv/search"

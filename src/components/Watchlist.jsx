@@ -17,7 +17,9 @@ export const Watchlist = () => {
 
         <div className="container">
           <div className="header">
-            <h1 className="heading">{user ? user.email : "My"} Watchlist</h1>
+            <h2 className="heading">
+              {user ? <span style={{ textDecoration: "underline" }}>{user.email.split('@')[0]}</span> : "My"} Watchlist
+            </h2>
 
             <span className="count-pill">
               {watchlist.length} {watchlist.length === 1 ? "Movie" : "Movies"}
