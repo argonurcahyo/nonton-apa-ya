@@ -77,11 +77,11 @@ export const Header = () => {
       </li>
       {user &&
        <li>
-        <a href="#"
+        <button
          onClick={onLogout}
         >
          <i className="fa-solid fa-power-off"></i>
-        </a>
+        </button>
        </li>
       }
       {/* <li>
