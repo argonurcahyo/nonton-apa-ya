@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalState";
 import { auth } from '../config/firebase'
 import { signOut } from 'firebase/auth'
