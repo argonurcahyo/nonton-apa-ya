@@ -79,11 +79,13 @@ export const MovieCard = forwardRef(({ movie, type, index }, ref) => {
         key={movie.id}
         initial={{
           opacity: 0,
-          scale: 0.1
+          translateX: 0,
+          translateY: 50,
         }}
         animate={{
           opacity: 1,
-          scale: 1
+          translateX: 0,
+          translateY: 0
         }}
         transition={{
           duration: 0.3,

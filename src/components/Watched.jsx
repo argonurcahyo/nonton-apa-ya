@@ -48,7 +48,7 @@ export const Watched = () => {
                         <MovieCard
                           movie={movie}
                           key={movie.id}
-                          type="watchlist"
+                          type="watched"
                           index={movie.id} />
                       ))}
                     </AnimatePresence>
@@ -64,7 +64,7 @@ export const Watched = () => {
                   {watched.map((movie, index) => (
                     <MovieCard
                       movie={movie}
-                      key={movie.id}
+                      key={index}
                       type="watched"
                       index={index}
                     />

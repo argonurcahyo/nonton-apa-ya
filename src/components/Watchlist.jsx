@@ -38,8 +38,8 @@ export const Watchlist = () => {
             {groupByYear ?
               <button className="btn" onClick={() => setGroupByYear(false)}>Show All</button>
               :
-              <button className="btn" onClick={() => setGroupByYear(true)}>Group By Year</button> 
-              }
+              <button className="btn" onClick={() => setGroupByYear(true)}>Group By Year</button>
+            }
           </div>
           <br />
           {groupByYear ?
