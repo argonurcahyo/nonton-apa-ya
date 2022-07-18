@@ -11,7 +11,7 @@ import TVNetworkLabel from "./TVNetworkLabel";
 import Rating from "./Rating";
 
 export const MovieCard = forwardRef(({ movie, type, index }, ref) => {
-  const BASE_IMG_URL = "https://image.tmdb.org/t/p/original";
+  const BASE_IMG_URL = "https://image.tmdb.org/t/p/w200";
   const NO_IMG_URL = "https://i.mydramalist.com/ZN5Ak_4c.jpg";
 
   const { watchlist, watched } = useContext(GlobalContext);
