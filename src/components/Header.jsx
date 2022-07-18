@@ -78,6 +78,7 @@ export const Header = () => {
       {user &&
        <li>
         <button
+         className="btn-logout"
          onClick={onLogout}
         >
          <i className="fa-solid fa-power-off"></i>

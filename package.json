@@ -12,6 +12,7 @@
     "firebase-admin": "^11.0.0",
     "framer-motion": "^6.3.16",
     "framer-motion-3d": "^6.3.16",
+    "lodash": "^4.17.21",
     "moment": "^2.29.3",
     "react": "^18.2.0",
     "react-animated-text": "^0.1.4",

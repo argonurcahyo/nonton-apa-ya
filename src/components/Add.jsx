@@ -4,33 +4,33 @@ import tmdb from "../apis/tmdb";
 import { MovieCard } from "./MovieCard";
 import Transitions from "./Transition";
 
+
 export const Add = () => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
 
+
+  const fetchMovies = async (q) => {
+    try {
+      const fetchedMovies = await tmdb.get("search/movie", {
+        params: {
+          language: "en-US",
+          page: "1",
+          include_adult: "true",
+          query: q
+        }
+      });
+      setResults(fetchedMovies.data.results);
+    } catch (error) {
+      console.log(error);
+      setResults([])
+    }
+  }
+
   const onChange = (e) => {
     e.preventDefault();
-
     setQuery(e.target.value);
-
-    const fetchMovies = async () => {
-      try {
-        const fetchedMovies = await tmdb.get("search/movie", {
-          params: {
-            language: "en-US",
-            page: "1",
-            include_adult: "true",
-            query: e.target.value
-          }
-        });
-        setResults(fetchedMovies.data.results);
-      } catch (error) {
-        console.log(error);
-        setResults([])
-      }
-    }
-
-    fetchMovies();
+    fetchMovies(e.target.value);
   };
 
   return (

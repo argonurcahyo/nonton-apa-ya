@@ -315,6 +315,12 @@ header .nav-links li:last-child {
   }
 }
 
+@media (max-width: 400px) {
+  .movie-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 .cast-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -338,7 +344,6 @@ header .nav-links li:last-child {
 }
 
 img.watchlist {
-  opacity: 0.5;
   border: 3px solid var(--watchlist);
   border-radius: 10px;
 }
@@ -348,7 +353,6 @@ input {
 }
 
 img.watched {
-  opacity: 0.5;
   border: 3px solid var(--watched);
   border-radius: 10px;
 }
@@ -610,13 +614,20 @@ span.actor-name {
 }
 
 .modal-close {
-  width: 24px;
-  height: 24px;
-  text-align: right;
+  width: 16px;
+  height: 16px;
+  font-size: 9px;
+  padding: 2px;
+  text-align: center;
+  background-color: var(--primary);
+  color: var(--white);
+  border-radius: 50%;
 }
 
 .modal-close:hover {
-  color: #525252;
+  color: var(--watched);
+  background-color: var(--white);
+  cursor: pointer;
 }
 
 .season-count {
@@ -748,6 +759,7 @@ span.ended i.status-icon:before {
 
 .loading-card {
   display: flex;
+  min-height: 317px;
   height: 100%;
   padding: 5px;
   border-radius: 10px;
@@ -826,4 +838,30 @@ span.ended i.status-icon:before {
 
 .profile-photo img {
   border-radius: 15px;
+}
+
+header button {
+  background-color: transparent;
+  color: var(--white);
+  font-size: 1.25rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 8px 10px;
+}
+
+.btn-logout:hover {
+  background-color: var(--cancelled);
+  color: var(--primary)
+}
+
+.sticky-thc {
+  box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+  width: fit-content;
+  padding: 3px 15px;
+  border-radius: 25px;
+  position: sticky;
+  top: 60px;
+  z-index: 999;
+  background-color: var(--secondary);
 }
