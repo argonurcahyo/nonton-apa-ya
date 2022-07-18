@@ -3,8 +3,13 @@ import { GlobalContext } from "../context/GlobalState";
 import { MovieCard } from "./MovieCard";
 import Transitions from "./Transition";
 
+import { auth } from '../config/firebase'
+import { useAuthState } from 'react-firebase-hooks/auth'
+
 export const Watchlist = () => {
   const { watchlist } = useContext(GlobalContext);
+
+  const [user] = useAuthState(auth)
 
   return (
     <Transitions>
@@ -12,7 +17,7 @@ export const Watchlist = () => {
 
         <div className="container">
           <div className="header">
-            <h1 className="heading">My Watchlist</h1>
+            <h1 className="heading">{user ? user.email : "My"} Watchlist</h1>
 
             <span className="count-pill">
               {watchlist.length} {watchlist.length === 1 ? "Movie" : "Movies"}

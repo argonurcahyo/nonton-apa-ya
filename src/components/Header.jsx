@@ -1,10 +1,26 @@
 import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalState";
+import { auth } from '../config/firebase'
+import { signOut } from 'firebase/auth'
+import { useAuthState } from "react-firebase-hooks/auth";
 
 export const Header = () => {
  const { watchlist } = useContext(GlobalContext);
  const activeClassname = "btn";
+
+ const navigate = useNavigate();
+ const [user] = useAuthState(auth)
+
+ const onLogout = async () => {
+  try {
+   await signOut(auth)
+   navigate("/login")
+
+  } catch (error) {
+   console.log(error)
+  }
+ }
 
  return (
   <header>

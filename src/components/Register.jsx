@@ -1,24 +1,21 @@
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import React from 'react'
-import { useState } from 'react';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-
 import { auth } from '../config/firebase'
 
-const Login = () => {
+const Register = () => {
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState('');
-    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        setLoading(true)
-        const data = new FormData(event.currentTarget);
+        const data = new FormData(event.currentTarget)
         const email = data.get('email')
         const password = data.get('password')
 
         try {
-            await signInWithEmailAndPassword(auth, email, password)
+            const { user } = await createUserWithEmailAndPassword(auth, email, password)
+            console.log(user);
             navigate("/")
         } catch (error) {
             setErrorMessage(error.message);
@@ -27,7 +24,6 @@ const Login = () => {
 
     return (
         <div className="container">
-            {loading && "Loading..."}
             <form onSubmit={handleSubmit}>
                 <div className="input-wrapper">
                     <input type="email" name="email" id="email" placeholder='Email' />
@@ -35,11 +31,11 @@ const Login = () => {
                 <div className="input-wrapper">
                     <input type="password" name="password" id="password" placeholder='Password' />
                 </div>
-                <button type="submit" className='btn'>Login</button>
+                <button type="submit" className='btn'>Register</button>
                 <div style={{ color: "red" }}>{errorMessage}</div>
             </form>
         </div>
     )
 }
 
-export default Login
+export default Register
