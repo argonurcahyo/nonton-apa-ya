@@ -415,6 +415,7 @@ img.watched {
 img.detail-backdrop {
   border-radius: 10px;
   margin-top: 5px;
+  max-width: 500px;
 }
 
 span.release-date {
@@ -864,4 +865,13 @@ header button {
   top: 60px;
   z-index: 999;
   background-color: var(--secondary);
+}
+
+.movie-container {
+  padding: 15px;
+  max-width: 500px;
+  margin-left: 20%;
+  margin-top:10px;
+  margin-right: auto;
+  box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
 }

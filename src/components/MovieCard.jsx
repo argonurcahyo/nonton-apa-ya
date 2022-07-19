@@ -9,10 +9,12 @@ import tmdb from "../apis/tmdb";
 import { MovieDetail } from "./MovieDetail";
 import TVNetworkLabel from "./TVNetworkLabel";
 import Rating from "./Rating";
+import { useNavigate } from 'react-router-dom'
 
 export const MovieCard = forwardRef(({ movie, type, index }, ref) => {
   const BASE_IMG_URL = "https://image.tmdb.org/t/p/w200";
   const NO_IMG_URL = "https://i.mydramalist.com/ZN5Ak_4c.jpg";
+  const navigate = useNavigate();
 
   const { watchlist, watched } = useContext(GlobalContext);
   const [movieDetail, setMovieDetail] = useState("");
@@ -54,6 +56,7 @@ export const MovieCard = forwardRef(({ movie, type, index }, ref) => {
   const handleOpenModal = () => {
     setOpenModal(true);
     console.log(movieDetail);
+    // navigate(`/movie/${movie.id}`)
   };
   const handleCloseModal = () => setOpenModal(false);
   const imageLoaded = () => {

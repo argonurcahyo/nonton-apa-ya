@@ -3,6 +3,7 @@ import ReactModal from "react-modal";
 import ProgressiveImage from "react-progressive-graceful-image";
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom'
+import { useEffect } from "react";
 
 ReactModal.setAppElement("#root");
 
@@ -18,6 +19,10 @@ export const MovieDetail = ({ movieDetail, providers }) => {
   const title = movieDetail?.title;
   const original_title = movieDetail?.original_title;
   const directors = crews?.filter(c => c.job === "Director");
+
+  useEffect(() => {
+    console.log(movieDetail)
+  }, [movieDetail])
 
   return (
     movieDetail && (
@@ -74,7 +79,7 @@ export const MovieDetail = ({ movieDetail, providers }) => {
           alignItems: "center"
         }}>
           <div className="genre-box">
-            {movieDetail && (
+            {movieDetail.genres && (
               movieDetail.genres.map((g, i) => (
                 <span
                   key={i}
