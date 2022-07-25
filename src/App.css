@@ -251,6 +251,12 @@ header .nav-links li:last-child {
   cursor: pointer;
 }
 
+.genre-pill:hover {
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  background-color: var(--white);
+}
+
 .btn .header-pill {
   position: relative;
   top: -8px;
@@ -854,8 +860,14 @@ span.ended i.status-icon:before {
   border-radius: 15px;
 }
 
+.profile-photo {
+  width: 20%;
+}
+
 .profile-photo img {
   border-radius: 15px;
+  max-width: 100%;
+
 }
 
 header button {

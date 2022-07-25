@@ -80,20 +80,20 @@ export const MovieCard = forwardRef(({ movie, type, index }, ref) => {
       <motion.div
         layout
         key={movie.id}
-        initial={{
-          opacity: 0,
-          translateX: 0,
-          translateY: 50,
-        }}
-        animate={{
-          opacity: 1,
-          translateX: 0,
-          translateY: 0
-        }}
-        transition={{
-          duration: 0.3,
-          delay: 0.2
-        }}
+      // initial={{
+      //   opacity: 0,
+      //   translateX: 0,
+      //   translateY: 50,
+      // }}
+      // animate={{
+      //   opacity: 1,
+      //   translateX: 0,
+      //   translateY: 0
+      // }}
+      // transition={{
+      //   duration: 0.3,
+      //   delay: 0.2
+      // }}
       >
 
         <div

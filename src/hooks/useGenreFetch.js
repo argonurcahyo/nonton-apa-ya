@@ -36,7 +36,11 @@ const useGenreFetch = (genreId, pageNumber) => {
       })
     return () => cancel()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageNumber])
+  }, [genreId, pageNumber])
+
+  useEffect(() => {
+    setMovies([])
+  }, [genreId])
 
   return { loading, error, hasMore, movies }
 }

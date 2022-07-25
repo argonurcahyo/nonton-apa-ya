@@ -7,6 +7,7 @@ import Transitions from './Transition'
 import useGenreFetch from '../hooks/useGenreFetch'
 import { useRef } from 'react'
 import { useCallback } from 'react'
+import LoadingCard from './LoadingCard'
 
 const MovieByGenre = () => {
  let { id } = useParams()
@@ -57,6 +58,8 @@ const MovieByGenre = () => {
 
  useEffect(() => {
   fetchGenreList()
+  setPageNumber(0)
+  setPageNumber(1)
   // if (id) fetchMovieByGenre(id)
  }, [id])
 
@@ -79,6 +82,7 @@ const MovieByGenre = () => {
          type="search"
         />
        ))}
+       {loading && <LoadingCard />}
       </div>
      ) : (
       <h2 className="no-movies">No movies!! Get some!</h2>

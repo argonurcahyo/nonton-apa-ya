@@ -9,5 +9,5 @@ const tmdb = axios.create({
         api_key: API_KEY,
     },
 });
-
+export const BASE_IMG_URL = "https://image.tmdb.org/t/p/w500";
 export default tmdb;

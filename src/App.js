@@ -17,6 +17,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Movie from "./components/Movie";
 import MovieByGenre from "./components/MovieByGenre";
+import Director from "./components/Director";
 
 function App() {
   useTitle("NontonApaYa");
@@ -40,6 +41,7 @@ function App() {
           <Route exact path="/tv/popular" element={<TVPopular />} />
 
           <Route path="/actor/:id" element={<Actor />} />
+          <Route path="/director/:id" element={<Director />} />
           <Route path="/movie/:movieId" element={<Movie />} />
           <Route path="/movie/genre/:id" element={<MovieByGenre />} />
         </Routes>

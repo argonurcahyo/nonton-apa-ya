@@ -109,7 +109,7 @@ export const MovieDetail = ({ movieDetail, providers }) => {
           alignItems: "center"
         }}>
           <span className="movie-director">
-            Directed by : <b>{directors.map((dir, i) => <Link key={i} to={`/actor/${dir.id}`} target="_blank">{dir.name}     </Link>)}</b>
+            Directed by : <b>{directors.map((dir, i) => <Link key={i} to={`/director/${dir.id}`} target="_blank">{dir.name}     </Link>)}</b>
 
           </span>
           <span className="rating">

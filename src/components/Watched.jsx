@@ -38,8 +38,8 @@ export const Watched = () => {
           <br />
           {groupByYear ?
             watched.length > 0 ? (
-              watchedGroupByYear.map((wgby) => (
-                <>
+              watchedGroupByYear.map((wgby, i) => (
+                <div key={i}>
                   <h3 className="sticky-thc">{wgby.year}</h3>
                   <motion.div layout className="movie-grid">
                     <AnimatePresence>
@@ -52,7 +52,7 @@ export const Watched = () => {
                       ))}
                     </AnimatePresence>
                   </motion.div>
-                </>
+                </div>
               ))
             ) : (
               <h2 className="no-movies">No movies!! Get some!</h2>
