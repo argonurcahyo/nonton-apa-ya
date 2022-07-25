@@ -12,11 +12,11 @@ import Upcoming from "./components/Upcoming";
 import TopRated from "./components/TopRated";
 import TVSearch from "./components/TVSearch";
 import { TVPopular } from "./components/TVPopular";
-import BookSearch from "./components/BookSearch";
 import Actor from "./components/Actor";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Movie from "./components/Movie";
+import MovieByGenre from "./components/MovieByGenre";
 
 function App() {
   useTitle("NontonApaYa");
@@ -39,9 +39,9 @@ function App() {
           <Route exact path="/tv/search" element={<TVSearch />} />
           <Route exact path="/tv/popular" element={<TVPopular />} />
 
-          <Route exact path="/book" element={<BookSearch />} />
           <Route path="/actor/:id" element={<Actor />} />
           <Route path="/movie/:movieId" element={<Movie />} />
+          <Route path="/movie/genre/:id" element={<MovieByGenre />} />
         </Routes>
       </Router>
     </GlobalProvider>

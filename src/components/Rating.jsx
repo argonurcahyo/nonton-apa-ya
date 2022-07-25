@@ -1,6 +1,7 @@
 import React from 'react'
 
 const Rating = ({ rating }) => {
+
     const ratingCat = () => {
         let intRating = parseInt(rating)
         if (intRating < 5) {
@@ -15,7 +16,7 @@ const Rating = ({ rating }) => {
     }
     return (
         <div className={`rating-card ${ratingCat()}`}>
-            {parseFloat(rating) * 10}
+            {parseInt(parseFloat(rating) * 10)}
         </div>
     )
 }

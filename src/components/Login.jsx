@@ -3,7 +3,7 @@ import React from 'react'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 
-import { auth } from '../config/firebase'
+import { auth } from '../apis/firebase'
 
 const Login = () => {
     const navigate = useNavigate();

@@ -3,7 +3,7 @@ import ReactModal from "react-modal";
 import ProgressiveImage from "react-progressive-graceful-image";
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom'
-import { useEffect } from "react";
+import { useNavigate } from 'react-router-dom'
 
 ReactModal.setAppElement("#root");
 
@@ -20,9 +20,7 @@ export const MovieDetail = ({ movieDetail, providers }) => {
   const original_title = movieDetail?.original_title;
   const directors = crews?.filter(c => c.job === "Director");
 
-  useEffect(() => {
-    console.log(movieDetail)
-  }, [movieDetail])
+  const navigate = useNavigate()
 
   return (
     movieDetail && (
@@ -83,7 +81,11 @@ export const MovieDetail = ({ movieDetail, providers }) => {
               movieDetail.genres.map((g, i) => (
                 <span
                   key={i}
-                  className="genre-pill">{g.name}</span>
+                  className="genre-pill"
+                  onClick={() => navigate(`/movie/genre/${g.id}`)}
+                >
+                  {g.name}
+                </span>
               ))
             )}
           </div>
@@ -107,7 +109,7 @@ export const MovieDetail = ({ movieDetail, providers }) => {
           alignItems: "center"
         }}>
           <span className="movie-director">
-            Directed by : <b>{directors.map(dir => <Link to={`/actor/${dir.id}`} target="_blank">{dir.name}     </Link>)}</b>
+            Directed by : <b>{directors.map((dir, i) => <Link key={i} to={`/actor/${dir.id}`} target="_blank">{dir.name}     </Link>)}</b>
 
           </span>
           <span className="rating">
@@ -137,7 +139,7 @@ export const MovieDetail = ({ movieDetail, providers }) => {
         {companies && (
           <div className="companies-row">
             {companies.map((comp, i) => (
-              <div className="companies">
+              <div key={i} className="companies">
                 &copy;  {comp.name}
               </div>
             ))}
@@ -145,14 +147,16 @@ export const MovieDetail = ({ movieDetail, providers }) => {
         )}
 
         {movieDetail.tagline && (
-          <div className="tagline"><i><code>"{movieDetail.tagline}"</code></i></div>
+          <div onClick={() => navigate(`/movie/${movieDetail.id}`)} className="tagline">
+            <i><code>"{movieDetail.tagline}"</code></i>
+          </div>
         )}
 
         <p className="movie-overview">{movieDetail.overview}</p>
 
         {movieDetail && (
           <div className="cast-grid cast-box">
-            {movieDetail.credits.cast.slice(0, 5).map((c) =>
+            {movieDetail.credits.cast.slice(0, 10).map((c) =>
               <div className="profile-box" key={c.id}>
                 <div className="profile">
                   <Link to={`/actor/${c.id}`} target="_blank">

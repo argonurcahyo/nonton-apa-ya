@@ -16,6 +16,10 @@
   --fresh: #32d61b;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: "Source Sans Pro", "Poppins", "Inter", sans-serif;
   padding: 0;
@@ -208,7 +212,7 @@ header .nav-links li:last-child {
 
 /* Movie Page */
 .movie-page {
-  padding: 30px 0;
+  padding: 20px 0;
 }
 
 .movie-page .header {
@@ -244,35 +248,8 @@ header .nav-links li:last-child {
   height: 20px;
   border-radius: 999px;
   color: var(--white);
+  cursor: pointer;
 }
-
-/* .header-pill {
-  padding: 6px;
-  margin-left: 10px;
-  background-color: var(--white);
-  color: var(--primary);
-  border-radius: 50%;
-  font-weight: 700;
-  display: inline-block;
-  border: none;
-  font-size: small;
-  transition: all 0.3s ease;
-  line-height: 1.1;
-} */
-
-/* .btn .header-pill {  
-  padding: 5px;
-  margin-left: 10px;
-  background-color: var(--primary);
-  color: var(--white);
-  border-radius: 50%;
-  font-weight: 600;
-  display: inline-block;
-  border: none;
-  font-size: smaller;
-  transition: all 0.3s ease;
-  line-height: 1.1;
-} */
 
 .btn .header-pill {
   position: relative;
@@ -415,7 +392,6 @@ img.watched {
 img.detail-backdrop {
   border-radius: 10px;
   margin-top: 5px;
-  max-width: 500px;
 }
 
 span.release-date {
@@ -436,12 +412,6 @@ span.release-date {
   transition: opacity 100ms ease-in-out;
 }
 
-/* .cast-box {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-evenly;
-} */
-
 .profile {
   position: relative;
   width: 80px;
@@ -458,6 +428,11 @@ span.release-date {
   margin-right: auto;
   display: block;
   box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+}
+
+.cast-box {
+  max-height: 120px;
+  overflow-y: scroll;
 }
 
 span.actor-name {
@@ -593,25 +568,67 @@ span.actor-name {
 }
 
 @media only screen and (max-width: 480px) {
-  /* .provider-grid {
-    display: grid;
-    grid-gap: 10px;
-  } */
 
   .cast-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     grid-gap: 10px;
+  }
+
+  .movie-overview {
+    font-size: small;
+    margin-top: 3px;
+    padding: 0px 5px;
+    overflow-y: scroll;
+    max-height: 3rem;
+  }
+
+  .profile-box {
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+    width: 40px;
+  }
+
+  .profile img {
+    margin-top: -8px;
+  }
+
+  .profile {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 50%;
+  }
+
+  .cast-box {
+    max-height: 100px;
+    overflow-y: scroll;
   }
 }
 
 .movie-overview {
   font-size: small;
-  text-align: justify;
   margin-top: 3px;
   padding: 0px 5px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  overflow-y: scroll;
+  max-height: 5rem;
+}
+
+.modal-container {
+  background-color: '#ffffff';
+  padding: '10px 10px';
+  border-radius: '15px';
+  position: 'fixed';
+  top: "10%";
+  left: "40%";
+  right: "auto";
+  bottom: "auto";
+  max-height: "calc(100vh-2rem)";
+  max-width: "600px";
+  transform: "translate(-40%, -10%)";
+  z-index: 1000;
 }
 
 .modal-close {
@@ -871,7 +888,7 @@ header button {
   padding: 15px;
   max-width: 500px;
   margin-left: 20%;
-  margin-top:10px;
+  margin-top: 10px;
   margin-right: auto;
   box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
 }

@@ -16,7 +16,6 @@ export const Watched = () => {
       .map((items, year) => ({ year: year, data: items }))
       .value()
     setWatchedGroupByYear(wgby.sort((a, b) => b.year - a.year))
-    console.log(wgby)
   }, [watched]);
 
   return (

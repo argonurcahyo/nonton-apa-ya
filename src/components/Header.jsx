@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalState";
-import { auth } from '../config/firebase'
+import { auth } from '../apis/firebase'
 import { signOut } from 'firebase/auth'
 import { useAuthState } from "react-firebase-hooks/auth";
 

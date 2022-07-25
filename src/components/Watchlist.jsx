@@ -3,7 +3,7 @@ import { GlobalContext } from "../context/GlobalState";
 import { MovieCard } from "./MovieCard";
 import Transitions from "./Transition";
 import { motion, AnimatePresence } from 'framer-motion'
-import { auth } from '../config/firebase'
+import { auth } from '../apis/firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import _ from 'lodash'
 

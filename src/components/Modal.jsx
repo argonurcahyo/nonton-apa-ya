@@ -1,20 +1,6 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 
-// const MODAL_STYLES = {
-//     position: 'fixed',
-//     marginLeft: '5%',
-//     marginRight: '5%',
-//     top: '10%',
-//     left: '45%',
-//     transform: 'translate(-50%,-50%)',
-//     backgroundColor: '#FFF',
-//     padding: '10px 10px',
-//     width: '80%',
-//     zIndex: 1000,
-//     borderRadius: '15px',
-// }
-
 const MODAL_STYLES2 = {
  backgroundColor: '#ffffff',
  padding: '10px 10px',
@@ -26,7 +12,6 @@ const MODAL_STYLES2 = {
  bottom: "auto",
  maxHeight: "calc(100vh-2rem)",
  maxWidth: "600px",
- // width: "auto",
  transform: "translate(-40%, -10%)",
  zIndex: 1000
 }
@@ -49,7 +34,7 @@ const Modal = ({ open, children, onClose }) => {
  return ReactDom.createPortal(
   <div className="modal">
    <div className="modal-overlay" style={OVERLAY_STYLES} />
-   <div style={MODAL_STYLES2}>
+   <div className="modal-container" style={MODAL_STYLES2}>
     <div style={{
      display: 'flex',
      flexDirection: 'row',
