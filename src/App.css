@@ -864,6 +864,15 @@ span.ended i.status-icon:before {
   width: 20%;
 }
 
+.grow {
+  transition: all .2s ease-in-out;
+  cursor: pointer;
+}
+
+.grow:hover {
+  transform: scale(1.1);
+}
+
 .profile-photo img {
   border-radius: 15px;
   max-width: 100%;

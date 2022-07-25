@@ -93,9 +93,11 @@ export const MovieDetail = ({ movieDetail, providers }) => {
           {providers && (
             <div className="provider-grid">
               {providers.flatrate?.map((c, i) => (
-                <div key={i} className="provider-box">
+                <div key={i}
+                  onClick={() => console.log(c)}
+                  className="provider-box grow">
                   <img
-                    alt={c.name}
+                    alt={c.provider_name}
                     src={`${BASE_PRV_URL}${c.logo_path}`} />
                 </div>
               ))}
