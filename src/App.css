@@ -424,7 +424,6 @@ img.watched {
   color: var(--secondary);
   font-size: .8rem;
   font-weight: 900;
-
 }
 
 .movie-card:hover .collection-ribbon {
@@ -432,8 +431,28 @@ img.watched {
   transition: opacity 0.4s linear;
 }
 
-.collection-ribbon .span {
-  cursor: pointer;
+.short-movie-ribbon {
+  position: absolute;
+  width: 100%;
+  top: 0px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  opacity: 1;
+}
+
+.movie-card:hover .short-movie-ribbon {
+  opacity: 1;
+  transition: opacity 0.4s linear;
+}
+
+.short-movie-ribbon span {
+  background-color: var(--secondary);
+  color: var(--primary);
+  font-weight: 700;
+  font-size: .7rem;
+  padding: 0px 15px 3px 15px;
+  border-radius: 0 0 5px 5px;
 }
 
 .ctrl-btn {
@@ -461,6 +480,7 @@ img.watched {
 img.detail-backdrop {
   border-radius: 10px;
   margin-top: 5px;
+  box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
 }
 
 span.release-date {
@@ -727,10 +747,13 @@ span.actor-name {
 }
 
 .status-pill {
-  font-size: smaller;
+  font-size: .7rem;
   font-weight: 600;
-  padding: 3px 10px 5px 10px;
+  padding: 1px 5px 2px 5px;
   border-radius: 15px;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
 }
 
 span.returning {

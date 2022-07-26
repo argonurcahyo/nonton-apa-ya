@@ -62,8 +62,8 @@ const MovieDetail = ({ movieDetail, providers }) => {
             {<Moment format="MMMM Do, YYYY">{movieDetail.release_date}</Moment>}
           </span>
 
-          {movieDetail && <span className="status-pill">
-            {movieDetail.status}
+          {movieDetail.runtime > 0 && <span className="status-pill">
+            {movieDetail.runtime} min
           </span>}
         </div>
 
@@ -110,9 +110,10 @@ const MovieDetail = ({ movieDetail, providers }) => {
             Directed by : <b>{directors.map((dir, i) => <Link key={i} to={`/director/${dir.id}`} target="_blank">{dir.name}     </Link>)}</b>
 
           </span>
-          <span className="rating">
-            {movieDetail.vote_average}
-          </span>
+          {movieDetail.vote_average > 0 && (
+            <span className="rating">
+              {movieDetail.vote_average}
+            </span>)}
         </div>
         <div style={{
           display: "flex",
@@ -148,7 +149,9 @@ const MovieDetail = ({ movieDetail, providers }) => {
           <div className="companies-row">
             {companies.map((comp, i) => (
               <div key={i} className="companies">
-                &copy;  {comp.name}
+                <Link to={`/movie/company/${comp.id}`}>
+                  &copy;  {comp.name}
+                </Link>
               </div>
             ))}
           </div>

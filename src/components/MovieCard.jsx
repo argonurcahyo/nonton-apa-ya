@@ -39,10 +39,9 @@ const MovieCard = forwardRef(({ movie, type, index }, ref) => {
   }
 
   useEffect(() => {
-    const movieId = movie.id;
     setOpenModal(false)
-    fetchMovieDetails(movieId);
-    fetchWatchProviders(movieId);
+    fetchMovieDetails(movie?.id);
+    fetchWatchProviders(movie?.id);
   }, [movie]);
 
   //React Modal
@@ -81,10 +80,17 @@ const MovieCard = forwardRef(({ movie, type, index }, ref) => {
           className="movie-card"
         >
           <div
+            className="short-movie-ribbon"
+            style={{ display: (movieDetail?.runtime === 0 || movieDetail?.runtime > 60) ? "none" : "flex" }}
+          >
+            <span>short movie</span>
+          </div>
+
+          <div
             className="collection-ribbon"
             style={{ display: movieDetail?.belongs_to_collection ? "block" : "none" }}
           >
-            <span>C O L L E C T I O N</span>
+            <span>collection</span>
           </div>
           {(type === "popular" || type === "search") ?
             (isWatchlist ?

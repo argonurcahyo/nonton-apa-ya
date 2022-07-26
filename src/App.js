@@ -20,6 +20,7 @@ import MovieByGenre from "./pages/MovieByGenre";
 import Director from "./pages/Director";
 import NotFound from "./pages/NotFound";
 import MovieByKeyword from "./pages/MovieByKeyword";
+import MovieByCompany from "./pages/MovieByCompany";
 
 function App() {
   useTitle("NontonApaYa");
@@ -42,6 +43,7 @@ function App() {
           <Route path="/movie/:movieId" element={<Movie />} />
           <Route path="/movie/genre/:id" element={<MovieByGenre />} />
           <Route path="/movie/keyword/:id" element={<MovieByKeyword />} />
+          <Route path="/movie/company/:id" element={<MovieByCompany />} />
 
           <Route exact path="/tv/search" element={<TVSearch />} />
           <Route exact path="/tv/popular" element={<TVPopular />} />
