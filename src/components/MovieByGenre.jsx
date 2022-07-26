@@ -40,22 +40,6 @@ const MovieByGenre = () => {
   }
  }
 
- // const fetchMovieByGenre = async (genreId) => {
- //  try {
- //   const fetchData = await tmdb.get(`discover/movie/`, {
- //    params: {
- //     with_genres: genreId,
- //     sort_by: 'popularity.desc'
- //    }
- //   })
- //   setMovies(fetchData.data.results)
- //   console.log(fetchData.data.results)
- //  } catch (error) {
- //   console.log(error)
- //   setMovies([])
- //  }
- // }
-
  useEffect(() => {
   fetchGenreList()
   setPageNumber(0)
