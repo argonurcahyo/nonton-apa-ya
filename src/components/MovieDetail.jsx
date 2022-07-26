@@ -90,11 +90,12 @@ const MovieDetail = ({ movieDetail, providers }) => {
             <div className="provider-grid">
               {providers.flatrate?.map((c, i) => (
                 <div key={i}
-                  onClick={() => console.log(c)}
                   className="provider-box grow">
-                  <img
-                    alt={c.provider_name}
-                    src={`${BASE_IMG_URL}${c.logo_path}`} />
+                  <Link to={`/movie/network/${c.provider_id}`}>
+                    <img
+                      alt={c.provider_name}
+                      src={`${BASE_IMG_URL}${c.logo_path}`} />
+                  </Link>
                 </div>
               ))}
             </div>

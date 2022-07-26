@@ -20,7 +20,7 @@ const MovieCard = forwardRef(({ movie, type, index }, ref) => {
     try {
       const fetchedMovieDetails = await tmdb.get(`movie/${id}`, {
         params: {
-          append_to_response: "credits,keywords",
+          append_to_response: "credits,keywords,watch/providers",
         }
       });
       setMovieDetail(fetchedMovieDetails.data);
