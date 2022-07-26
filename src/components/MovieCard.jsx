@@ -1,19 +1,16 @@
 import React, { forwardRef, useContext, useEffect, useState } from "react";
-import { MovieControls } from "./MovieControls";
 import { GlobalContext } from "../context/GlobalState";
 import { motion } from "framer-motion";
 import Modal from "./Modal";
+import MovieControls from "./MovieControls";
 import LoadingCard from './LoadingCard'
-// import ProgressiveImage from "react-progressive-graceful-image";
 import tmdb from "../apis/tmdb";
-import { MovieDetail } from "./MovieDetail";
+import MovieDetail from "./MovieDetail";
 import TVNetworkLabel from "./TVNetworkLabel";
 import Rating from "./Rating";
+import { BASE_IMG_URL, NO_IMG_URL } from "../apis/tmdb";
 
-export const MovieCard = forwardRef(({ movie, type, index }, ref) => {
-  const BASE_IMG_URL = "https://image.tmdb.org/t/p/w200";
-  const NO_IMG_URL = "https://i.mydramalist.com/ZN5Ak_4c.jpg";
-
+const MovieCard = forwardRef(({ movie, type, index }, ref) => {
   const { watchlist, watched } = useContext(GlobalContext);
   const [movieDetail, setMovieDetail] = useState("");
   const [providers, setProviders] = useState([]);
@@ -23,7 +20,7 @@ export const MovieCard = forwardRef(({ movie, type, index }, ref) => {
     try {
       const fetchedMovieDetails = await tmdb.get(`movie/${id}`, {
         params: {
-          append_to_response: "credits",
+          append_to_response: "credits,keywords",
         }
       });
       setMovieDetail(fetchedMovieDetails.data);
@@ -44,7 +41,6 @@ export const MovieCard = forwardRef(({ movie, type, index }, ref) => {
   useEffect(() => {
     const movieId = movie.id;
     setOpenModal(false)
-    // window.scrollTo(0, 0)
     fetchMovieDetails(movieId);
     fetchWatchProviders(movieId);
   }, [movie]);
@@ -56,7 +52,6 @@ export const MovieCard = forwardRef(({ movie, type, index }, ref) => {
   const handleOpenModal = () => {
     setOpenModal(true);
     console.log(movieDetail);
-    // navigate(`/movie/${movie.id}`)
   };
   const handleCloseModal = () => setOpenModal(false);
   const imageLoaded = () => {
@@ -72,6 +67,7 @@ export const MovieCard = forwardRef(({ movie, type, index }, ref) => {
     : storedMovieWatched
       ? true
       : false;
+
   const isWatchlist = storedMovie ? true : false;
   const isWatched = storedMovieWatched ? true : false;
 
@@ -80,25 +76,16 @@ export const MovieCard = forwardRef(({ movie, type, index }, ref) => {
       <motion.div
         layout
         key={movie.id}
-      // initial={{
-      //   opacity: 0,
-      //   translateX: 0,
-      //   translateY: 50,
-      // }}
-      // animate={{
-      //   opacity: 1,
-      //   translateX: 0,
-      //   translateY: 0
-      // }}
-      // transition={{
-      //   duration: 0.3,
-      //   delay: 0.2
-      // }}
       >
-
         <div
           className="movie-card"
         >
+          <div
+            className="collection-ribbon"
+            style={{ display: movieDetail?.belongs_to_collection ? "block" : "none" }}
+          >
+            <span>C O L L E C T I O N</span>
+          </div>
           {(type === "popular" || type === "search") ?
             (isWatchlist ?
               (!loading && <div className="ribbon blue"><span>WATCHLIST</span></div>)
@@ -155,3 +142,5 @@ export const MovieCard = forwardRef(({ movie, type, index }, ref) => {
   );
 }
 )
+
+export default MovieCard

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import Transitions from './Transition';
+import Transitions from '../components/Transition';
 import tmdb from '../apis/tmdb';
-import TVCard from './TVCard';
+import TVCard from '../components/TVCard';
 
 const TVSearch = () => {
  const [query, setQuery] = useState("");

@@ -1,15 +1,10 @@
 import React from "react";
-import ReactModal from "react-modal";
+import { Link, useNavigate } from 'react-router-dom'
 import ProgressiveImage from "react-progressive-graceful-image";
 import Moment from 'react-moment';
-import { Link } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
+import { BASE_IMG_URL } from "../apis/tmdb";
 
-ReactModal.setAppElement("#root");
-
-export const MovieDetail = ({ movieDetail, providers }) => {
-  const BASE_IMG_URL = "https://image.tmdb.org/t/p/w500";
-  const BASE_PRV_URL = "https://image.tmdb.org/t/p/w200";
+const MovieDetail = ({ movieDetail, providers }) => {
   const BASE_FLAG_URL = 'https://countryflagsapi.com/png/';
   const BD_LOADING = "https://i.pinimg.com/originals/3d/6a/a9/3d6aa9082f3c9e285df9970dc7b762ac.gif";
 
@@ -33,11 +28,12 @@ export const MovieDetail = ({ movieDetail, providers }) => {
             justifyContent: "space-between",
           }}
         >
-
           <span className="movie-title">
-            {title}
+            <Link to={`/movie/${movieDetail.id}`}>{title}</Link>
             {title !== original_title && (
-              <span className="original-title">  ({`${original_title}`})</span>
+              <span className="original-title">
+                ({`${original_title}`})
+              </span>
             )}
           </span>
 
@@ -98,7 +94,7 @@ export const MovieDetail = ({ movieDetail, providers }) => {
                   className="provider-box grow">
                   <img
                     alt={c.provider_name}
-                    src={`${BASE_PRV_URL}${c.logo_path}`} />
+                    src={`${BASE_IMG_URL}${c.logo_path}`} />
                 </div>
               ))}
             </div>
@@ -118,12 +114,22 @@ export const MovieDetail = ({ movieDetail, providers }) => {
             {movieDetail.vote_average}
           </span>
         </div>
+        <div style={{
+          display: "flex",
+          flexWrap: "wrap"
+        }}>
+          {movieDetail?.keywords?.keywords?.map((k, i) => (
+            <span key={i} className="keyword-pill">
+              <Link to={`/movie/keyword/${k.id}`}>{k.name}</Link>
+            </span>
+          ))
+          }
+        </div>
 
         <ProgressiveImage
           key={movieDetail.id}
           src={movieDetail.backdrop_path ?
             `${BASE_IMG_URL}${movieDetail.backdrop_path}`
-            // BD_LOADING
             : "https://placekitten.com/458/305"}
           placeholder={BD_LOADING}
         >
@@ -181,3 +187,5 @@ export const MovieDetail = ({ movieDetail, providers }) => {
     )
   );
 };
+
+export default MovieDetail

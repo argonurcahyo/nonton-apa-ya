@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../context/GlobalState";
-import { MovieCard } from "./MovieCard";
-import Transitions from "./Transition";
+import MovieCard from "../components/MovieCard";
+import Transitions from "../components/Transition";
 import { motion, AnimatePresence } from 'framer-motion'
 import _ from "lodash";
 
-export const Watched = () => {
+const Watched = () => {
   const { watched } = useContext(GlobalContext);
   const [groupByYear, setGroupByYear] = useState(false)
   const [watchedGroupByYear, setWatchedGroupByYear] = useState([])
@@ -82,3 +82,5 @@ export const Watched = () => {
     </Transitions>
   );
 };
+
+export default Watched

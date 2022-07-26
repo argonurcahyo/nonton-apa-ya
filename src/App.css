@@ -257,6 +257,25 @@ header .nav-links li:last-child {
   background-color: var(--white);
 }
 
+.keyword-pill {
+  display: block;
+  background-color: var(--secondary);
+  padding: 3px 5px 4px 5px;
+  font-size: xx-small;
+  margin-right: 2px;
+  height: 20px;
+  border-radius: 5px;
+  color: var(--primary);
+  cursor: pointer;
+  margin-bottom: 2px;
+}
+
+.keyword-pill:hover {
+  border: 1px solid var(--secondary);
+  color: var(--secondary);
+  background-color: var(--white);
+}
+
 .btn .header-pill {
   position: relative;
   top: -8px;
@@ -326,6 +345,25 @@ header .nav-links li:last-child {
   display: block;
 }
 
+.movie-card.collection {
+  max-height: 300px;
+}
+
+.movie-detail-page .detail-backdrop {
+  max-height: 450px;
+  object-fit: cover;
+}
+
+.collection-name {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  font-weight: 900;
+  color: var(--secondary);
+  text-shadow: 1px 2px var(--white);
+  ;
+}
+
 img.watchlist {
   border: 3px solid var(--watchlist);
   border-radius: 10px;
@@ -371,6 +409,31 @@ img.watched {
 
 .movie-card:hover .inner-card-controls {
   opacity: 1;
+}
+
+.collection-ribbon {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  height: 25px;
+  background-color: var(--primary);
+  opacity: 0;
+  text-align: center;
+  vertical-align: center;
+  padding: 2px;
+  color: var(--secondary);
+  font-size: .8rem;
+  font-weight: 900;
+
+}
+
+.movie-card:hover .collection-ribbon {
+  opacity: 1;
+  transition: opacity 0.4s linear;
+}
+
+.collection-ribbon .span {
+  cursor: pointer;
 }
 
 .ctrl-btn {
@@ -518,30 +581,30 @@ span.actor-name {
   border-top: 3px solid #79A70A;
 }
 
-.red span {
+.ribbon.red span {
   background: linear-gradient(#F70505 0%, #8F0808 100%);
 }
 
-.red span::before {
+.ribbon.red span::before {
   border-left-color: #8F0808;
   border-top-color: #8F0808;
 }
 
-.red span::after {
+.ribbon.red span::after {
   border-right-color: #8F0808;
   border-top-color: #8F0808;
 }
 
-.blue span {
+.ribbon.blue span {
   background: linear-gradient(#2989d8 0%, #1e5799 100%);
 }
 
-.blue span::before {
+.ribbon.blue span::before {
   border-left-color: #1e5799;
   border-top-color: #1e5799;
 }
 
-.blue span::after {
+.ribbon.blue span::after {
   border-right-color: #1e5799;
   border-top-color: #1e5799;
 }

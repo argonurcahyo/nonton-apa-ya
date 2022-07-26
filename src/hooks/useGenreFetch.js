@@ -21,11 +21,9 @@ const useGenreFetch = (genreId, pageNumber) => {
       cancelToken: new axios.CancelToken(c => cancel = c)
     })
       .then(res => {
-        console.log(res.config.params)
         setMovies(prevMovies => {
           let newState = [...prevMovies, ...res.data.results]
           let uniqueList = [...new Map(newState?.map((item) => [item["id"], item]))]
-          console.log(uniqueList)
           return uniqueList.map(i => i[1])
         })
         setHasMore(res.data.results.length > 0)

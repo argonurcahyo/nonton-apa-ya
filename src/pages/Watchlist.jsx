@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../context/GlobalState";
-import { MovieCard } from "./MovieCard";
-import Transitions from "./Transition";
+import MovieCard from "../components/MovieCard";
+import Transitions from "../components/Transition";
 import { motion, AnimatePresence } from 'framer-motion'
 import { auth } from '../apis/firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import _ from 'lodash'
 
-export const Watchlist = () => {
+const Watchlist = () => {
   const { watchlist } = useContext(GlobalContext);
   const [user] = useAuthState(auth)
   const [groupByYear, setGroupByYear] = useState(false)
@@ -83,3 +83,5 @@ export const Watchlist = () => {
     </Transitions>
   );
 };
+
+export default Watchlist

@@ -10,4 +10,5 @@ const tmdb = axios.create({
     },
 });
 export const BASE_IMG_URL = "https://image.tmdb.org/t/p/w500";
+export const NO_IMG_URL = "https://i.mydramalist.com/ZN5Ak_4c.jpg";
 export default tmdb;

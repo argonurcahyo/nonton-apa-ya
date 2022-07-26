@@ -1,10 +1,10 @@
 import React, { useState, useRef, useCallback } from "react";
-import { MovieCard } from "./MovieCard";
-import Transitions from "./Transition";
-import LoadingCard from "./LoadingCard";
+import Transitions from '../components/Transition';
 import usePopularFetch from "../hooks/usePopularFetch"
+import MovieCard from '../components/MovieCard'
+import LoadingCard from "../components/LoadingCard";
 
-export const Popular = () => {
+const Popular = () => {
   const [pageNumber, setPageNumber] = useState(1)
 
   const {
@@ -60,3 +60,5 @@ export const Popular = () => {
     </Transitions>
   );
 };
+
+export default Popular

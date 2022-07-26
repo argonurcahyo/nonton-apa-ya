@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import tmdb from '../apis/tmdb';
-import { MovieCard } from './MovieCard';
-import Transitions from './Transition';
+import MovieCard from '../components/MovieCard';
+import Transitions from '../components/Transition';
 
 const Upcoming = () => {
   const [upcoming, setUpcoming] = useState([]);

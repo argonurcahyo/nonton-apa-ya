@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
 
-export const MovieControls = ({ type, movie }) => {
+const MovieControls = ({ type, movie }) => {
   const {
     addMovieToWatched,
     addMovieToWatchlist,
@@ -63,3 +63,5 @@ export const MovieControls = ({ type, movie }) => {
     </div >
   );
 };
+
+export default MovieControls

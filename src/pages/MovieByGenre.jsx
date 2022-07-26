@@ -1,13 +1,10 @@
-import React, { useState } from 'react'
-import { useEffect } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
 import tmdb from '../apis/tmdb'
-import { MovieCard } from './MovieCard'
-import Transitions from './Transition'
 import useGenreFetch from '../hooks/useGenreFetch'
-import { useRef } from 'react'
-import { useCallback } from 'react'
-import LoadingCard from './LoadingCard'
+import Transitions from '../components/Transition';
+import MovieCard from '../components/MovieCard';
+import LoadingCard from '../components/LoadingCard';
 
 const MovieByGenre = () => {
  let { id } = useParams()
@@ -44,7 +41,6 @@ const MovieByGenre = () => {
   fetchGenreList()
   setPageNumber(0)
   setPageNumber(1)
-  // if (id) fetchMovieByGenre(id)
  }, [id])
 
  return (
@@ -71,11 +67,10 @@ const MovieByGenre = () => {
      ) : (
       <h2 className="no-movies">No movies!! Get some!</h2>
      )}
+     {error && <>Error...</>}
     </div>
    </div>
   </Transitions>
-
-
  )
 }
 

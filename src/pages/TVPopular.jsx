@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Transitions from "./Transition";
+import Transitions from '../components/Transition';
 import tmdb from '../apis/tmdb';
-import TVCard from "./TVCard";
+import TVCard from "../components/TVCard";
 
-export const TVPopular = () => {
+const TVPopular = () => {
   const [tvPopular, settvPopular] = useState([]);
 
   useEffect(() => {
@@ -38,7 +38,6 @@ export const TVPopular = () => {
           </div>
           {tvPopular.length > 0 ? (
             <div className="movie-grid">
-
               {tvPopular.map((tv, index) => (
                 <TVCard
                   tv={tv}
@@ -55,3 +54,5 @@ export const TVPopular = () => {
     </Transitions>
   );
 };
+
+export default TVPopular

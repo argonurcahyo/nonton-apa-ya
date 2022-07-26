@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import tmdb from "../apis/tmdb";
-// import { ResultCard } from "./ResultCard";
-import { MovieCard } from "./MovieCard";
-import Transitions from "./Transition";
+import MovieCard from "../components/MovieCard";
+import Transitions from "../components/Transition";
 
-
-export const Add = () => {
+const Add = () => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
 
@@ -48,16 +46,6 @@ export const Add = () => {
             </div>
             <br />
 
-            {/* {results.length > 0 && (
-              <ul className="results">
-                {results.map((movie) => (
-                  <li key={movie.id}>
-                    <ResultCard movie={movie} />
-                  </li>
-                ))}
-              </ul>
-            )} */}
-
             {results.length > 0 ? (
               <div className="movie-grid">
                 {results.map((movie, index) => (
@@ -78,3 +66,5 @@ export const Add = () => {
     </Transitions>
   );
 };
+
+export default Add

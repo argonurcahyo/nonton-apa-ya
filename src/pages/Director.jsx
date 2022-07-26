@@ -1,19 +1,17 @@
-import React from 'react'
-import { useState, useEffect, useRef, useCallback } from 'react';
-import { useParams } from 'react-router-dom';
-import tmdb from '../apis/tmdb';
-import useActorMovieFetch from '../hooks/useActorMovieFetch';
-import { MovieCard } from './MovieCard';
-import Transitions from './Transition';
+import React, { useEffect, useState, useRef, useCallback } from 'react'
+import { useParams } from 'react-router-dom'
+import tmdb, { BASE_IMG_URL } from '../apis/tmdb';
+import useDirectorMovieFetch from '../hooks/useDirectorMovieFetch';
+import Transitions from '../components/Transition'
+import MovieCard from '../components/MovieCard';
 
-const Actor = () => {
+const Director = () => {
   let { id } = useParams();
-  const [actorBio, setActorBio] = useState();
+  const [directorBio, setDirectorBio] = useState({})
   const [pageNumber, setPageNumber] = useState(1);
-  const BASE_IMG_URL = "https://image.tmdb.org/t/p/w200";
   const {
     hasMore, loading, error, movies
-  } = useActorMovieFetch(id, pageNumber)
+  } = useDirectorMovieFetch(id, pageNumber)
 
   const observer = useRef()
   const lastGridElementRef = useCallback(node => {
@@ -27,43 +25,40 @@ const Actor = () => {
     if (node) observer.current.observe(node)
   }, [loading, hasMore])
 
-  const fetchActorBio = async (id) => {
+  const fetchDirectorBio = async (id) => {
     try {
-      const fetchedActorBio = await tmdb.get(`person/${id}`);
-      setActorBio(fetchedActorBio.data);
+      const fetchedData = await tmdb.get(`person/${id}`);
+      setDirectorBio(fetchedData.data);
+      console.log(fetchedData.data)
     } catch (error) {
       console.log(error)
-      setActorBio("");
+      setDirectorBio({})
     }
   }
 
-  const handleClick = () => {
-    console.log(movies);
-  }
-
   useEffect(() => {
-    fetchActorBio(id);
-  }, [id]);
+    fetchDirectorBio(id)
+  }, [id])
 
   return (
     <Transitions>
       <div className="movie-page">
         <div className="container">
-          {actorBio && (
+          {directorBio && (
             <div>
               <div className='profile-card'>
-                <h1 className="heading" onClick={handleClick}>{actorBio?.name}</h1>
+                <h1 className="heading">{directorBio?.name}</h1>
                 <div style={{
                   display: "flex"
                 }}>
                   <div className='profile-photo'>
                     <img
-                      src={`${BASE_IMG_URL}${actorBio?.profile_path}`}
-                      alt={actorBio?.name}
+                      src={`${BASE_IMG_URL}${directorBio?.profile_path}`}
+                      alt={directorBio?.name}
                     />
                   </div>
                   <div style={{ padding: "0px 10px" }}>
-                    <p>Born : {actorBio.birthday}</p>
+                    <p>Born : {directorBio.birthday}</p>
                   </div>
                 </div>
               </div>
@@ -71,7 +66,7 @@ const Actor = () => {
               {movies.length > 0 ? (
                 <div className="movie-grid">
                   {movies?.map((movie, index) => (
-                    movie.genre_ids.length > 0 && actorBio.adult === "false" ? <></> :
+                    movie.genre_ids.length > 0 && directorBio.adult === "false" ? <></> :
                       <MovieCard
                         ref={lastGridElementRef}
                         movie={movie}
@@ -92,4 +87,4 @@ const Actor = () => {
   )
 }
 
-export default Actor
+export default Director

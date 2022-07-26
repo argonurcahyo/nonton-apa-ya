@@ -5,7 +5,7 @@ import { auth } from '../apis/firebase'
 import { signOut } from 'firebase/auth'
 import { useAuthState } from "react-firebase-hooks/auth";
 
-export const Header = () => {
+const Header = () => {
  const { watchlist } = useContext(GlobalContext);
  const activeClassname = "btn";
 
@@ -99,3 +99,5 @@ export const Header = () => {
   </header>
  );
 };
+
+export default Header

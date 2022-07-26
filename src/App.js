@@ -1,23 +1,25 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Header } from "./components/Header";
-import { Watchlist } from "./components/Watchlist";
-import { Watched } from "./components/Watched";
-import { Add } from "./components/Add";
 import "./App.css";
 import "./lib/fontawesome6/css/all.min.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { GlobalProvider } from "./context/GlobalState";
-import { Popular } from "./components/Popular";
-import Upcoming from "./components/Upcoming";
-import TopRated from "./components/TopRated";
-import TVSearch from "./components/TVSearch";
-import { TVPopular } from "./components/TVPopular";
-import Actor from "./components/Actor";
-import Login from "./components/Login";
-import Register from "./components/Register";
-import Movie from "./components/Movie";
-import MovieByGenre from "./components/MovieByGenre";
-import Director from "./components/Director";
+import Header from "./components/Header";
+import Watchlist from "./pages/Watchlist";
+import Watched from "./pages/Watched";
+import Add from "./pages/Add";
+import Popular from "./pages/Popular";
+import Upcoming from "./pages/Upcoming";
+import TopRated from "./pages/TopRated";
+import TVSearch from "./pages/TVSearch";
+import TVPopular from "./pages/TVPopular";
+import Actor from "./pages/Actor";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Movie from "./pages/Movie";
+import MovieByGenre from "./pages/MovieByGenre";
+import Director from "./pages/Director";
+import NotFound from "./pages/NotFound";
+import MovieByKeyword from "./pages/MovieByKeyword";
 
 function App() {
   useTitle("NontonApaYa");
@@ -37,13 +39,18 @@ function App() {
           <Route exact path="/movie/popular" element={<Popular />} />
           <Route exact path="/movie/upcoming" element={<Upcoming />} />
           <Route exact path="/movie/toprated" element={<TopRated />} />
+          <Route path="/movie/:movieId" element={<Movie />} />
+          <Route path="/movie/genre/:id" element={<MovieByGenre />} />
+          <Route path="/movie/keyword/:id" element={<MovieByKeyword />} />
+
           <Route exact path="/tv/search" element={<TVSearch />} />
           <Route exact path="/tv/popular" element={<TVPopular />} />
 
           <Route path="/actor/:id" element={<Actor />} />
           <Route path="/director/:id" element={<Director />} />
-          <Route path="/movie/:movieId" element={<Movie />} />
-          <Route path="/movie/genre/:id" element={<MovieByGenre />} />
+
+          <Route element={<NotFound />} />
+
         </Routes>
       </Router>
     </GlobalProvider>
