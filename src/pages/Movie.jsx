@@ -43,10 +43,14 @@ const Movie = () => {
          src={`${BASE_IMG_URL}${movieDetail.backdrop_path}`}
          alt={movieDetail.title}
         />
-        <div>
-         <h2>Collections</h2>
-         <CollectionCard id={movieDetail?.belongs_to_collection?.id} />
-        </div>
+        {
+         movieDetail.belongs_to_collection && (
+          <div>
+           <h2>Collections</h2>
+           <CollectionCard id={movieDetail?.belongs_to_collection?.id} />
+          </div>
+         )
+        }
        </>
       )
      }

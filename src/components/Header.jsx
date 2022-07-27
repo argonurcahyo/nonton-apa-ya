@@ -5,7 +5,7 @@ import { auth } from '../apis/firebase'
 import { signOut } from 'firebase/auth'
 import { useAuthState } from "react-firebase-hooks/auth";
 
-const Header = () => {
+const Header = ({ type = "movie" }) => {
  const { watchlist } = useContext(GlobalContext);
  const activeClassname = "btn";
 
@@ -27,20 +27,6 @@ const Header = () => {
    <div className="container">
     <div className="inner-content">
      <ul className="nav-links">
-      {/* <li>
-       <NavLink
-        to="/movie/toprated"
-        className={({ isActive }) => isActive ? activeClassname : undefined}>
-        <i className="fa fas fa-star"></i>
-       </NavLink>
-      </li>
-      <li>
-       <NavLink
-        to="/movie/upcoming"
-        className={({ isActive }) => isActive ? activeClassname : undefined}>
-        <i className="fa fas fa-hourglass"></i>
-       </NavLink>
-      </li> */}
       <li>
        <NavLink
         to="/movie/popular"
@@ -85,18 +71,10 @@ const Header = () => {
         </button>
        </li>
       }
-      {/* <li>
-       <NavLink
-        to="/tv/search"
-        className={({ isActive }) => isActive ? activeClassname : undefined}>
-        <i className="fa fas fa-tv"></i>
-
-       </NavLink>
-      </li> */}
      </ul>
     </div>
    </div>
-  </header>
+  </header >
  );
 };
 

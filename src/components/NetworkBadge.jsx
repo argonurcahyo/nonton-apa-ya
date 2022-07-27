@@ -1,12 +1,7 @@
 import React from 'react'
-// import { useEffect } from 'react';
+import { BASE_IMG_URL } from '../apis/tmdb';
 
 const NetworkBadge = ({ networks }) => {
-  const BASE_IMG_URL = "https://image.tmdb.org/t/p/original";
-
-  // useEffect(() => {
-  //   console.log(networks)
-  // }, [networks])
   return (
     <div className="tv-network-label">
       {networks && networks.map(n => (

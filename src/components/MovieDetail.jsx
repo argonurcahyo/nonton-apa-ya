@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useNavigate } from 'react-router-dom'
 import ProgressiveImage from "react-progressive-graceful-image";
 import Moment from 'react-moment';
-import { BASE_IMG_URL } from "../apis/tmdb";
+import { BASE_IMG_URL, NO_IMG_URL } from "../apis/tmdb";
 
 const MovieDetail = ({ movieDetail, providers }) => {
   const BASE_FLAG_URL = 'https://countryflagsapi.com/png/';
@@ -118,7 +118,9 @@ const MovieDetail = ({ movieDetail, providers }) => {
         </div>
         <div style={{
           display: "flex",
-          flexWrap: "wrap"
+          flexWrap: "wrap",
+          maxHeight: '4rem',
+          overflowY: 'auto'
         }}>
           {movieDetail?.keywords?.keywords?.map((k, i) => (
             <span key={i} className="keyword-pill">
@@ -130,8 +132,8 @@ const MovieDetail = ({ movieDetail, providers }) => {
 
         <ProgressiveImage
           key={movieDetail.id}
-          src={movieDetail.backdrop_path ?
-            `${BASE_IMG_URL}${movieDetail.backdrop_path}`
+          src={movieDetail?.backdrop_path ?
+            `${BASE_IMG_URL}${movieDetail?.backdrop_path}`
             : "https://placekitten.com/458/305"}
           placeholder={BD_LOADING}
         >
@@ -174,7 +176,7 @@ const MovieDetail = ({ movieDetail, providers }) => {
                   <Link to={`/actor/${c.id}`} target="_blank">
                     <img
                       alt={c.name}
-                      src={`${BASE_IMG_URL}${c.profile_path}`} />
+                      src={c.profile_path ? `${BASE_IMG_URL}${c?.profile_path}` : NO_IMG_URL} />
                   </Link>
                 </div>
                 <span className="actor-name">

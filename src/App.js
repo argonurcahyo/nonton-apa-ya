@@ -22,6 +22,7 @@ import NotFound from "./pages/NotFound";
 import MovieByKeyword from "./pages/MovieByKeyword";
 import MovieByCompany from "./pages/MovieByCompany";
 import MovieByNetwork from "./pages/MovieByNetwork";
+import TVSeries from "./pages/TVSeries";
 
 function App() {
   useTitle("NontonApaYa");
@@ -50,11 +51,12 @@ function App() {
 
           <Route exact path="/tv/search" element={<TVSearch />} />
           <Route exact path="/tv/popular" element={<TVPopular />} />
+          <Route path="/tv/:id" element={<TVSeries />} />
 
           <Route path="/actor/:id" element={<Actor />} />
           <Route path="/director/:id" element={<Director />} />
 
-          <Route element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
 
         </Routes>
       </Router>

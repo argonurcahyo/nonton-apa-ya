@@ -10,7 +10,7 @@ import TVNetworkLabel from "./TVNetworkLabel";
 import Rating from "./Rating";
 import { BASE_IMG_URL, NO_IMG_URL } from "../apis/tmdb";
 
-const MovieCard = forwardRef(({ movie, type, index }, ref) => {
+const MovieCard = forwardRef(({ movie, type, index, showShortMovies = true }, ref) => {
   const { watchlist, watched } = useContext(GlobalContext);
   const [movieDetail, setMovieDetail] = useState("");
   const [providers, setProviders] = useState([]);
@@ -50,7 +50,7 @@ const MovieCard = forwardRef(({ movie, type, index }, ref) => {
 
   const handleOpenModal = () => {
     setOpenModal(true);
-    console.log(movieDetail);
+    console.log(providers);
   };
   const handleCloseModal = () => setOpenModal(false);
   const imageLoaded = () => {
@@ -71,7 +71,9 @@ const MovieCard = forwardRef(({ movie, type, index }, ref) => {
   const isWatched = storedMovieWatched ? true : false;
 
   return (
-    <div ref={ref}>
+    <div
+      style={{ display: movieDetail.runtime !== 0 && movieDetail.runtime <= 60 && !showShortMovies ? "none" : "block" }}
+      ref={ref}>
       <motion.div
         layout
         key={movie.id}

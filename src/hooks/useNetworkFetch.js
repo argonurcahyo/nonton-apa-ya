@@ -18,7 +18,8 @@ const useNetworkFetch = (network, pageNumber) => {
                 watch_region: 'ID',
                 with_watch_monetization_types: 'flatrate',
                 page: pageNumber,
-                sort_by: 'popularity.desc'
+                sort_by: 'popularity.desc',
+                include_adult: 'true',
             },
             cancelToken: new axios.CancelToken(c => cancel = c)
         })

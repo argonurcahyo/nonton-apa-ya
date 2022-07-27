@@ -16,7 +16,8 @@ const useKeywordFetch = (keyword, pageNumber) => {
             params: {
                 with_keywords: keyword,
                 page: pageNumber,
-                sort_by: 'popularity.desc'
+                sort_by: 'popularity.desc',
+                include_adult: 'true',
             },
             cancelToken: new axios.CancelToken(c => cancel = c)
         })

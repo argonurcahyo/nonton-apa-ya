@@ -16,7 +16,8 @@ const useGenreFetch = (genreId, pageNumber) => {
       params: {
         with_genres: genreId,
         page: pageNumber,
-        sort_by: 'popularity.desc'
+        sort_by: 'popularity.desc',
+        include_adult: 'true',
       },
       cancelToken: new axios.CancelToken(c => cancel = c)
     })

@@ -55,7 +55,6 @@ const Popular = () => {
           )}
           {error && <>Error...</>}
         </div>
-
       </div>
     </Transitions>
   );

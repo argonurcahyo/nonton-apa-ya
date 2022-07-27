@@ -44,8 +44,8 @@ const Watchlist = () => {
           <br />
           {groupByYear ?
             watchlist.length > 0 ? (
-              watchlistGroupByYear.map((wgby) => (
-                <>
+              watchlistGroupByYear.map((wgby, i) => (
+                <div key={i}>
                   <h3 className="sticky-thc">{wgby.year}</h3>
                   <motion.div layout className="movie-grid">
                     <AnimatePresence>
@@ -58,7 +58,7 @@ const Watchlist = () => {
                       ))}
                     </AnimatePresence>
                   </motion.div>
-                </>
+                </div>
               ))
             ) : (
               <h2 className="no-movies">No movies!! Get some!</h2>
