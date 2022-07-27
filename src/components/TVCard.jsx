@@ -70,7 +70,7 @@ const TVCard = forwardRef(({ tv }, ref) => {
    )}
 
    <div className='card-season-count'>
-    {tvDetail?.seasons?.length}
+    {tvDetail?.number_of_seasons}
    </div>
 
   </div>
