@@ -51,12 +51,15 @@ const MovieByCompany = () => {
     <div className="container">
      {/* <h1>{company.name}</h1> */}
      <div style={{
-      marginBottom: "15px",
+      marginBottom: "20px",
+      padding: "20px",
       display: "flex",
-      justifyContent: "center",
-      padding: "5px"
+      justifyContent: "center"
      }}>
-      <img src={`${BASE_IMG_URL}${company?.logo_path}`} alt={company.name} />
+      <img
+       style={{ width: "100%" }}
+       src={`${BASE_IMG_URL}${company?.logo_path}`}
+       alt={company.name} />
      </div>
 
      {movies.length > 0 ? (

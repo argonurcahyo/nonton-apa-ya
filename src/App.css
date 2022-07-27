@@ -354,14 +354,26 @@ header .nav-links li:last-child {
   object-fit: cover;
 }
 
-.collection-name {
+.collection-header {
   position: absolute;
+  width: 50%;
   top: 15px;
   left: 15px;
-  font-weight: 900;
-  color: var(--secondary);
-  text-shadow: 1px 2px var(--white);
+  color: var(--white);
+  z-index: 10;
   ;
+}
+
+.collection-name {
+  font-weight: 900;
+}
+
+.collection-overview {
+  font-size: .8rem;
+}
+
+.collection img {
+  filter: brightness(50%);
 }
 
 img.watchlist {
@@ -436,10 +448,12 @@ img.watched {
   width: 100%;
   top: 0px;
   text-align: center;
-  display: flex;
+  display: none;
   justify-content: center;
   opacity: 1;
 }
+
+
 
 .movie-card:hover .short-movie-ribbon {
   opacity: 1;
