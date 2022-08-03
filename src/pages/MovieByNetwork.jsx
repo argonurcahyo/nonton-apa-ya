@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useRef, useState } from 'react'
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
