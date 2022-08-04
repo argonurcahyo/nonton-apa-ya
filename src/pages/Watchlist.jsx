@@ -41,7 +41,7 @@ const Watchlist = () => {
             }
           </div>
           <br />
-          
+
           {groupByYear ?
             watchlist.length > 0 ? (
               watchlistGroupByYear.map((wgby, i) => (

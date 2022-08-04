@@ -10,7 +10,7 @@ import TVNetworkLabel from "./TVNetworkLabel";
 import Rating from "./Rating";
 import { BASE_IMG_URL, NO_IMG_URL } from "../apis/tmdb";
 
-const MovieCard = forwardRef(({ movie, type, index, showShortMovies = true }, ref) => {
+const MovieCard = forwardRef(({ movie, type, index, showShortMovies = true, sync }, ref) => {
   const { watchlist, watched } = useContext(GlobalContext);
   const [movieDetail, setMovieDetail] = useState("");
   const [providers, setProviders] = useState([]);
@@ -139,7 +139,12 @@ const MovieCard = forwardRef(({ movie, type, index, showShortMovies = true }, re
           ) : <></>}
 
           {((type === "popular" || type === "search") &&
-            watchlistDisabled) ? <></> : !loading && <MovieControls type={type} movie={movie} />}
+            watchlistDisabled) ? <></> : !loading &&
+          <MovieControls
+            type={type}
+            movie={movie}
+            sync={sync} />
+          }
         </div>
 
         <Modal key={index} open={openModal} onClose={handleCloseModal}>

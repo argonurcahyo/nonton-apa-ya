@@ -3,7 +3,8 @@ export const ACTIONS = {
   REMOVE_MOVIE_FROM_WATCHLIST: "REMOVE_MOVIE_FROM_WATCHLIST",
   ADD_MOVIE_TO_WATCHED: "ADD_MOVIE_TO_WATCHED",
   MOVE_TO_WATCHLIST: "MOVE_TO_WATCHLIST",
-  REMOVE_FROM_WATCHED: "REMOVE_FROM_WATCHED"
+  REMOVE_FROM_WATCHED: "REMOVE_FROM_WATCHED",
+  SYNC_NOW: "SYNC_NOW"
 }
 
 const reducer = (state, action) => {
@@ -17,6 +18,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         watchlist: state.watchlist.filter((movie) => movie.id !== action.payload),
+        sync: !state.sync
       };
     case ACTIONS.ADD_MOVIE_TO_WATCHED:
       return {
@@ -36,6 +38,11 @@ const reducer = (state, action) => {
         ...state,
         watched: state.watched.filter((movie) => movie.id !== action.payload),
       };
+    case ACTIONS.SYNC_NOW:
+      return {
+        ...state,
+        sync: !state.sync
+      }
     default:
       return state;
   }

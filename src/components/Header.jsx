@@ -5,7 +5,7 @@ import { auth } from '../apis/firebase'
 import { signOut } from 'firebase/auth'
 import { useAuthState } from "react-firebase-hooks/auth";
 
-const Header = ({ type = "movie" }) => {
+const Header = () => {
  const { watchlist } = useContext(GlobalContext);
  const activeClassname = "btn";
 
@@ -44,6 +44,13 @@ const Header = ({ type = "movie" }) => {
           {watchlist.length}
          </span>
         )}
+       </NavLink>
+      </li>
+      <li>
+       <NavLink
+        to="/sync"
+        className={({ isActive }) => isActive ? activeClassname : undefined}>
+        <i className="fa fas fa-sync"></i>
        </NavLink>
       </li>
       <li>
