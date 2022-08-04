@@ -1,29 +1,7 @@
 import React, { createContext, useEffect, useReducer } from "react";
-import nonton from "../apis/nonton";
 import AppReducer from "./AppReducer";
 import { ACTIONS } from "./AppReducer";
-
-const getWatchlistFromAPI = async () => {
-  // try {
-  //   const fetchData = await nonton.get("watchlist")
-  //   if (fetchData) {
-  //     return fetchData.data.data
-  //   }
-  // } catch (error) {
-  //   console.log(error);
-  //   return []
-  // }
-
-  nonton.get("watchlist")
-    .then(res => {
-      console.log(res.data.data)
-      return res.data.data
-    })
-    .catch(error => {
-      console.log(error)
-      return []
-    })
-}
+import nonton from '../apis/nonton'
 
 const initialState = {
   watchlist: localStorage.getItem("watchlist")
@@ -31,8 +9,7 @@ const initialState = {
     : [],
   watched: localStorage.getItem("watched")
     ? JSON.parse(localStorage.getItem("watched"))
-    : [],
-  watchlistFromAPI: getWatchlistFromAPI()
+    : []
 };
 
 export const GlobalContext = createContext(initialState);
@@ -45,10 +22,34 @@ export const GlobalProvider = (props) => {
     localStorage.setItem("watched", JSON.stringify(state.watched));
   }, [state]);
 
+  const postMovieToWatchlist = async (movie) => {
+    const newData = {
+      id: movie.id,
+      title: movie.title,
+      overview: movie.overview,
+      genre_ids: movie.genre_ids,
+      release_date: movie.release_date,
+      vote_average: movie.vote_average,
+      poster_path: movie.poster_path,
+      backdrop_path: movie.backdrop_path
+    }
+    const res = await nonton.post('/watchlist/movie', newData)
+    console.log(res.data)
+    return res.data
+  }
+
+  const deleteMovieFromWatchlist = async (id) => {
+    const res = await nonton.delete(`/watchlist/movie/${id}`)
+    console.log(res.data)
+    return res.data
+  }
+
   const addMovieToWatchlist = (movie) => {
+    postMovieToWatchlist(movie)
     dispatch({ type: ACTIONS.ADD_MOVIE_TO_WATCHLIST, payload: movie });
   };
   const removeMovieFromWatchlist = (id) => {
+    deleteMovieFromWatchlist(id)
     dispatch({ type: ACTIONS.REMOVE_MOVIE_FROM_WATCHLIST, payload: id });
   };
   const addMovieToWatched = (movie) => {
@@ -66,7 +67,6 @@ export const GlobalProvider = (props) => {
       value={{
         watchlist: state.watchlist,
         watched: state.watched,
-        watchlistFromAPI: state.watchlistFromAPI,
         addMovieToWatchlist,
         removeMovieFromWatchlist,
         addMovieToWatched,

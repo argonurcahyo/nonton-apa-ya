@@ -23,6 +23,7 @@ import MovieByKeyword from "./pages/MovieByKeyword";
 import MovieByCompany from "./pages/MovieByCompany";
 import MovieByNetwork from "./pages/MovieByNetwork";
 import TVSeries from "./pages/TVSeries";
+import Sync from "./pages/Sync";
 
 function App() {
   useTitle("NontonApaYa");
@@ -55,6 +56,8 @@ function App() {
 
           <Route path="/actor/:id" element={<Actor />} />
           <Route path="/director/:id" element={<Director />} />
+
+          <Route exact path="/sync" element={<Sync />} />
 
           <Route path="*" element={<NotFound />} />
 

@@ -8,14 +8,10 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import _ from 'lodash'
 
 const Watchlist = () => {
-  const { watchlist, watchlistFromAPI } = useContext(GlobalContext);
+  const { watchlist } = useContext(GlobalContext);
   const [user] = useAuthState(auth)
   const [groupByYear, setGroupByYear] = useState(false)
   const [watchlistGroupByYear, setWatchlistGroupByYear] = useState([])
-
-  useEffect(() => {
-    console.log(watchlistFromAPI)
-  }, [])
 
   useEffect(() => {
     const wgby = _(watchlist)
@@ -45,6 +41,7 @@ const Watchlist = () => {
             }
           </div>
           <br />
+          
           {groupByYear ?
             watchlist.length > 0 ? (
               watchlistGroupByYear.map((wgby, i) => (
@@ -81,22 +78,6 @@ const Watchlist = () => {
             ) : (
               <h2 className="no-movies">No movies!! Get some!</h2>
             )}
-
-          {/* {
-            watchlistFromAPI && (
-              <motion.div layout className="movie-grid">
-                <AnimatePresence>
-                  {watchlistFromAPI?.map((movie, index) => (
-                    <MovieCard
-                      movie={movie}
-                      key={movie.id}
-                      type="watchlist"
-                      index={index} />
-                  ))}
-                </AnimatePresence>
-              </motion.div>
-            )
-          } */}
         </div>
       </div>
     </Transitions>
