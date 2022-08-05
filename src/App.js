@@ -26,6 +26,7 @@ import TVSeries from "./pages/TVSeries";
 import Sync from "./pages/Sync";
 import TVByNetwork from "./pages/TVByNetwork";
 import TVByGenre from "./pages/TVByGenre";
+import TVByKeyword from "./pages/TVByKeyword";
 
 function App() {
   useTitle("NontonApaYa");
@@ -57,6 +58,7 @@ function App() {
           <Route path="/tv/:id" element={<TVSeries />} />
           <Route path="/tv/network/:id" element={<TVByNetwork />} />
           <Route path="/tv/genre/:id" element={<TVByGenre />} />
+          <Route path="/tv/keyword/:id" element={<TVByKeyword />} />
 
           <Route path="/actor/:id" element={<Actor />} />
           <Route path="/director/:id" element={<Director />} />

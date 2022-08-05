@@ -1064,7 +1064,7 @@ header button {
 
 .episode-overview {
   display: none;
-  font-style: italic;
+  font-size: .7rem;
   border: 1px solid var(--primary);
   padding: .5rem .8rem;
   border-radius: 15px;

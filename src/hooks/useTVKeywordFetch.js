@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import tmdb from '../apis/tmdb'
 
-const useTVGenreFetch = (genre, pageNumber) => {
+const useTVKeywordFetch = (keyword, pageNumber) => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
     const [tv, setTv] = useState([]);
@@ -17,7 +17,7 @@ const useTVGenreFetch = (genre, pageNumber) => {
                 page: pageNumber,
                 sort_by: 'popularity.desc',
                 include_adult: 'true',
-                with_genres: genre
+                with_keywords: keyword
             },
             cancelToken: new axios.CancelToken(c => cancel = c)
         })
@@ -35,13 +35,13 @@ const useTVGenreFetch = (genre, pageNumber) => {
             })
         return () => cancel()
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [genre, pageNumber])
+    }, [keyword, pageNumber])
 
     useEffect(() => {
         setTv([])
-    }, [genre])
+    }, [keyword])
 
     return { loading, error, hasMore, tv }
 }
 
-export default useTVGenreFetch
+export default useTVKeywordFetch
