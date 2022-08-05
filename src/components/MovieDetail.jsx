@@ -75,13 +75,13 @@ const MovieDetail = ({ movieDetail, providers }) => {
           <div className="genre-box">
             {movieDetail.genres && (
               movieDetail.genres.map((g, i) => (
-                <span
-                  key={i}
-                  className="genre-pill"
-                  onClick={() => navigate(`/movie/genre/${g.id}`)}
-                >
-                  {g.name}
-                </span>
+                <Link key={i} to={`/movie/genre/${g.id}`}>
+                  <span
+                    className="genre-pill"
+                  >
+                    {g.name}
+                  </span>
+                </Link>
               ))
             )}
           </div>
@@ -123,9 +123,11 @@ const MovieDetail = ({ movieDetail, providers }) => {
           overflowY: 'auto'
         }}>
           {movieDetail?.keywords?.keywords?.map((k, i) => (
-            <span key={i} className="keyword-pill">
-              <Link to={`/movie/keyword/${k.id}`}>{k.name}</Link>
-            </span>
+            <Link to={`/movie/keyword/${k.id}`}>
+              <span key={i} className="keyword-pill">
+                {k.name}
+              </span>
+            </Link>
           ))
           }
         </div>

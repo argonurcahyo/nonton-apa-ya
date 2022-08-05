@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalState";
 import { auth } from '../apis/firebase'
@@ -7,6 +7,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 const Header = () => {
  const { watchlist } = useContext(GlobalContext);
+ const [sw, setSw] = useState(true)
  const activeClassname = "btn";
 
  const navigate = useNavigate();
@@ -22,11 +23,32 @@ const Header = () => {
   }
  }
 
+ const handleSwitch = () => {
+  setSw(!sw)
+  sw ? navigate('/tv/popular') : navigate('/')
+ }
+
  return (
   <header>
    <div className="container">
     <div className="inner-content">
      <ul className="nav-links">
+      {user &&
+       <li>
+        <button
+         className="btn-logout"
+         onClick={onLogout}
+        >
+         <i className="fa-solid fa-power-off"></i>
+        </button>
+       </li>
+      }
+      <button style={{ fontFamily: "Source Sans Pro", fontWeight: "900" }} onClick={handleSwitch}>
+       {sw ? "MOVIE" : "TV"}
+      </button>
+     </ul>
+
+     {sw ? <ul className="nav-links">
       <li>
        <NavLink
         to="/movie/popular"
@@ -68,17 +90,25 @@ const Header = () => {
         <i className="fa-solid fa-search"></i>
        </NavLink>
       </li>
-      {user &&
-       <li>
-        <button
-         className="btn-logout"
-         onClick={onLogout}
-        >
-         <i className="fa-solid fa-power-off"></i>
-        </button>
-       </li>
-      }
-     </ul>
+
+     </ul> : <ul className="nav-links">
+      <li>
+       <NavLink
+        to="/tv/popular"
+        className={({ isActive }) => isActive ? activeClassname : undefined}>
+        <i className="fa fas fa-fire-flame-curved"></i>
+       </NavLink>
+      </li>
+      <li>
+       <NavLink
+        to="/tv/search"
+        className={({ isActive }) => isActive ? activeClassname : undefined}
+       >
+        <i className="fa-solid fa-search"></i>
+       </NavLink>
+      </li>
+     </ul>}
+
     </div>
    </div>
   </header >

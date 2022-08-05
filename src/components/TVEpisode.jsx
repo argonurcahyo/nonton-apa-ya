@@ -21,10 +21,16 @@ const TVEpisode = ({ tvId, seasonId, episodeId }) => {
     }, [tvId, seasonId, episodeId]);
 
     return (
-        <div>
-            S{seasonId?.toString().padStart(2, "0")}E{episodeId?.toString().padStart(2, "0")}. {tvEpisode?.name}
-            {/* <img src={`${BASE_IMG_URL}${tvEpisode.still_path}`} alt={tvEpisode.id} /> */}
+        <div className='episode-detail'>
+            <div className='episode-name'>
+                S{seasonId?.toString().padStart(2, "0")}E{episodeId?.toString().padStart(2, "0")}. {tvEpisode?.name} <span className='air-date'>({tvEpisode?.air_date})</span>
+            </div>
+            {tvEpisode?.overview && <div className="episode-overview">
+                {tvEpisode?.overview}
+            </div>
+            }
         </div>
+
     )
 }
 

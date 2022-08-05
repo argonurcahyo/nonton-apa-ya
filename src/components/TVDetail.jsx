@@ -2,9 +2,10 @@ import React from 'react'
 import ProgressiveImage from 'react-progressive-graceful-image';
 import Moment from 'react-moment'
 import { Link } from 'react-router-dom';
+import { BASE_IMG_URL, NO_IMG_URL } from '../apis/tmdb';
 
 const TVDetail = ({ tvDetail }) => {
-  const BASE_IMG_URL = "https://image.tmdb.org/t/p/w500";
+
   return (
     tvDetail && (
       <>
@@ -14,7 +15,11 @@ const TVDetail = ({ tvDetail }) => {
           alignItems: 'center',
           marginBottom: '3px'
         }}>
-          <span className='movie-title'>{tvDetail.name} </span>
+          <span className='movie-title'>
+            <Link to={`/tv/${tvDetail.id}`}>
+              {tvDetail.name}
+            </Link>
+          </span>
           <span className={`status-pill ${(tvDetail.status?.replace(/ Series/gi, "")).toLowerCase()}`}>
             <i className="status-icon"></i>
             {tvDetail.status?.replace(/ Series/gi, "")}
@@ -26,8 +31,9 @@ const TVDetail = ({ tvDetail }) => {
           alignItems: 'center'
         }}>
           <span className='release-date'>
-            {<Moment format="MMMM Do, YYYY">{tvDetail.first_air_date}</Moment>}
+            {<Moment format="MMMM Do, YYYY">{tvDetail.first_air_date}</Moment>} - {<Moment format="MMMM Do, YYYY">{tvDetail.last_air_date}</Moment>}
           </span>
+
           <span className="season-count">
             <Link to={`/tv/${tvDetail.id}`}>
               {tvDetail.number_of_seasons} seasons
@@ -36,14 +42,19 @@ const TVDetail = ({ tvDetail }) => {
         </div>
         <div style={{
           display: "flex",
-          justifyContent: 'space-between'
+          justifyContent: 'space-between',
+          marginBottom: "5px"
+
         }}>
           <div className="genre-box">
             {tvDetail && (
-              tvDetail.genres.map((g) => (
-                <span
-                  key={g.id}
-                  className="genre-pill">{g.name}</span>
+              tvDetail.genres.map((g, i) => (
+                <Link key={i} to={`/tv/genre/${g.id}`}>
+                  <span
+                    className="genre-pill">
+                    {g.name}
+                  </span>
+                </Link>
               ))
             )}
           </div>
@@ -62,6 +73,24 @@ const TVDetail = ({ tvDetail }) => {
                 </div>
               ))
             )}
+          </div>
+        </div>
+        <div style={{
+          display: "flex",
+          justifyContent: 'space-between'
+        }}>
+          <div style={{
+            display: "flex",
+            flexWrap: "wrap",
+            maxHeight: '4rem',
+            overflowY: 'auto'
+          }}>
+            {tvDetail?.keywords?.results?.map((k, i) => (
+              <span key={i} className="keyword-pill">
+                <Link to={`/tv/keyword/${k.id}`}>{k.name}</Link>
+              </span>
+            ))
+            }
           </div>
         </div>
 
@@ -104,9 +133,13 @@ const TVDetail = ({ tvDetail }) => {
                 <div className="profile">
                   <img
                     alt={c.name}
-                    src={`${BASE_IMG_URL}${c.profile_path}`} />
+                    src={c.profile_path ? `${BASE_IMG_URL}${c?.profile_path}` : NO_IMG_URL} />
                 </div>
-                <span className="actor-name">{c.name}</span>
+                <span className="actor-name">
+                  <Link to={`/actor/${c.id}`} target="_blank">
+                    {c.name}
+                  </Link>
+                </span>
               </div>)}
           </div>
 

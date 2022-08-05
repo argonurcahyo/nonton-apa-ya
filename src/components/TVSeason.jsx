@@ -27,7 +27,7 @@ const TVSeason = ({ tvId, seasonId }) => {
     <div style={{ width: "25%" }}>
      <img style={{ width: "100%", borderRadius: "15px" }} src={`${BASE_IMG_URL}${tvSeason?.poster_path}`} alt={`${tvSeason._id}`} />
     </div>
-    <div style={{ padding: "10px" }}>
+    <div style={{ width: "75%", padding: "10px" }}>
      {tvSeason?.episodes?.map((e, i) => (
       <TVEpisode
        key={i}

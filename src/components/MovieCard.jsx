@@ -4,11 +4,10 @@ import { motion } from "framer-motion";
 import Modal from "./Modal";
 import MovieControls from "./MovieControls";
 import LoadingCard from './LoadingCard'
-import tmdb from "../apis/tmdb";
+import tmdb, { BASE_IMG_URL, NO_IMG_URL } from "../apis/tmdb";
 import MovieDetail from "./MovieDetail";
 import TVNetworkLabel from "./TVNetworkLabel";
 import Rating from "./Rating";
-import { BASE_IMG_URL, NO_IMG_URL } from "../apis/tmdb";
 
 const MovieCard = forwardRef(({ movie, type, index, showShortMovies = true, sync }, ref) => {
   const { watchlist, watched } = useContext(GlobalContext);
@@ -120,7 +119,6 @@ const MovieCard = forwardRef(({ movie, type, index, showShortMovies = true, sync
                   (isWatchlist ? "watchlist" : isWatched ? "watched" : "")
                   : ""
               }
-              key={index}
               alt={movie.title}
               src={movie.poster_path ? `${BASE_IMG_URL}${movie.poster_path}` : NO_IMG_URL}
               onLoad={imageLoaded}

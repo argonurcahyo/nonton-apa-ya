@@ -266,6 +266,14 @@ header .nav-links li:last-child {
   background-color: var(--white);
 }
 
+.genre-pill a {
+  color: var(--white);
+}
+
+.genre-pill:hover a {
+  color: var(--primary);
+}
+
 .keyword-pill {
   display: block;
   background-color: var(--secondary);
@@ -1043,4 +1051,25 @@ header button {
 
 .movie-card:hover .card-season-count {
   opacity: 1;
+}
+
+.air-date {
+  font-size: .75rem;
+  display: none;
+}
+
+.episode-detail:hover .air-date {
+  display: inline;
+}
+
+.episode-overview {
+  display: none;
+  font-style: italic;
+  border: 1px solid var(--primary);
+  padding: .5rem .8rem;
+  border-radius: 15px;
+}
+
+.episode-detail:hover .episode-overview {
+  display: block;
 }
