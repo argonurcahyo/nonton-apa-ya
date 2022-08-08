@@ -23,9 +23,17 @@ const TVSeason = ({ tvId, seasonId }) => {
  return (
   <div>
    <h2>{tvSeason?.name}</h2>
+   <div
+    className="series-overview"
+    style={{ marginBottom: "5px" }}>
+    {tvSeason?.overview}
+   </div>
    <div style={{ display: 'flex' }}>
     <div style={{ width: "25%" }}>
-     <img style={{ width: "100%", borderRadius: "15px" }} src={`${BASE_IMG_URL}${tvSeason?.poster_path}`} alt={`${tvSeason._id}`} />
+     <img
+      style={{ width: "100%", borderRadius: "15px" }}
+      src={`${BASE_IMG_URL}${tvSeason?.poster_path}`}
+      alt={`${tvSeason?._id}`} />
     </div>
     <div style={{ width: "75%", padding: "10px" }}>
      {tvSeason?.episodes?.map((e, i) => (

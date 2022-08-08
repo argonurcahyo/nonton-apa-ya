@@ -46,7 +46,6 @@ const MovieDetail = ({ movieDetail, providers }) => {
                     alt={c.name} />
                 </div>
               ))
-
             )}
           </div>
         </div>
@@ -189,7 +188,6 @@ const MovieDetail = ({ movieDetail, providers }) => {
                 </span>
               </div>)}
           </div>
-
         )}
       </>
     )

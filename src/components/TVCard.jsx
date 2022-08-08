@@ -28,6 +28,7 @@ const TVCard = forwardRef(({ tv }, ref) => {
     }
    });
    setTvDetail(fetchedTvDetails.data);
+   console.log(fetchedTvDetails.data)
   } catch (error) {
    console.log(error);
    setTvDetail("");
@@ -75,6 +76,11 @@ const TVCard = forwardRef(({ tv }, ref) => {
      {tvDetail?.number_of_seasons}
     </div>
    }
+   <div
+    className={`card-season-status ${(tvDetail?.status?.replace(/ Series/gi, ""))?.toLowerCase()}`}>
+    <i className="status-icon"></i>
+   </div>
+
   </div>
  )
 })

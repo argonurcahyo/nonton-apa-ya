@@ -11,7 +11,6 @@ const CollectionCard = ({ id }) => {
       const fetchData = await tmdb.get(`collection/${id}`);
       setCollectionDetail(fetchData.data);
       setMovies(fetchData.data.parts);
-      console.log(fetchData.data)
     } catch (error) {
       console.log(error)
       setCollectionDetail("");
@@ -52,7 +51,7 @@ const CollectionCard = ({ id }) => {
               movie={movie}
               index={index}
               key={movie.id}
-              type="popular"
+              type="collection"
             />
           ))}
       </div>

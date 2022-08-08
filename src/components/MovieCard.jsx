@@ -80,20 +80,15 @@ const MovieCard = forwardRef(({ movie, type, index, showShortMovies = true, sync
         <div
           className="movie-card"
         >
-          <div
-            className="short-movie-ribbon"
-            style={{ display: (movieDetail?.runtime === 0 || movieDetail?.runtime > 60) ? "none" : "flex" }}
-          >
-            <span>short movie</span>
+          <div style={{ display: (movieDetail?.runtime === 0 || movieDetail?.runtime > 60) ? "none" : "block" }}>
+            <div
+              className="short-movie-ribbon"
+            >
+              <span>short movie</span>
+            </div>
           </div>
 
-          <div
-            className="collection-ribbon"
-            style={{ display: movieDetail?.belongs_to_collection ? "block" : "none" }}
-          >
-            <span>collection</span>
-          </div>
-          {(type === "popular" || type === "search") ?
+          {(type === "popular" || type === "search" || type === "collection") ?
             (isWatchlist ?
               (!loading && <div className="ribbon blue"><span>WATCHLIST</span></div>)
               : isWatched ?
@@ -109,13 +104,15 @@ const MovieCard = forwardRef(({ movie, type, index, showShortMovies = true, sync
             data-event-off='focusout'
             onClick={handleOpenModal}
           />
+
           <div style={{ display: loading ? "block" : "none" }}>
             <LoadingCard />
           </div>
+
           <div style={{ display: loading ? "none" : "block" }}>
             <img
               className={
-                (type === "popular" || type === "search") ?
+                (type === "popular" || type === "search") || type === "collection" ?
                   (isWatchlist ? "watchlist" : isWatched ? "watched" : "")
                   : ""
               }
@@ -136,12 +133,23 @@ const MovieCard = forwardRef(({ movie, type, index, showShortMovies = true, sync
             />
           ) : <></>}
 
-          {((type === "popular" || type === "search") &&
+          {((type === "popular" || type === "search" || type === "collection") &&
             watchlistDisabled) ? <></> : !loading &&
           <MovieControls
             type={type}
             movie={movie}
             sync={sync} />
+          }
+
+          {type !== 'collection' &&
+            <div style={{ display: movieDetail?.belongs_to_collection ? "block" : "none" }}>
+              <div
+                className="collection-ribbon"          >
+                <span>
+                  <i className="fa far fa-caret-square-right" />
+                </span>
+              </div>
+            </div>
           }
         </div>
 

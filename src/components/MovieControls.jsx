@@ -49,7 +49,7 @@ const MovieControls = ({ type, movie, sync }) => {
         </>
       )}
 
-      {(type === "search" || type === "popular") && (
+      {(type === "search" || type === "popular" || type === "collection") && (
         <>
           <button className="ctrl-btn" onClick={() => addMovieToWatchlist(movie)}>
             <i className="fa-fw far fa-plus"></i>

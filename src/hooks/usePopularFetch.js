@@ -12,6 +12,7 @@ const usePopularFetch = (pageNumber) => {
         setLoading(true)
         setError(false)
         let cancel
+
         tmdb.get("movie/popular", {
             params: {
                 page: pageNumber,

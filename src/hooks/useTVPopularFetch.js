@@ -12,13 +12,22 @@ const useTVPopularFetch = (pageNumber) => {
         setLoading(true)
         setError(false)
         let cancel
-        tmdb.get("tv/popular", {
+        tmdb.get(`discover/tv/`, {
             params: {
                 page: pageNumber,
-                language: "en-US"
+                sort_by: 'popularity.desc',
+                with_type: 4,
+                with_original_language: "en",
             },
             cancelToken: new axios.CancelToken(c => cancel = c)
         })
+            // tmdb.get("tv/popular", {
+            //     params: {
+            //         page: pageNumber,
+            //         language: "en-US"
+            //     },
+            //     cancelToken: new axios.CancelToken(c => cancel = c)
+            // })
             .then(res => {
                 setTvs(prev => {
                     let newState = [...prev, ...res.data.results]

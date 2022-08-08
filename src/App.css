@@ -444,13 +444,15 @@ img.watched {
 .collection-ribbon {
   position: absolute;
   bottom: 0px;
-  width: 100%;
-  height: 25px;
+  right: 0px;
+  width: 1.8rem;
+  height: 1.6rem;
   background-color: var(--primary);
   opacity: 1;
+  border-radius: 15px 0 0 0;
   text-align: center;
   vertical-align: center;
-  padding: 2px;
+  padding: 5px;
   color: var(--secondary);
   font-size: .8rem;
   font-weight: 900;
@@ -697,6 +699,17 @@ body::-webkit-scrollbar {
   /* for Chrome, Safari, and Opera */
 }
 
+.movie-detail-page .cast-box {
+  overflow-y: scroll;
+  max-height: 15rem;
+}
+
+.movie-detail-page .cast-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
 @media only screen and (max-width: 480px) {
 
   .cast-grid {
@@ -733,7 +746,7 @@ body::-webkit-scrollbar {
   }
 
   .cast-box {
-    max-height: 100px;
+    max-height: 5rem;
     overflow-y: scroll;
   }
 }
@@ -799,16 +812,34 @@ body::-webkit-scrollbar {
 
 span.returning {
   background-color: var(--returning);
-  color: var(--white)
+  color: var(--white);
+  border: 1px solid var(--returning);
 }
 
 span.canceled {
   background-color: var(--cancelled);
   color: var(--white);
+  border: 1px solid var(--cancelled);
 }
 
 span.ended {
   background-color: var(--ended);
+  color: var(--white);
+  border: 1px solid var(--ended);
+}
+
+.card-season-status.ended {
+  background-color: var(--ended);
+  color: var(--white);
+}
+
+.card-season-status.returning {
+  background-color: var(--returning);
+  color: var(--white);
+}
+
+.card-season-status.canceled {
+  background-color: var(--cancelled);
   color: var(--white);
 }
 
@@ -820,15 +851,18 @@ i.status-icon {
   margin-right: .2rem;
 }
 
-span.returning i.status-icon:before {
+span.returning i.status-icon:before,
+.card-season-status.returning i.status-icon:before {
   content: "\e551";
 }
 
-span.canceled i.status-icon:before {
+span.canceled i.status-icon:before,
+.card-season-status.canceled i.status-icon:before {
   content: "\f00d";
 }
 
-span.ended i.status-icon:before {
+span.ended i.status-icon:before,
+.card-season-status.ended i.status-icon:before {
   content: "\f11e";
 }
 
@@ -856,9 +890,13 @@ span.ended i.status-icon:before {
   font-weight: 700;
 }
 
-.tv-network {
-  width: 20px;
+.tv-network-label .tv-network {
+  width: 1.2rem;
   margin-right: 2px;
+}
+
+.tv-network-label .tv-network img {
+  border-radius: 5px;
 }
 
 .countries-box {
@@ -1042,14 +1080,31 @@ header button {
   top: 0px;
   color: var(--primary);
   background-color: var(--secondary);
-  padding: 5px;
-  font-size: .8rem;
+  padding: 4px;
+  font-size: .7rem;
   font-weight: 700;
   border-radius: 0 0 5px 0;
   opacity: 1;
+  z-index: 2;
+}
+
+.card-season-status {
+  position: absolute;
+  top: 0px;
+  opacity: 1;
+  color: var(--secondary);
+  background-color: var(--primary);
+  padding: 4px 4px 4px 1.4rem;
+  font-size: .7rem;
+  font-weight: 600;
+  border-radius: 0 8px 8px 0;
 }
 
 .movie-card:hover .card-season-count {
+  opacity: 1;
+}
+
+.movie-card:hover .card-season-status {
   opacity: 1;
 }
 
