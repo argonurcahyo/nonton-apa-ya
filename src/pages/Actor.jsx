@@ -30,7 +30,8 @@ const Actor = () => {
   const fetchActorBio = async (id) => {
     try {
       const fetchedActorBio = await tmdb.get(`person/${id}`);
-      setActorBio(fetchedActorBio.data);
+      setActorBio(fetchedActorBio.data)
+      console.log(fetchedActorBio.data)
     } catch (error) {
       console.log(error)
       setActorBio("");

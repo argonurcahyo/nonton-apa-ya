@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import "./lib/fontawesome6/css/all.min.css";
+import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { GlobalProvider } from "./context/GlobalState";
 import Header from "./components/Header";
@@ -27,6 +28,7 @@ import Sync from "./pages/Sync";
 import TVByNetwork from "./pages/TVByNetwork";
 import TVByGenre from "./pages/TVByGenre";
 import TVByKeyword from "./pages/TVByKeyword";
+import { ToastContainer } from 'react-toastify'
 
 function App() {
   useTitle("NontonApaYa");
@@ -35,6 +37,16 @@ function App() {
     <GlobalProvider>
       <Router>
         <Header />
+        <ToastContainer
+          position="bottom-right"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

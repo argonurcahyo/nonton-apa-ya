@@ -28,7 +28,7 @@ const TVSeries = () => {
 
   const fetchSimilar = async (id) => {
     try {
-      const fetchData = await tmdb.get(`tv/${id}/similar`);
+      const fetchData = await tmdb.get(`tv/${id}/recommendations`);
       setSimilar(fetchData.data.results);
     } catch (error) {
       console.log(error)
@@ -147,7 +147,7 @@ const TVSeries = () => {
                   </div>
                 ))}
               </div>
-              <h1>Similar TV Series</h1>
+              <h4>Similar TV Series</h4>
               {similar.length > 0 ? (
                 <div className="movie-grid">
                   {similar.map((t) => (

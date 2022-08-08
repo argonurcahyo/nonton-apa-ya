@@ -122,8 +122,8 @@ const MovieDetail = ({ movieDetail, providers }) => {
           overflowY: 'auto'
         }}>
           {movieDetail?.keywords?.keywords?.map((k, i) => (
-            <Link to={`/movie/keyword/${k.id}`}>
-              <span key={i} className="keyword-pill">
+            <Link key={i} to={`/movie/keyword/${k.id}`}>
+              <span className="keyword-pill">
                 {k.name}
               </span>
             </Link>

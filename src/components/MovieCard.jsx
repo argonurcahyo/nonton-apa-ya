@@ -38,7 +38,6 @@ const MovieCard = forwardRef(({ movie, type, index, showShortMovies = true, sync
   }
 
   useEffect(() => {
-    setOpenModal(false)
     fetchMovieDetails(movie?.id);
     fetchWatchProviders(movie?.id);
   }, [movie]);
@@ -80,13 +79,13 @@ const MovieCard = forwardRef(({ movie, type, index, showShortMovies = true, sync
         <div
           className="movie-card"
         >
-          <div style={{ display: (movieDetail?.runtime === 0 || movieDetail?.runtime > 60) ? "none" : "block" }}>
-            <div
-              className="short-movie-ribbon"
-            >
-              <span>short movie</span>
-            </div>
+          <div
+            className="short-movie-ribbon"
+            style={{ display: (movieDetail?.runtime === 0 || movieDetail?.runtime > 60) ? "none" : "flex" }}
+          >
+            <span>short movie</span>
           </div>
+
 
           {(type === "popular" || type === "search" || type === "collection") ?
             (isWatchlist ?
@@ -156,8 +155,8 @@ const MovieCard = forwardRef(({ movie, type, index, showShortMovies = true, sync
         <Modal key={index} open={openModal} onClose={handleCloseModal}>
           <MovieDetail movieDetail={movieDetail} providers={providers} />
         </Modal>
-      </motion.div>
-    </div>
+      </motion.div >
+    </div >
   );
 }
 )

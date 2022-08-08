@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useReducer } from "react";
 import AppReducer from "./AppReducer";
 import { ACTIONS } from "./AppReducer";
 import nonton from '../apis/nonton'
+import { toast } from 'react-toastify'
 
 const initialState = {
   watchlist: localStorage.getItem("watchlist")
@@ -65,26 +66,31 @@ export const GlobalProvider = (props) => {
   }
 
   const addMovieToWatchlist = (movie) => {
+    toast.success(`You added ${movie?.title} (${movie.release_date.substr(0, 4)}) to watchlist!!`)
     postMovieToWatchlist(movie)
     dispatch({ type: ACTIONS.ADD_MOVIE_TO_WATCHLIST, payload: movie });
   };
-  const removeMovieFromWatchlist = (id) => {
-    deleteMovieFromWatchlist(id)
-    dispatch({ type: ACTIONS.REMOVE_MOVIE_FROM_WATCHLIST, payload: id });
+  const removeMovieFromWatchlist = (movie) => {
+    toast.success(`You removed ${movie?.title} (${movie.release_date.substr(0, 4)}) from watchlist!!`)
+    deleteMovieFromWatchlist(movie.id)
+    dispatch({ type: ACTIONS.REMOVE_MOVIE_FROM_WATCHLIST, payload: movie.id });
   };
   const addMovieToWatched = (movie) => {
+    toast.success(`You've watched ${movie?.title} (${movie.release_date.substr(0, 4)})`)
     deleteMovieFromWatchlist(movie.id)
     postMovieToWatched(movie)
     dispatch({ type: ACTIONS.ADD_MOVIE_TO_WATCHED, payload: movie });
   };
   const moveToWatchlist = (movie) => {
+    toast.info(`You moved ${movie?.title} (${movie.release_date.substr(0, 4)}) to watchlist!!`)
     deleteMovieFromWatched(movie.id)
     postMovieToWatchlist(movie)
     dispatch({ type: ACTIONS.MOVE_TO_WATCHLIST, payload: movie });
   };
-  const removeFromWatched = (id) => {
-    deleteMovieFromWatched(id)
-    dispatch({ type: ACTIONS.REMOVE_FROM_WATCHED, payload: id });
+  const removeFromWatched = (movie) => {
+    toast.info(`You've not watched ${movie?.title} (${movie.release_date.substr(0, 4)})`)
+    deleteMovieFromWatched(movie.id)
+    dispatch({ type: ACTIONS.REMOVE_FROM_WATCHED, payload: movie.id });
   };
 
   return (

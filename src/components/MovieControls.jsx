@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
+import { toast } from 'react-toastify'
 
 const MovieControls = ({ type, movie, sync }) => {
   const {
@@ -16,15 +17,20 @@ const MovieControls = ({ type, movie, sync }) => {
         <>
           <button
             className="ctrl-btn"
-            onClick={() => addMovieToWatched(movie)}
+            onClick={() => {
+              addMovieToWatched(movie)
+              // toast(`You've watched ${movie?.title} (${movie.release_date.substr(0, 4)})`)
+              if (sync) sync()
+            }}
           >
             <i className="fa-fw far fa-eye"></i>
           </button>
           <button
             className="ctrl-btn"
             onClick={() => {
-              removeMovieFromWatchlist(movie.id)
-              sync()
+              removeMovieFromWatchlist(movie)
+              // toast(`You removed ${movie?.title} (${movie.release_date.substr(0, 4)}) from watchlist!!`)
+              if (sync) sync()
             }}
           >
             <i className="fa-fw fa fa-times"></i>
@@ -36,13 +42,20 @@ const MovieControls = ({ type, movie, sync }) => {
         <>
           <button
             className="ctrl-btn"
-            onClick={() => moveToWatchlist(movie)}
+            onClick={() => {
+              moveToWatchlist(movie)
+              if (sync) sync()
+            }}
           >
             <i className="fa-fw far fa-eye-slash"></i>
           </button>
           <button
             className="ctrl-btn"
-            onClick={() => removeFromWatched(movie.id)}
+            onClick={() => {
+              removeFromWatched(movie)
+              // toast(`You haven't watched ${movie?.title} (${movie.release_date.substr(0, 4)})`)
+              if (sync) sync()
+            }}
           >
             <i className="fa-fw fa fa-times"></i>
           </button>
@@ -51,12 +64,17 @@ const MovieControls = ({ type, movie, sync }) => {
 
       {(type === "search" || type === "popular" || type === "collection") && (
         <>
-          <button className="ctrl-btn" onClick={() => addMovieToWatchlist(movie)}>
+          <button className="ctrl-btn" onClick={() => {
+            addMovieToWatchlist(movie)
+            // toast(`You added ${movie?.title} (${movie.release_date.substr(0, 4)}) to watchlist!!`)
+            if (sync) sync()
+          }}>
             <i className="fa-fw far fa-plus"></i>
           </button>
           <button className="ctrl-btn" onClick={() => {
             addMovieToWatchlist(movie);
             addMovieToWatched(movie);
+            if (sync) sync()
           }}>
             <i className="fa-fw far fa-eye"></i>
           </button>
