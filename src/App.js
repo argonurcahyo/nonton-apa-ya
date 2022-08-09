@@ -40,13 +40,14 @@ function App() {
         <ToastContainer
           position="bottom-right"
           autoClose={2000}
-          hideProgressBar={false}
-          newestOnTop={false}
+          hideProgressBar={true}
+          newestOnTop={true}
           closeOnClick
           rtl={false}
           pauseOnFocusLoss
           draggable
-          pauseOnHover />
+          pauseOnHover
+          theme="dark" />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

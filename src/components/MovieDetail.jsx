@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom'
-import ProgressiveImage from "react-progressive-graceful-image";
 import Moment from 'react-moment';
 import { BASE_IMG_URL, NO_IMG_URL } from "../apis/tmdb";
 
@@ -14,8 +13,13 @@ const MovieDetail = ({ movieDetail, providers }) => {
   const title = movieDetail?.title;
   const original_title = movieDetail?.original_title;
   const directors = crews?.filter(c => c.job === "Director");
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate()
+
+  const imageLoaded = () => {
+    setLoading(false)
+  }
 
   return (
     movieDetail && (
@@ -131,23 +135,21 @@ const MovieDetail = ({ movieDetail, providers }) => {
           }
         </div>
 
-        <ProgressiveImage
-          key={movieDetail.id}
-          src={movieDetail?.backdrop_path ?
-            `${BASE_IMG_URL}${movieDetail?.backdrop_path}`
-            : "https://placekitten.com/458/305"}
-          placeholder={BD_LOADING}
-        >
-          {(src, loading) => (
-            <img
-              className="detail-backdrop"
-              width="100%"
-              src={src}
-              alt={movieDetail.title}
-              style={{ opacity: loading ? 0.5 : 1 }}
-            />
-          )}
-        </ProgressiveImage>
+        <div style={{ display: loading ? "block" : "none" }}>
+          <img
+            src={BD_LOADING}
+            width="100%"
+            alt="loading" />
+        </div>
+        <div style={{ display: loading ? "none" : "block" }}>
+          <img
+            className="detail-backdrop"
+            alt={movieDetail.title}
+            width="100%"
+            src={movieDetail.backdrop_path ? `${BASE_IMG_URL}${movieDetail.backdrop_path}` : "https://placekitten.com/458/305"}
+            onLoad={imageLoaded}
+          />
+        </div>
 
         {companies && (
           <div className="companies-row">

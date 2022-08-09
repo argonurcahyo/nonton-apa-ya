@@ -5,6 +5,7 @@ import tmdb from '../apis/tmdb';
 import useActorMovieFetch from '../hooks/useActorMovieFetch';
 import MovieCard from '../components/MovieCard'
 import Transitions from '../components/Transition';
+import Moment from 'react-moment'
 
 const Actor = () => {
   let { id } = useParams();
@@ -57,14 +58,40 @@ const Actor = () => {
                 <div style={{
                   display: "flex"
                 }}>
-                  <div className='profile-photo'>
+                  <div className='profile-photo' style={{ width: "20%" }}>
                     <img
                       src={`${BASE_IMG_URL}${actorBio?.profile_path}`}
                       alt={actorBio?.name}
                     />
                   </div>
-                  <div style={{ padding: "0px 10px" }}>
-                    <p>Born : {actorBio.birthday}</p>
+                  <div style={{ padding: "0px 10px", width: "80%" }}>
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td>Born</td>
+                          <td>:  <Moment format="MMMM Do, YYYY">{actorBio?.birthday}</Moment></td>
+                        </tr>
+                        {actorBio?.deathday &&
+                          <tr>
+                            <td>Died</td>
+                            <td>:  <Moment format="MMMM Do, YYYY">{actorBio?.deathday}</Moment></td>
+                          </tr>
+                        }
+                        <tr>
+                          <td>Place of birth</td>
+                          <td>:  {actorBio?.place_of_birth}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div style={{
+                      padding: ".2rem",
+                      fontSize: ".8rem",
+                      maxHeight: "15rem",
+                      overflowY: "scroll",
+                      width: "100%"
+                    }}>
+                      {actorBio?.biography}
+                    </div>
                   </div>
                 </div>
               </div>

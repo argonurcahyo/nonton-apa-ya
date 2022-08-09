@@ -25,7 +25,6 @@ const Header = () => {
 
  const handleSwitch = () => {
   setSw(!sw)
-  sw ? navigate('/tv/popular') : navigate('/')
  }
 
  return (

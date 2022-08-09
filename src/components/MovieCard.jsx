@@ -143,7 +143,7 @@ const MovieCard = forwardRef(({ movie, type, index, showShortMovies = true, sync
           {type !== 'collection' &&
             <div style={{ display: movieDetail?.belongs_to_collection ? "block" : "none" }}>
               <div
-                className="collection-ribbon"          >
+                className="collection-ribbon">
                 <span>
                   <i className="fa far fa-caret-square-right" />
                 </span>

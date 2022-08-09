@@ -3,7 +3,7 @@ import Moment from 'react-moment'
 import { Link, useParams } from 'react-router-dom'
 import tmdb, { BASE_IMG_URL, NO_IMG_URL, BASE_FLAG_URL } from '../apis/tmdb'
 import CollectionCard from '../components/CollectionCard'
-import MovieCard from '../components/MovieCard'
+// import MovieCard from '../components/MovieCard'
 import Transitions from '../components/Transition'
 
 const Movie = () => {
@@ -15,7 +15,7 @@ const Movie = () => {
     try {
       const fetchedMovieDetails = await tmdb.get(`movie/${id}`, {
         params: {
-          append_to_response: "credits,watch/providers,keywords",
+          append_to_response: "credits,watch/providers,keywords,pictures,videos",
         }
       });
       setMovieDetail(fetchedMovieDetails.data);
@@ -64,8 +64,8 @@ const Movie = () => {
                       movieDetail?.production_countries?.map((c, i) => (
                         <div key={i} className='country-flag'>
                           <img
-                            src={c.iso_3166_1 ? `${BASE_FLAG_URL}${c.iso_3166_1.toLowerCase()}` : ""}
-                            alt={c.name} />
+                            src={c?.iso_3166_1 ? `${BASE_FLAG_URL}${c?.iso_3166_1.toLowerCase()}` : ""}
+                            alt={c?.name} />
                         </div>
                       ))
 
@@ -81,7 +81,7 @@ const Movie = () => {
                   }}
                 >
                   <span className="release-date">
-                    {<Moment format="MMMM Do, YYYY">{movieDetail.release_date}</Moment>}
+                    {<Moment format="MMMM Do, YYYY">{movieDetail?.release_date}</Moment>}
                   </span>
 
                   {movieDetail.runtime > 0 && <span className="status-pill">
@@ -113,10 +113,10 @@ const Movie = () => {
                       {movieDetail["watch/providers"]?.results?.ID?.flatrate?.map((c, i) => (
                         <div key={i}
                           className="provider-box grow">
-                          <Link to={`/movie/network/${c.provider_id}`}>
+                          <Link to={`/movie/network/${c?.provider_id}`}>
                             <img
-                              alt={c.provider_name}
-                              src={`${BASE_IMG_URL}${c.logo_path}`} />
+                              alt={c?.provider_name}
+                              src={`${BASE_IMG_URL}${c?.logo_path}`} />
                           </Link>
                         </div>
                       ))}
@@ -144,8 +144,8 @@ const Movie = () => {
                   overflowY: 'auto'
                 }}>
                   {movieDetail?.keywords?.keywords?.map((k, i) => (
-                    <Link to={`/movie/keyword/${k.id}`}>
-                      <span key={i} className="keyword-pill">
+                    <Link key={i} to={`/movie/keyword/${k.id}`}>
+                      <span className="keyword-pill">
                         {k.name}
                       </span>
                     </Link>
@@ -181,18 +181,20 @@ const Movie = () => {
                 <div className="cast-grid cast-box">
                   {movieDetail?.credits?.cast?.map((c) =>
                     <div className="profile-box" key={c.id}>
-                      <div className="profile">
+                      <div className="profile grow">
                         <Link to={`/actor/${c.id}`} target="_blank">
                           <img
-                            alt={c.name}
-                            src={c.profile_path ? `${BASE_IMG_URL}${c?.profile_path}` : NO_IMG_URL} />
+                            alt={c?.name}
+                            src={c?.profile_path ? `${BASE_IMG_URL}${c?.profile_path}` : NO_IMG_URL} />
                         </Link>
                       </div>
                       <span className="actor-name">
                         <Link to={`/actor/${c.id}`} target="_blank">
                           {c.name}
                         </Link>
-
+                      </span>
+                      <span className="char-name" style={{ color: "gray", fontStyle: "italic" }}>
+                        {c.character}
                       </span>
                     </div>)}
                 </div>
@@ -205,7 +207,7 @@ const Movie = () => {
                     </div>
                   )
                 }
-
+                {/* 
                 <h4>Similar Movies</h4>
                 {similar.length > 0 ? (
                   <div className="movie-grid">
@@ -220,7 +222,7 @@ const Movie = () => {
                   </div>
                 ) : (
                   <h2 className="no-movies">None</h2>
-                )}
+                )} */}
               </>
             )
           }

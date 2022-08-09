@@ -3,7 +3,7 @@ import ReactDom from 'react-dom'
 
 const MODAL_STYLES2 = {
  backgroundColor: '#ffffff',
- padding: '10px 10px',
+ padding: '0',
  borderRadius: '15px',
  position: 'fixed',
  top: "10%",
@@ -35,16 +35,11 @@ const Modal = ({ open, children, onClose }) => {
   <div className="modal">
    <div className="modal-overlay" style={OVERLAY_STYLES} />
    <div className="modal-container" style={MODAL_STYLES2}>
-    <div style={{
-     display: 'flex',
-     flexDirection: 'row',
-     justifyContent: 'flex-end'
-    }}>
+    <div style={{ marginBottom: "10px" }}>
      <span
       className='modal-close'
-      role='button'
       onClick={onClose}>
-      <i className='fa fas fa-times'></i>
+      CLOSE
      </span>
     </div>
     <div className="modal-content">

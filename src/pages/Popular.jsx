@@ -33,8 +33,8 @@ const Popular = () => {
             justifyContent: "space-between",
           }}>
             <h1 className="heading">Popular</h1>
-
           </div>
+
           {movies.length > 0 ? (
             <div className="movie-grid">
 

@@ -1,11 +1,13 @@
-import React from 'react'
-import ProgressiveImage from 'react-progressive-graceful-image';
+import React, { useState } from 'react'
 import Moment from 'react-moment'
 import { Link } from 'react-router-dom';
-import { BASE_IMG_URL, NO_IMG_URL } from '../apis/tmdb';
+import { BASE_IMG_URL, BD_LOADING, NO_IMG_URL } from '../apis/tmdb';
 
 const TVDetail = ({ tvDetail }) => {
-
+  const [loading, setLoading] = useState(true);
+  const imageLoaded = () => {
+    setLoading(false)
+  }
   return (
     tvDetail && (
       <>
@@ -61,7 +63,7 @@ const TVDetail = ({ tvDetail }) => {
           <div className="network-box">
             {tvDetail?.networks && (
               tvDetail.networks.map(n => (
-                <div style={{ marginLeft: "2px" }} key={n.id}>
+                <div style={{ marginLeft: "5px" }} key={n.id}>
                   <Link to={`/tv/network/${n.id}`}>
                     <img
                       style={{
@@ -94,20 +96,21 @@ const TVDetail = ({ tvDetail }) => {
           </div>
         </div>
 
-        <ProgressiveImage
-          src={tvDetail.backdrop_path ? `${BASE_IMG_URL}${tvDetail.backdrop_path}` : "https://placekitten.com/458/305"}
-          placeholder="https://i.pinimg.com/originals/3d/6a/a9/3d6aa9082f3c9e285df9970dc7b762ac.gif"
-        >
-          {(src, loading) => (
-            <img
-              className="detail-backdrop"
-              width="100%"
-              src={src}
-              alt={tvDetail.title}
-              style={{ opacity: loading ? 0.5 : 1 }}
-            />
-          )}
-        </ProgressiveImage>
+        <div style={{ display: loading ? "block" : "none" }}>
+          <img
+            src={BD_LOADING}
+            width="100%"
+            alt="loading" />
+        </div>
+        <div style={{ display: loading ? "none" : "block" }}>
+          <img
+            className="detail-backdrop"
+            alt={tvDetail.name}
+            width="100%"
+            src={tvDetail.backdrop_path ? `${BASE_IMG_URL}${tvDetail.backdrop_path}` : "https://placekitten.com/458/305"}
+            onLoad={imageLoaded}
+          />
+        </div>
 
         {tvDetail?.production_companies && (
           <div className="companies-row">
