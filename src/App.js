@@ -29,6 +29,8 @@ import TVByNetwork from "./pages/TVByNetwork";
 import TVByGenre from "./pages/TVByGenre";
 import TVByKeyword from "./pages/TVByKeyword";
 import { ToastContainer } from 'react-toastify'
+import MovieByCountry from "./pages/MovieByCountry";
+import MovieByYear from "./pages/MovieByYear";
 
 function App() {
   useTitle("NontonApaYa");
@@ -65,6 +67,8 @@ function App() {
           <Route path="/movie/keyword/:id" element={<MovieByKeyword />} />
           <Route path="/movie/company/:id" element={<MovieByCompany />} />
           <Route path="/movie/network/:id" element={<MovieByNetwork />} />
+          <Route path="/movie/country/:country" element={<MovieByCountry />} />
+          <Route path="/movie/year/:year" element={<MovieByYear />} />
 
           <Route exact path="/tv/search" element={<TVSearch />} />
           <Route exact path="/tv/popular" element={<TVPopular />} />

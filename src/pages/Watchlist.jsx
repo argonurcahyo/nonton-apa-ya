@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { auth } from '../apis/firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import _ from 'lodash'
+import { Link } from "react-router-dom";
 
 const Watchlist = () => {
   const { watchlist } = useContext(GlobalContext);
@@ -46,7 +47,10 @@ const Watchlist = () => {
             watchlist.length > 0 ? (
               watchlistGroupByYear.map((wgby, i) => (
                 <div key={i}>
-                  <h3 className="sticky-thc">{wgby.year}</h3>
+                  <Link to={`/movie/year/${wgby.year}`}>
+                    <h3 className="sticky-thc">{wgby.year}</h3>
+                  </Link>
+
                   <motion.div layout className="movie-grid">
                     <AnimatePresence>
                       {wgby.data.map(movie => (
