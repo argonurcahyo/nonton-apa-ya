@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Moment from 'react-moment'
 import { Link, useParams } from 'react-router-dom'
 import tmdb, { BASE_IMG_URL } from '../apis/tmdb'
 import Transitions from '../components/Transition'
 import TVCard from '../components/TVCard'
 import TVSeason from '../components/TVSeason'
+import { GlobalContext } from '../context/GlobalState'
 
 const TVSeries = () => {
   let { id } = useParams()
+  let { tvWatched } = useContext(GlobalContext)
   const [tvDetail, setTvDetail] = useState({})
   const [similar, setSimilar] = useState([])
 
@@ -19,7 +21,6 @@ const TVSeries = () => {
         }
       });
       setTvDetail(fetchData.data);
-      console.log(fetchData.data)
     } catch (error) {
       console.log(error)
       setTvDetail("");
@@ -57,6 +58,7 @@ const TVSeries = () => {
                   <Link to={`/tv/${tvDetail?.id}`}>
                     {tvDetail?.name}
                   </Link>
+                  ({tvWatched.filter(tv => tv.tvId === id).length}/{tvDetail?.number_of_episodes})
                 </span>
                 <span className={`status-pill ${(tvDetail?.status?.replace(/ Series/gi, ""))?.toLowerCase()}`}>
                   <i className="status-icon"></i>
@@ -147,18 +149,19 @@ const TVSeries = () => {
                   </div>
                 ))}
               </div>
-              <h4>Similar TV Series</h4>
-              {similar.length > 0 ? (
-                <div className="movie-grid">
-                  {similar.map((t) => (
-                    <TVCard
-                      tv={t}
-                      key={t.id}
-                    />
-                  ))}
-                </div>
-              ) : (
-                <h2 className="no-movies">None</h2>
+
+              {similar.length > 0 && (
+                <>
+                  <h4>Similar TV Series</h4>
+                  <div className="movie-grid">
+                    {similar.map((t) => (
+                      <TVCard
+                        tv={t}
+                        key={t.id}
+                      />
+                    ))}
+                  </div>
+                </>
               )}
             </>
           )}

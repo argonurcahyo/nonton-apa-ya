@@ -10,6 +10,9 @@ const initialState = {
     : [],
   watched: localStorage.getItem("watched")
     ? JSON.parse(localStorage.getItem("watched"))
+    : [],
+  tvWatched: localStorage.getItem("tvWatched")
+    ? JSON.parse(localStorage.getItem("tvWatched"))
     : []
 };
 
@@ -21,6 +24,7 @@ export const GlobalProvider = (props) => {
   useEffect(() => {
     localStorage.setItem("watchlist", JSON.stringify(state.watchlist));
     localStorage.setItem("watched", JSON.stringify(state.watched));
+    localStorage.setItem("tvWatched", JSON.stringify(state.tvWatched));
   }, [state]);
 
   const postMovieToWatchlist = async (movie) => {
@@ -73,7 +77,7 @@ export const GlobalProvider = (props) => {
   const removeMovieFromWatchlist = (movie) => {
     toast.success(`You removed ${movie?.title} (${movie.release_date.substr(0, 4)}) from watchlist!!`)
     deleteMovieFromWatchlist(movie.id)
-    dispatch({ type: ACTIONS.REMOVE_MOVIE_FROM_WATCHLIST, payload: movie.id });
+    dispatch({ type: ACTIONS.REMOVE_MOVIE_FROM_WATCHLIST, payload: movie });
   };
   const addMovieToWatched = (movie) => {
     toast.success(`You've watched ${movie?.title} (${movie.release_date.substr(0, 4)})`)
@@ -90,19 +94,27 @@ export const GlobalProvider = (props) => {
   const removeFromWatched = (movie) => {
     toast.info(`You've not watched ${movie?.title} (${movie.release_date.substr(0, 4)})`)
     deleteMovieFromWatched(movie.id)
-    dispatch({ type: ACTIONS.REMOVE_FROM_WATCHED, payload: movie.id });
+    dispatch({ type: ACTIONS.REMOVE_FROM_WATCHED, payload: movie });
   };
+  // add episode to watched
+  const addEpisodeToWatched = (episode) => {
+    toast.info(`added!`)
+    dispatch({ type: ACTIONS.ADD_EPISODE_TO_WATCHED, payload: episode })
+  }
+
 
   return (
     <GlobalContext.Provider
       value={{
         watchlist: state.watchlist,
         watched: state.watched,
+        tvWatched: state.tvWatched,
         addMovieToWatchlist,
         removeMovieFromWatchlist,
         addMovieToWatched,
         moveToWatchlist,
         removeFromWatched,
+        addEpisodeToWatched,
         dbFunction: {
           postMovieToWatchlist,
           postMovieToWatched,

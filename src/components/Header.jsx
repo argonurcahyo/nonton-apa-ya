@@ -67,13 +67,13 @@ const Header = () => {
         )}
        </NavLink>
       </li>
-      <li>
+      {/* <li>
        <NavLink
         to="/sync"
         className={({ isActive }) => isActive ? activeClassname : undefined}>
         <i className="fa fas fa-sync"></i>
        </NavLink>
-      </li>
+      </li> */}
       <li>
        <NavLink
         to="/movie/watched"

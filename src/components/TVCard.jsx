@@ -1,12 +1,14 @@
-import React, { useEffect, useState, forwardRef } from 'react'
+import React, { useEffect, useState, forwardRef, useContext } from 'react'
 import tmdb, { BASE_IMG_URL, NO_IMG_URL } from "../apis/tmdb";
 import Modal from './Modal';
 import TVDetail from './TVDetail';
 import OriginCountry from './OriginCountry';
 import NetworkBadge from './TVNetworkLabel';
 import LoadingCard from './LoadingCard';
+import { GlobalContext } from '../context/GlobalState';
 
 const TVCard = forwardRef(({ tv }, ref) => {
+ let { tvWatched } = useContext(GlobalContext)
  const [tvDetail, setTvDetail] = useState("");
  const [openModal, setOpenModal] = useState(false);
  const [loading, setLoading] = useState(true);
@@ -28,7 +30,6 @@ const TVCard = forwardRef(({ tv }, ref) => {
     }
    });
    setTvDetail(fetchedTvDetails.data);
-   console.log(fetchedTvDetails.data)
   } catch (error) {
    console.log(error);
    setTvDetail("");
@@ -80,7 +81,12 @@ const TVCard = forwardRef(({ tv }, ref) => {
     className={`card-season-status ${(tvDetail?.status?.replace(/ Series/gi, ""))?.toLowerCase()}`}>
     <i className="status-icon"></i>
    </div>
-
+   <div
+    className='card-progress-bar'
+    style={{
+     width: (tvWatched?.filter(t => parseInt(t?.tvId) === tv.id)?.length / tvDetail?.number_of_episodes) * 100 + "%"
+    }}>
+   </div>
   </div>
  )
 })
