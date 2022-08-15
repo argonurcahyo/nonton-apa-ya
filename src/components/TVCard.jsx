@@ -84,7 +84,7 @@ const TVCard = forwardRef(({ tv }, ref) => {
    <div
     className='card-progress-bar'
     style={{
-     width: (tvWatched?.filter(t => parseInt(t?.tvId) === tv.id)?.length / tvDetail?.number_of_episodes) * 100 + "%"
+     width: (tvWatched?.filter(t => parseInt(t?.tvId) === tv?.id)?.length / tvDetail?.number_of_episodes) * 100 + "%"
     }}>
    </div>
   </div>

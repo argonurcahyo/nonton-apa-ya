@@ -49,7 +49,7 @@ const TVSeason = ({ tvId, seasonId }) => {
       <div style={{ display: 'flex' }}>
         <div style={{ width: "25%" }}>
           <img
-            style={{ width: "100%", borderRadius: "15px" }}
+            style={{ width: "100%", borderRadius: "10px", boxShadow: "0 3px 10px -5px rgba(0, 0, 0, 1)" }}
             src={tvSeason?.poster_path ? `${BASE_IMG_URL}${tvSeason?.poster_path}` : `${NO_IMG_URL}`}
             alt={`${tvSeason?._id}`} />
         </div>

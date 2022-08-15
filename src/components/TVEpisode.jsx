@@ -28,7 +28,7 @@ const TVEpisode = ({ tvId, seasonId, episodeId }) => {
       tvId: tvId,
       seasonId: seasonId,
       episodeId: episodeId,
-      ...tvEpisode
+      id: tvEpisode.id
     }
     addEpisodeToWatched(episodeData)
     console.log(tvWatched)
@@ -55,7 +55,6 @@ const TVEpisode = ({ tvId, seasonId, episodeId }) => {
               <i className='fa fas fa-eye'></i>
             </button> :
             <button
-              onClick={handleClick}
               className='btn-tv watched'>
               <i className='fa fas fa-check'></i>
             </button>

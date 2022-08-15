@@ -930,6 +930,19 @@ span.ended i.status-icon:before,
   border-radius: 5px;
 }
 
+.tv-network-label .tv-card-network {
+  margin-right: 3px;
+  height: 1rem;
+  background-color: var(--white);
+  padding: .1rem .1rem .2rem .1rem;
+  border-radius: 3px;
+  box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+}
+
+.tv-network-label .tv-card-network img {
+  height: 100%;
+}
+
 .countries-box {
   display: flex;
   position: absolute;
@@ -1132,8 +1145,8 @@ header button {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: .5rem;
-  background-color: var(--watchlist);
+  height: .4rem;
+  background-color: var(--secondary)
 }
 
 .movie-card:hover .card-season-count {
@@ -1162,5 +1175,5 @@ header button {
 }
 
 .episode-detail:hover .episode-overview {
-  display: block;
+  display: none;
 }
