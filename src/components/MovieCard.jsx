@@ -6,7 +6,7 @@ import MovieControls from "./MovieControls";
 import LoadingCard from './LoadingCard'
 import tmdb, { BASE_IMG_URL, NO_IMG_URL } from "../apis/tmdb";
 import MovieDetail from "./MovieDetail";
-import TVNetworkLabel from "./TVNetworkLabel";
+import MovieNetworkLabel from "./MovieNetworkLabel";
 import Rating from "./Rating";
 
 const MovieCard = forwardRef(({ movie, type, index, showShortMovies = true, sync }, ref) => {
@@ -122,7 +122,7 @@ const MovieCard = forwardRef(({ movie, type, index, showShortMovies = true, sync
           </div>
 
           {providers?.flatrate && (
-            !loading && (<TVNetworkLabel
+            !loading && (<MovieNetworkLabel
               networks={providers.flatrate}
             />)
           )}

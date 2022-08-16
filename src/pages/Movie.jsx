@@ -3,6 +3,7 @@ import Moment from 'react-moment'
 import { Link, useParams } from 'react-router-dom'
 import tmdb, { BASE_IMG_URL, NO_IMG_URL, BASE_FLAG_URL } from '../apis/tmdb'
 import CollectionCard from '../components/CollectionCard'
+import ImageSlider from '../components/ImageSlider'
 // import MovieCard from '../components/MovieCard'
 import Transitions from '../components/Transition'
 
@@ -15,7 +16,7 @@ const Movie = () => {
     try {
       const fetchedMovieDetails = await tmdb.get(`movie/${id}`, {
         params: {
-          append_to_response: "credits,watch/providers,keywords,pictures,videos",
+          append_to_response: "credits,watch/providers,keywords,images,videos",
         }
       });
       setMovieDetail(fetchedMovieDetails.data);
@@ -68,7 +69,6 @@ const Movie = () => {
                             alt={c?.name} />
                         </div>
                       ))
-
                     )}
                   </div>
                 </div>
@@ -153,13 +153,14 @@ const Movie = () => {
                   }
                 </div>
 
-                <img
+                {movieDetail?.images?.backdrops && <ImageSlider images={movieDetail?.images?.backdrops?.map(im => (`${BASE_IMG_URL}${im?.file_path}`))} />}
+
+                {/* <img
                   className="detail-backdrop"
                   width="100%"
                   src={`${BASE_IMG_URL}${movieDetail?.backdrop_path}`}
                   alt={movieDetail?.title}
-                />
-
+                /> */}
                 <div className="companies-row">
                   {movieDetail?.production_companies?.map((comp, i) => (
                     <div key={i} className="companies">

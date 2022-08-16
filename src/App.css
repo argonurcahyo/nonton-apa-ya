@@ -933,7 +933,6 @@ span.ended i.status-icon:before,
 .tv-network-label .tv-card-network {
   margin-right: 3px;
   height: 1rem;
-  background-color: var(--white);
   padding: .1rem .1rem .2rem .1rem;
   border-radius: 3px;
   box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
@@ -1166,14 +1165,53 @@ header button {
   display: inline;
 }
 
-.episode-overview {
-  display: none;
-  font-size: .7rem;
-  border: 1px solid var(--primary);
-  padding: .5rem .8rem;
-  border-radius: 15px;
+.episode-name {
+  cursor: pointer;
 }
 
-.episode-detail:hover .episode-overview {
-  display: none;
+.modal-episode-name {
+  font-size: larger;
+  font-weight: 700;
+  margin-bottom: .5rem;
+}
+
+.modal-episode-overview {
+  padding: .5rem;
+  font-size: .8rem;
+}
+
+.still-image {
+  margin-bottom: .7rem;
+}
+
+.image-slider-container {
+  display: flex;
+  width: 100%;
+  position: relative;
+  align-content: center;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+.image-slider-container img {
+  border-radius: 5px;
+  width: 100%;
+}
+
+.image-slider-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.image-slider-index {
+  position: absolute;
+  left: 1.5rem;
+  top: .5rem;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fefefe;
+  padding: 5px;
+  opacity: .6;
+  border-radius: 8px;
+  font-size: .7rem;
 }

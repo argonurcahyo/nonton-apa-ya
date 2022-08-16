@@ -25,7 +25,6 @@ const OVERLAY_STYLES = {
  backgroundColor: 'rgba(0,0,0,.7)',
  zIndex: 1000,
  transition: "all 500ms ease-in -out"
-
 }
 
 const Modal = ({ open, children, onClose }) => {
@@ -33,7 +32,7 @@ const Modal = ({ open, children, onClose }) => {
 
  return ReactDom.createPortal(
   <div className="modal">
-   <div className="modal-overlay" style={OVERLAY_STYLES} />
+   <div className="modal-overlay" onClick={onClose} style={OVERLAY_STYLES} />
    <div className="modal-container" style={MODAL_STYLES2}>
     <div style={{ marginBottom: "10px" }}>
      <span

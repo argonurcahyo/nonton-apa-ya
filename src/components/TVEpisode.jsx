@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import tmdb, { BASE_IMG_URL } from '../apis/tmdb';
 import { GlobalContext } from '../context/GlobalState';
+import Modal from "./Modal";
+import TVEpisodeDetail from './TVEpisodeDetail';
 
 const TVEpisode = ({ tvId, seasonId, episodeId }) => {
   const {
@@ -9,6 +11,8 @@ const TVEpisode = ({ tvId, seasonId, episodeId }) => {
   } = useContext(GlobalContext);
 
   const [tvEpisode, setTvEpisode] = useState({})
+  const [openModal, setOpenModal] = useState(false);
+
   let findEpisode = tvWatched?.find((o) => o?.id === tvEpisode?.id);
   const isWatched = findEpisode ? true : false;
 
@@ -22,7 +26,7 @@ const TVEpisode = ({ tvId, seasonId, episodeId }) => {
     }
   }
 
-  const handleClick = () => {
+  const handleWatchButton = () => {
     console.log(tvEpisode)
     let episodeData = {
       tvId: tvId,
@@ -33,6 +37,11 @@ const TVEpisode = ({ tvId, seasonId, episodeId }) => {
     addEpisodeToWatched(episodeData)
     console.log(tvWatched)
   }
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+  const handleCloseModal = () => setOpenModal(false);
 
   useEffect(() => {
     fetchTvEpisode(tvId, seasonId, episodeId);
@@ -50,7 +59,7 @@ const TVEpisode = ({ tvId, seasonId, episodeId }) => {
         <div style={{ marginRight: "5px" }}>
           {!isWatched ?
             <button
-              onClick={handleClick}
+              onClick={handleWatchButton}
               className='btn-tv'>
               <i className='fa fas fa-eye'></i>
             </button> :
@@ -59,25 +68,15 @@ const TVEpisode = ({ tvId, seasonId, episodeId }) => {
               <i className='fa fas fa-check'></i>
             </button>
           }
-
         </div>
-        <div className='episode-name'>
+        <div className='episode-name' onClick={handleOpenModal}>
           S{seasonId?.toString().padStart(2, "0")}E{episodeId?.toString().padStart(2, "0")}. {tvEpisode?.name} <span className='air-date'>({tvEpisode?.air_date})</span>
         </div>
       </div>
 
-      {tvEpisode?.overview &&
-        <div className="episode-overview" style={{ width: "75%" }}>
-          <div className="still-image">
-            <img
-              src={`${BASE_IMG_URL}${tvEpisode?.still_path}`}
-              alt={tvEpisode?.id}
-              style={{ width: "100%", borderRadius: "15px" }} />
-          </div>
-
-          {tvEpisode?.overview}
-        </div>
-      }
+      <Modal open={openModal} onClose={handleCloseModal}>
+        <TVEpisodeDetail episode={tvEpisode} />
+      </Modal>
     </div>
 
   )
