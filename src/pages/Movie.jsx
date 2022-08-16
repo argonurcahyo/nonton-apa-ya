@@ -6,6 +6,7 @@ import CollectionCard from '../components/CollectionCard'
 import ImageSlider from '../components/ImageSlider'
 // import MovieCard from '../components/MovieCard'
 import Transitions from '../components/Transition'
+import VideoSlider from '../components/VideoSlider'
 
 const Movie = () => {
   let { movieId } = useParams()
@@ -198,8 +199,28 @@ const Movie = () => {
                         {c.character}
                       </span>
                     </div>)}
-                </div>
+                </div><br />
 
+                {movieDetail?.videos?.results && (
+                  <>
+                    <h2>Videos  ({movieDetail?.videos?.results?.length})</h2>
+                    <div style={{
+                      display: "flex",
+                      flexWrap: 'wrap',
+                      justifyContent: "center"
+                    }}>
+                      {movieDetail?.videos?.results?.map((vid, i) => (
+                        <iframe key={i} style={{
+                          border: "none",
+                          margin: "5px",
+                          borderRadius: "5px",
+                        }} title={i} allow="fullscreen;"
+                          src={`https://www.youtube.com/embed/${vid.key}`}>
+                        </iframe>
+                      ))}
+                    </div>
+                  </>
+                )}
                 {
                   movieDetail?.belongs_to_collection && (
                     <div>
@@ -224,6 +245,7 @@ const Movie = () => {
                 ) : (
                   <h2 className="no-movies">None</h2>
                 )} */}
+
               </>
             )
           }

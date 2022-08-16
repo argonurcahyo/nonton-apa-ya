@@ -35,11 +35,11 @@ const ImageSlider = ({ images }) => {
     <button className="image-slider-btn prev" onClick={slideLeft}>
      <i className='fa fas fa-chevron-left'></i>
     </button>
-    <div style={{ display: loading ? 'none' : 'block' }}>
+    <div style={{ display: loading ? 'none' : 'block', width: "100%" }}>
      <img className='detail-backdrop' src={images[index]} alt={index} onLoad={imageLoaded} />
     </div>
-    <div style={{ display: loading ? 'block' : 'none' }}>
-     <img src={BD_LOADING} alt="loading" />
+    <div style={{ display: loading ? 'block' : 'none', width: "100%" }}>
+     <img style={{ objectFit: "cover", maxHeight: "450px" }} src={BD_LOADING} alt="loading" />
     </div>
 
     <button className="image-slider-btn next" onClick={slideRight}>

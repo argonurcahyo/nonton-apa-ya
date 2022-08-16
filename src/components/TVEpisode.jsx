@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import tmdb, { BASE_IMG_URL } from '../apis/tmdb';
+import tmdb from '../apis/tmdb';
 import { GlobalContext } from '../context/GlobalState';
 import Modal from "./Modal";
 import TVEpisodeDetail from './TVEpisodeDetail';
