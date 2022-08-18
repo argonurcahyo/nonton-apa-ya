@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Moment from 'react-moment'
 import { Link, useParams } from 'react-router-dom'
-import tmdb, { BASE_IMG_URL } from '../apis/tmdb'
+import tmdb, { BASE_IMG_URL, NO_IMG_URL_LANDSCAPE } from '../apis/tmdb'
+import ImageSlider from '../components/ImageSlider'
 import Transitions from '../components/Transition'
 import TVCard from '../components/TVCard'
 import TVSeason from '../components/TVSeason'
@@ -17,7 +18,7 @@ const TVSeries = () => {
     try {
       const fetchData = await tmdb.get(`tv/${id}`, {
         params: {
-          append_to_response: "credits,keywords",
+          append_to_response: "credits,keywords,images",
         }
       });
       setTvDetail(fetchData.data);
@@ -133,15 +134,15 @@ const TVSeries = () => {
                   }
                 </div>
               </div>
-              <img
-                className="detail-backdrop"
-                width="100%"
-                src={`${BASE_IMG_URL}${tvDetail?.backdrop_path}`}
-                alt={tvDetail?.name}
-              />
-              <div className='tv-overview' style={{ marginTop: '10px' }}>
+              {tvDetail?.images?.backdrops?.length > 0 ?
+                <ImageSlider images={tvDetail?.images?.backdrops?.map(im => (`${BASE_IMG_URL}${im?.file_path}`))} />
+                : <img style={{ width: "100%", maxHeight: "300px", objectFit: "cover" }} src={NO_IMG_URL_LANDSCAPE} alt="no-img" />
+              }
+
+              <div className='tv-overview' style={{ margin: '10px 0' }}>
                 {tvDetail?.overview}
               </div>
+
               <div>
                 {tvDetail?.seasons?.map((s, i) => (
                   <div key={i}>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom'
 import Moment from 'react-moment';
-import { BASE_IMG_URL, NO_IMG_URL } from "../apis/tmdb";
+import { BASE_IMG_URL, NO_IMG_URL, NO_IMG_URL_LANDSCAPE } from "../apis/tmdb";
 
 const MovieDetail = ({ movieDetail, providers }) => {
   const BASE_FLAG_URL = 'https://countryflagsapi.com/png/';
@@ -139,6 +139,10 @@ const MovieDetail = ({ movieDetail, providers }) => {
 
         <div style={{ display: loading ? "block" : "none" }}>
           <img
+            style={{
+              maxHeight: "256px",
+              objectFit: "cover"
+            }}
             src={BD_LOADING}
             width="100%"
             alt="loading" />
@@ -148,7 +152,7 @@ const MovieDetail = ({ movieDetail, providers }) => {
             className="detail-backdrop"
             alt={movieDetail.title}
             width="100%"
-            src={movieDetail.backdrop_path ? `${BASE_IMG_URL}${movieDetail.backdrop_path}` : "https://placekitten.com/458/305"}
+            src={movieDetail.backdrop_path ? `${BASE_IMG_URL}${movieDetail.backdrop_path}` : NO_IMG_URL_LANDSCAPE}
             onLoad={imageLoaded}
           />
         </div>

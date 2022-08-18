@@ -4,6 +4,7 @@ import MovieCard from "../components/MovieCard";
 import Transitions from "../components/Transition";
 import { motion, AnimatePresence } from 'framer-motion'
 import _ from "lodash";
+import { Link } from "react-router-dom";
 
 const Watched = () => {
   const { watched } = useContext(GlobalContext);
@@ -40,7 +41,9 @@ const Watched = () => {
             watched.length > 0 ? (
               watchedGroupByYear.map((wgby, i) => (
                 <div key={i}>
-                  <h3 className="sticky-thc">{wgby.year}</h3>
+                  <Link to={`/movie/year/${wgby.year}`}>
+                    <h3 className="sticky-thc">{wgby.year}</h3>
+                  </Link>
                   <motion.div layout className="movie-grid">
                     <AnimatePresence>
                       {wgby.data.map(movie => (

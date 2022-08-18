@@ -26,7 +26,7 @@ const TVCard = forwardRef(({ tv }, ref) => {
   try {
    const fetchedTvDetails = await tmdb.get(`tv/${id}`, {
     params: {
-     append_to_response: "credits,keywords",
+     append_to_response: "credits,keywords,images",
     }
    });
    setTvDetail(fetchedTvDetails.data);

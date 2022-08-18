@@ -18,7 +18,11 @@ const TVEpisode = ({ tvId, seasonId, episodeId }) => {
 
   const fetchTvEpisode = async (tvId, seasonId, episodeId) => {
     try {
-      const fetchData = await tmdb.get(`tv/${tvId}/season/${seasonId}/episode/${episodeId}`);
+      const fetchData = await tmdb.get(`tv/${tvId}/season/${seasonId}/episode/${episodeId}`, {
+        params: {
+          append_to_response: "images"
+        }
+      });
       setTvEpisode(fetchData.data)
     } catch (error) {
       console.log(error)
@@ -46,10 +50,6 @@ const TVEpisode = ({ tvId, seasonId, episodeId }) => {
   useEffect(() => {
     fetchTvEpisode(tvId, seasonId, episodeId);
   }, [tvId, seasonId, episodeId]);
-
-  useEffect(() => {
-    console.log(tvWatched)
-  })
 
   return (
     <div className='episode-detail'>

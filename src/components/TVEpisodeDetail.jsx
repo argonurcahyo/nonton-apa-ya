@@ -1,37 +1,39 @@
-import React from 'react'
-import { BASE_IMG_URL } from '../apis/tmdb'
+import React, { useEffect } from 'react'
+import { BASE_IMG_URL, NO_IMG_URL_LANDSCAPE } from '../apis/tmdb'
+import ImageSlider from './ImageSlider'
 
 const TVEpisodeDetail = ({ episode }) => {
- return (
-  episode && (
-   <>
-    <div
-     className="modal-header"
-     style={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-     }}
-    >
-     <span className="modal-episode-name">
-      S{episode?.season_number?.toString().padStart(2, "0")}E{episode?.episode_number?.toString().padStart(2, "0")}. {episode?.name}
-     </span>
-    </div>
-    {episode?.overview &&
-     <div className="modal-episode-overview" style={{ width: "100%" }}>
-      <div className="still-image">
-       <img
-        src={`${BASE_IMG_URL}${episode?.still_path}`}
-        alt={episode?.id}
-        style={{ width: "100%", borderRadius: "10px" }} />
-      </div>
+  useEffect(() => {
+    console.log(episode)
+  }, [episode]);
+  return (
+    episode && (
+      <>
+        <div
+          className="modal-header"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <span className="modal-episode-name">
+            S{episode?.season_number?.toString().padStart(2, "0")}E{episode?.episode_number?.toString().padStart(2, "0")}. {episode?.name}
+          </span>
+        </div>
+        {episode?.overview &&
+          <div className="modal-episode-overview" style={{ width: "100%" }}>
+            {episode?.images?.stills?.length > 0 ?
+              <ImageSlider images={episode?.images?.stills?.map(im => (`${BASE_IMG_URL}${im?.file_path}`))} />
+              : <img style={{ width: "100%", maxHeight: "300px", objectFit: "cover" }} src={NO_IMG_URL_LANDSCAPE} alt="no-img" />
+            }
 
-      {episode?.overview}
-     </div>
-    }
-   </>
+            {episode?.overview}
+          </div>
+        }
+      </>
+    )
   )
- )
 }
 
 export default TVEpisodeDetail

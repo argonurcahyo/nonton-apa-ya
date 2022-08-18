@@ -536,6 +536,8 @@ img.watched {
 img.detail-backdrop {
   border-radius: 10px;
   margin-top: 5px;
+  max-height: 500px;
+  object-fit: cover;
   box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
 }
 
@@ -1176,7 +1178,6 @@ header button {
 }
 
 .modal-episode-overview {
-  padding: .5rem;
   font-size: .8rem;
 }
 

@@ -17,7 +17,7 @@ const useCountryFetch = (country, pageNumber) => {
                 with_origin_country: country,
                 page: pageNumber,
                 sort_by: 'popularity.desc',
-                include_adult: 'true',
+                include_adult: 'false',
             },
             cancelToken: new axios.CancelToken(c => cancel = c)
         })

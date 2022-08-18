@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Moment from 'react-moment'
 import { Link } from 'react-router-dom';
-import { BASE_IMG_URL, BD_LOADING, NO_IMG_URL } from '../apis/tmdb';
+import { BASE_IMG_URL, BD_LOADING, NO_IMG_URL, NO_IMG_URL_LANDSCAPE } from '../apis/tmdb';
 
 const TVDetail = ({ tvDetail }) => {
   const [loading, setLoading] = useState(true);
@@ -107,7 +107,7 @@ const TVDetail = ({ tvDetail }) => {
             className="detail-backdrop"
             alt={tvDetail.name}
             width="100%"
-            src={tvDetail.backdrop_path ? `${BASE_IMG_URL}${tvDetail.backdrop_path}` : "https://placekitten.com/458/305"}
+            src={tvDetail.backdrop_path ? `${BASE_IMG_URL}${tvDetail.backdrop_path}` : NO_IMG_URL_LANDSCAPE}
             onLoad={imageLoaded}
           />
         </div>

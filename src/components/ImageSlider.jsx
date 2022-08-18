@@ -39,7 +39,7 @@ const ImageSlider = ({ images }) => {
      <img className='detail-backdrop' src={images[index]} alt={index} onLoad={imageLoaded} />
     </div>
     <div style={{ display: loading ? 'block' : 'none', width: "100%" }}>
-     <img style={{ objectFit: "cover", maxHeight: "450px" }} src={BD_LOADING} alt="loading" />
+     <img style={{ objectFit: "cover", maxHeight: "500px" }} src={BD_LOADING} alt="loading" />
     </div>
 
     <button className="image-slider-btn next" onClick={slideRight}>

@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import Moment from 'react-moment'
 import { Link, useParams } from 'react-router-dom'
-import tmdb, { BASE_IMG_URL, NO_IMG_URL, BASE_FLAG_URL } from '../apis/tmdb'
+import tmdb, { BASE_IMG_URL, NO_IMG_URL, BASE_FLAG_URL, NO_IMG_URL_LANDSCAPE } from '../apis/tmdb'
 import CollectionCard from '../components/CollectionCard'
 import ImageSlider from '../components/ImageSlider'
 // import MovieCard from '../components/MovieCard'
 import Transitions from '../components/Transition'
-import VideoSlider from '../components/VideoSlider'
 
 const Movie = () => {
   let { movieId } = useParams()
   const [movieDetail, setMovieDetail] = useState({})
-  const [similar, setSimilar] = useState([])
+  // const [similar, setSimilar] = useState([])
 
   const fetchMovieDetails = async (id) => {
     try {
@@ -28,19 +27,19 @@ const Movie = () => {
     }
   }
 
-  const fetchSimilar = async (id) => {
-    try {
-      const fetchData = await tmdb.get(`movie/${id}/recommendations`);
-      setSimilar(fetchData.data.results);
-    } catch (error) {
-      console.log(error)
-      setSimilar([])
-    }
-  }
+  // const fetchSimilar = async (id) => {
+  //   try {
+  //     const fetchData = await tmdb.get(`movie/${id}/recommendations`);
+  //     setSimilar(fetchData.data.results);
+  //   } catch (error) {
+  //     console.log(error)
+  //     setSimilar([])
+  //   }
+  // }
 
   useEffect(() => {
     fetchMovieDetails(movieId);
-    fetchSimilar(movieId)
+    // fetchSimilar(movieId)
   }, [movieId]);
 
   return (
@@ -154,14 +153,11 @@ const Movie = () => {
                   }
                 </div>
 
-                {movieDetail?.images?.backdrops && <ImageSlider images={movieDetail?.images?.backdrops?.map(im => (`${BASE_IMG_URL}${im?.file_path}`))} />}
+                {movieDetail?.images?.backdrops?.length > 0 ?
+                  <ImageSlider images={movieDetail?.images?.backdrops?.map(im => (`${BASE_IMG_URL}${im?.file_path}`))} />
+                  : <img style={{ width: "100%", maxHeight: "300px", objectFit: "cover" }} src={NO_IMG_URL_LANDSCAPE} alt="no-img" />
+                }
 
-                {/* <img
-                  className="detail-backdrop"
-                  width="100%"
-                  src={`${BASE_IMG_URL}${movieDetail?.backdrop_path}`}
-                  alt={movieDetail?.title}
-                /> */}
                 <div className="companies-row">
                   {movieDetail?.production_companies?.map((comp, i) => (
                     <div key={i} className="companies">
