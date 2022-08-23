@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import LoadingCard from '../components/LoadingCard';
 import MovieCard from '../components/MovieCard';
 import Transitions from '../components/Transition';
@@ -35,9 +35,25 @@ const MovieByYear = () => {
   <Transitions>
    <div className="movie-page">
     <div className="container">
-     {
-      <h3>{year}</h3>
-     }
+     <div style={{
+      display: "flex",
+      justifyContent: "space-between"
+     }}>
+      <button className="image-slider-btn">
+       <Link to={`/movie/year/${year - 1}`}>
+        <i className='fa fas fa-chevron-left'></i>
+        <span className='year-slider'>{year - 1}</span>
+       </Link>
+      </button>
+      <h1>{year}</h1>
+      <button className="image-slider-btn">
+       <Link to={`/movie/year/${parseInt(year) + 1}`}>
+        <span className='year-slider'>{parseInt(year) + 1}</span>
+        <i className='fa fas fa-chevron-right'></i>
+       </Link>
+      </button>
+     </div>
+
      {movies.length > 0 ? (
       <div className="movie-grid">
        {movies.map((movie, index) => (

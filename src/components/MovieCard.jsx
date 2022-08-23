@@ -85,8 +85,6 @@ const MovieCard = forwardRef(({ movie, type, index, showShortMovies = true, sync
           >
             <span>short movie</span>
           </div>
-
-
           {(type === "popular" || type === "search" || type === "collection") ?
             (isWatchlist ?
               (!loading && <div className="ribbon blue"><span>WATCHLIST</span></div>)
@@ -94,7 +92,6 @@ const MovieCard = forwardRef(({ movie, type, index, showShortMovies = true, sync
                 (!loading && <div className="ribbon red"><span>WATCHED</span></div>)
                 : <></>)
             : <></>}
-
           <div
             className="overlay"
             role="button"
@@ -103,12 +100,12 @@ const MovieCard = forwardRef(({ movie, type, index, showShortMovies = true, sync
             data-event-off='focusout'
             onClick={handleOpenModal}
           />
-
           <div style={{ display: loading ? "block" : "none" }}>
             <LoadingCard />
           </div>
-
-          <div style={{ display: loading ? "none" : "block" }}>
+          <div
+            style={{ display: loading ? "none" : "block" }}
+          >
             <img
               className={
                 (type === "popular" || type === "search") || type === "collection" ?

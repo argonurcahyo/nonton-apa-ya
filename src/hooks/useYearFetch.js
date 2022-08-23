@@ -17,7 +17,7 @@ const useYearFetch = (year, pageNumber) => {
                 primary_release_year: year,
                 page: pageNumber,
                 sort_by: 'popularity.desc',
-                include_adult: 'true',
+                include_adult: 'false',
             },
             cancelToken: new axios.CancelToken(c => cancel = c)
         })

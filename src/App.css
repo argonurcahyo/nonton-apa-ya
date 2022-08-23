@@ -787,7 +787,7 @@ body::-webkit-scrollbar {
   font-size: small;
   margin-top: 3px;
   padding: 0px 5px;
-  overflow-y: scroll;
+  overflow-y: auto;
   max-height: 10rem;
 }
 
@@ -1215,4 +1215,10 @@ header button {
   opacity: .6;
   border-radius: 8px;
   font-size: .7rem;
+}
+
+.year-slider {
+  color: gray;
+  font-size: .7rem;
+  margin: 0 .3rem;
 }

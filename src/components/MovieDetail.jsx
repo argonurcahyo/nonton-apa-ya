@@ -170,12 +170,16 @@ const MovieDetail = ({ movieDetail, providers }) => {
         )}
 
         {movieDetail.tagline && (
-          <div onClick={() => navigate(`/movie/${movieDetail.id}`)} className="tagline">
+          <div
+            onClick={() => navigate(`/movie/${movieDetail.id}`)}
+            className="tagline">
             <i><code>"{movieDetail.tagline}"</code></i>
           </div>
         )}
 
-        <p className="movie-overview">{movieDetail.overview}</p>
+        <p className="movie-overview">
+          {movieDetail.overview}
+        </p>
 
         {movieDetail && (
           <div className="cast-grid cast-box">
