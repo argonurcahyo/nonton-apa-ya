@@ -276,6 +276,7 @@ header .nav-links li:last-child {
   border-radius: 999px;
   color: var(--white);
   cursor: pointer;
+  margin-bottom: 2px;
 }
 
 .genre-pill:hover {

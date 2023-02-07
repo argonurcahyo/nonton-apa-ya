@@ -48,7 +48,7 @@ const MovieCard = forwardRef(({ movie, type, index, showShortMovies = true, sync
 
   const handleOpenModal = () => {
     setOpenModal(true);
-    console.log(movie);
+    // console.log(movie);
   };
   const handleCloseModal = () => setOpenModal(false);
   const imageLoaded = () => {
