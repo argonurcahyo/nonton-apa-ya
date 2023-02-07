@@ -46,9 +46,13 @@ const MovieDetail = ({ movieDetail, providers }) => {
               countries.map((c, i) => (
                 <div key={i} className='country-flag'>
                   <Link to={`/movie/country/${c.iso_3166_1}`}>
-                    <img
+                    {/* <img
                       src={c.iso_3166_1 ? `${BASE_FLAG_URL}${c.iso_3166_1.toLowerCase()}` : ""}
-                      alt={c.name} />
+                      alt={c.name} /> */}
+                    <img
+                      src={c.iso_3166_1 ? `https://flagsapi.com/${c.iso_3166_1}/shiny/64.png` : ""}
+                      alt={c.name}
+                    />
                   </Link>
                 </div>
               ))
