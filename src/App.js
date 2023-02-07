@@ -54,7 +54,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
-          <Route exact path="/" element={<Watchlist />} />
+          <Route exact path="/" element={<Popular />} />
           <Route exact path="/movie" element={<Watchlist />} />
           <Route exact path="/movie/watched" element={<Watched />} />
           <Route exact path="/movie/search" element={<Add />} />
