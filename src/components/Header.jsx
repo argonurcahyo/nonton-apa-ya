@@ -57,7 +57,7 @@ const Header = () => {
       </li>
       <li>
        <NavLink
-        to="/"
+        to="/movie/watchlist"
         className={({ isActive }) => isActive ? activeClassname : undefined}>
         <i className="fa fas fa-list"></i>
         {watchlist.length > 0 && (

@@ -55,7 +55,7 @@ function App() {
           <Route path="/register" element={<Register />} />
 
           <Route exact path="/" element={<Popular />} />
-          <Route exact path="/movie" element={<Watchlist />} />
+          <Route exact path="/movie/watchlist" element={<Watchlist />} />
           <Route exact path="/movie/watched" element={<Watched />} />
           <Route exact path="/movie/search" element={<Add />} />
           <Route exact path="/movie/popular" element={<Popular />} />
