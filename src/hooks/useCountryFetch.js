@@ -12,12 +12,12 @@ const useCountryFetch = (country, pageNumber) => {
         setLoading(true)
         setError(false)
         let cancel
-        tmdb.get(`discover/movie/`, {
+        tmdb.get(`discover/movie`, {
             params: {
                 with_origin_country: country,
                 page: pageNumber,
                 sort_by: 'popularity.desc',
-                include_adult: 'false',
+                // include_adult: 'false',
             },
             cancelToken: new axios.CancelToken(c => cancel = c)
         })

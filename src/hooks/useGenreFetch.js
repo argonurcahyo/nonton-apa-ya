@@ -12,12 +12,12 @@ const useGenreFetch = (genreId, pageNumber) => {
     setLoading(true)
     setError(false)
     let cancel
-    tmdb.get(`discover/movie/`, {
+    tmdb.get(`discover/movie`, {
       params: {
         with_genres: genreId,
         page: pageNumber,
         sort_by: 'popularity.desc',
-        include_adult: 'true',
+        // include_adult: 'true',
       },
       cancelToken: new axios.CancelToken(c => cancel = c)
     })

@@ -12,14 +12,14 @@ const useNetworkFetch = (network, pageNumber) => {
         setLoading(true)
         setError(false)
         let cancel
-        tmdb.get(`discover/movie/`, {
+        tmdb.get(`discover/movie`, {
             params: {
                 with_watch_providers: network,
                 watch_region: 'ID',
                 with_watch_monetization_types: 'flatrate',
                 page: pageNumber,
                 sort_by: 'popularity.desc',
-                include_adult: 'true',
+                // include_adult: 'true',
             },
             cancelToken: new axios.CancelToken(c => cancel = c)
         })

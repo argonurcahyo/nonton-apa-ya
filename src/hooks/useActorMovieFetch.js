@@ -12,13 +12,13 @@ const useActorMovieFetch = (id, pageNumber) => {
         setLoading(true)
         setError(false)
         let cancel
-        tmdb.get(`discover/movie/`, {
+        tmdb.get(`discover/movie`, {
             params: {
                 page: pageNumber,
                 with_cast: id,
                 sort_by: "primary_release_date.desc",
                 without_genres: "99, 10770",
-                include_adult: "true",
+                // include_adult: "true",
             },
             cancelToken: new axios.CancelToken(c => cancel = c)
         })

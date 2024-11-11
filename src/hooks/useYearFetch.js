@@ -12,12 +12,12 @@ const useYearFetch = (year, pageNumber) => {
         setLoading(true)
         setError(false)
         let cancel
-        tmdb.get(`discover/movie/`, {
+        tmdb.get(`discover/movie`, {
             params: {
                 primary_release_year: year,
                 page: pageNumber,
                 sort_by: 'popularity.desc',
-                include_adult: 'false',
+                // include_adult: 'false',
             },
             cancelToken: new axios.CancelToken(c => cancel = c)
         })

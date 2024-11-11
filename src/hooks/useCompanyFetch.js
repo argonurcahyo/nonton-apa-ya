@@ -12,9 +12,9 @@ const useCompanyFetch = (company, pageNumber) => {
         setLoading(true)
         setError(false)
         let cancel
-        tmdb.get(`discover/movie/`, {
+        tmdb.get(`discover/movie`, {
             params: {
-                include_adult: 'true',
+                // include_adult: 'true',
                 with_companies: company,
                 page: pageNumber,
                 sort_by: 'primary_release_date.desc'
