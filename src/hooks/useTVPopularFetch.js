@@ -12,7 +12,7 @@ const useTVPopularFetch = (pageNumber) => {
         setLoading(true)
         setError(false)
         let cancel
-        tmdb.get(`discover/tv/`, {
+        tmdb.get(`discover/tv`, {
             params: {
                 page: pageNumber,
                 sort_by: 'popularity.desc',

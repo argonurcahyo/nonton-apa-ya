@@ -12,11 +12,11 @@ const useTVKeywordFetch = (keyword, pageNumber) => {
         setLoading(true)
         setError(false)
         let cancel
-        tmdb.get(`discover/tv/`, {
+        tmdb.get(`discover/tv`, {
             params: {
                 page: pageNumber,
                 sort_by: 'popularity.desc',
-                include_adult: 'true',
+                // include_adult: 'true',
                 with_keywords: keyword
             },
             cancelToken: new axios.CancelToken(c => cancel = c)
