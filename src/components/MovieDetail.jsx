@@ -4,7 +4,6 @@ import Moment from 'react-moment';
 import { BASE_IMG_URL, NO_IMG_URL, NO_IMG_URL_LANDSCAPE } from "../apis/tmdb";
 
 const MovieDetail = ({ movieDetail, providers }) => {
-  const BASE_FLAG_URL = 'https://countryflagsapi.com/png/';
   const BD_LOADING = "https://i.pinimg.com/originals/3d/6a/a9/3d6aa9082f3c9e285df9970dc7b762ac.gif";
 
   const crews = movieDetail?.credits?.crew;
@@ -50,7 +49,7 @@ const MovieDetail = ({ movieDetail, providers }) => {
                       src={c.iso_3166_1 ? `${BASE_FLAG_URL}${c.iso_3166_1.toLowerCase()}` : ""}
                       alt={c.name} /> */}
                     <img
-                      src={c.iso_3166_1 ? `https://flagsapi.com/${c.iso_3166_1}/shiny/64.png` : ""}
+                      src={c.iso_3166_1 ? `https://flagsapi.com/${c.iso_3166_1}/flat/64.png` : ""}
                       alt={c.name}
                     />
                   </Link>

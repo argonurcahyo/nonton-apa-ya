@@ -65,7 +65,7 @@ const Movie = () => {
                       movieDetail?.production_countries?.map((c, i) => (
                         <div key={i} className='country-flag'>
                           <img
-                            src={c?.iso_3166_1 ? `${BASE_FLAG_URL}${c?.iso_3166_1.toLowerCase()}` : ""}
+                            src={c?.iso_3166_1 ? `${BASE_FLAG_URL}${c?.iso_3166_1}/flat/64.png` : ""}
                             alt={c?.name} />
                         </div>
                       ))
