@@ -1,9 +1,9 @@
 import React from "react";
-import "./App.css";
 import "./lib/fontawesome6/css/all.min.css";
 import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { GlobalProvider } from "./context/GlobalState";
+import { ThemeProvider } from "./context/ThemeContext";
 import Header from "./components/Header";
 import Watchlist from "./pages/Watchlist";
 import Watched from "./pages/Watched";
@@ -36,21 +36,22 @@ function App() {
   useTitle("NontonApaYa");
 
   return (
-    <GlobalProvider>
-      <Router>
-        <Header />
-        <ToastContainer
-          position="bottom-right"
-          autoClose={2000}
-          hideProgressBar={true}
-          newestOnTop={true}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="dark" />
-        <Routes>
+    <ThemeProvider>
+      <GlobalProvider>
+        <Router>
+          <Header />
+          <ToastContainer
+            position="bottom-right"
+            autoClose={2000}
+            hideProgressBar={true}
+            newestOnTop={true}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark" />
+          <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
@@ -85,8 +86,9 @@ function App() {
           <Route path="*" element={<NotFound />} />
 
         </Routes>
-      </Router>
-    </GlobalProvider>
+        </Router>
+      </GlobalProvider>
+    </ThemeProvider>
   );
 }
 

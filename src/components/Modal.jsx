@@ -1,51 +1,54 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-
-const MODAL_STYLES2 = {
- backgroundColor: '#ffffff',
- padding: '0',
- borderRadius: '15px',
- position: 'fixed',
- top: "10%",
- left: "40%",
- right: "auto",
- bottom: "auto",
- maxHeight: "calc(100vh-2rem)",
- maxWidth: "600px",
- transform: "translate(-40%, -10%)",
- zIndex: 1000
-}
-
-const OVERLAY_STYLES = {
- position: 'fixed',
- top: 0,
- left: 0,
- right: 0,
- bottom: 0,
- backgroundColor: 'rgba(0,0,0,.7)',
- zIndex: 1000,
- transition: "all 500ms ease-in -out"
-}
+import { motion, AnimatePresence } from 'framer-motion'
 
 const Modal = ({ open, children, onClose }) => {
  if (!open) return null;
 
  return ReactDom.createPortal(
-  <div className="modal">
-   <div className="modal-overlay" onClick={onClose} style={OVERLAY_STYLES} />
-   <div className="modal-container" style={MODAL_STYLES2}>
-    <div style={{ marginBottom: "10px" }}>
-     <span
-      className='modal-close'
-      onClick={onClose}>
-      CLOSE
-     </span>
-    </div>
-    <div className="modal-content">
-     {children}
-    </div>
-   </div>
-  </div>,
+  <AnimatePresence>
+   {open && (
+    <motion.div 
+     initial={{ opacity: 0 }}
+     animate={{ opacity: 1 }}
+     exit={{ opacity: 0 }}
+     className="fixed inset-0 z-50 flex items-center justify-center"
+    >
+     {/* Overlay */}
+     <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={onClose}
+      className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+     />
+     
+     {/* Modal Content */}
+     <motion.div
+      initial={{ opacity: 0, scale: 0.95, y: 20 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.95, y: 20 }}
+      transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+      className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-h-[90vh] w-11/12 max-w-4xl overflow-y-auto custom-scrollbar"
+     >
+      {/* Close Button */}
+      <motion.button
+       whileHover={{ scale: 1.1 }}
+       whileTap={{ scale: 0.95 }}
+       onClick={onClose}
+       className="absolute top-4 right-4 z-10 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-600 dark:text-gray-300 rounded-full w-10 h-10 flex items-center justify-center transition-colors"
+      >
+       <i className="fa-solid fa-times text-lg"></i>
+      </motion.button>
+
+      {/* Modal Body */}
+      <div className="p-6 md:p-8">
+       {children}
+      </div>
+     </motion.div>
+    </motion.div>
+   )}
+  </AnimatePresence>,
   document.getElementById('portal')
  )
 }

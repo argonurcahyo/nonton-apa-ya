@@ -3,18 +3,10 @@ import AppReducer from "./AppReducer";
 import { ACTIONS } from "./AppReducer";
 import nonton from '../apis/nonton'
 import { toast } from 'react-toastify'
+import { loadInitialState, persistState } from '../utils/storageHelper'
+import { extractMovieData, extractEpisodeData, getYear } from '../utils/dataTransformer'
 
-const initialState = {
-  watchlist: localStorage.getItem("watchlist")
-    ? JSON.parse(localStorage.getItem("watchlist"))
-    : [],
-  watched: localStorage.getItem("watched")
-    ? JSON.parse(localStorage.getItem("watched"))
-    : [],
-  tvWatched: localStorage.getItem("tvWatched")
-    ? JSON.parse(localStorage.getItem("tvWatched"))
-    : []
-};
+const initialState = loadInitialState();
 
 export const GlobalContext = createContext(initialState);
 
@@ -22,38 +14,17 @@ export const GlobalProvider = (props) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
   useEffect(() => {
-    localStorage.setItem("watchlist", JSON.stringify(state.watchlist));
-    localStorage.setItem("watched", JSON.stringify(state.watched));
-    localStorage.setItem("tvWatched", JSON.stringify(state.tvWatched));
+    persistState(state);
   }, [state]);
 
   const postMovieToWatchlist = async (movie) => {
-    const newData = {
-      id: movie.id,
-      title: movie.title,
-      overview: movie.overview,
-      genre_ids: movie.genre_ids,
-      release_date: movie.release_date,
-      vote_average: movie.vote_average,
-      poster_path: movie.poster_path,
-      backdrop_path: movie.backdrop_path
-    }
-    const res = await nonton.post('/watchlist/movie', newData)
+    const res = await nonton.post('/watchlist/movie', extractMovieData(movie))
     console.log(res.data)
     return res.data
   }
+
   const postMovieToWatched = async (movie) => {
-    const newData = {
-      id: movie.id,
-      title: movie.title,
-      overview: movie.overview,
-      genre_ids: movie.genre_ids,
-      release_date: movie.release_date,
-      vote_average: movie.vote_average,
-      poster_path: movie.poster_path,
-      backdrop_path: movie.backdrop_path
-    }
-    const res = await nonton.post('/watched/movie', newData)
+    const res = await nonton.post('/watched/movie', extractMovieData(movie))
     console.log(res.data)
     return res.data
   }
@@ -70,29 +41,38 @@ export const GlobalProvider = (props) => {
   }
 
   const addMovieToWatchlist = (movie) => {
-    toast.success(`You added ${movie?.title} (${movie.release_date.substr(0, 4)}) to watchlist!!`)
+    const year = getYear(movie.release_date)
+    toast.success(`You added ${movie?.title} (${year}) to watchlist!!`)
     postMovieToWatchlist(movie)
     dispatch({ type: ACTIONS.ADD_MOVIE_TO_WATCHLIST, payload: movie });
   };
+
   const removeMovieFromWatchlist = (movie) => {
-    toast.success(`You removed ${movie?.title} (${movie.release_date.substr(0, 4)}) from watchlist!!`)
+    const year = getYear(movie.release_date)
+    toast.success(`You removed ${movie?.title} (${year}) from watchlist!!`)
     deleteMovieFromWatchlist(movie.id)
     dispatch({ type: ACTIONS.REMOVE_MOVIE_FROM_WATCHLIST, payload: movie });
   };
+
   const addMovieToWatched = (movie) => {
-    toast.success(`You've watched ${movie?.title} (${movie.release_date.substr(0, 4)})`)
+    const year = getYear(movie.release_date)
+    toast.success(`You've watched ${movie?.title} (${year})`)
     deleteMovieFromWatchlist(movie.id)
     postMovieToWatched(movie)
     dispatch({ type: ACTIONS.ADD_MOVIE_TO_WATCHED, payload: movie });
   };
+
   const moveToWatchlist = (movie) => {
-    toast.info(`You moved ${movie?.title} (${movie.release_date.substr(0, 4)}) to watchlist!!`)
+    const year = getYear(movie.release_date)
+    toast.info(`You moved ${movie?.title} (${year}) to watchlist!!`)
     deleteMovieFromWatched(movie.id)
     postMovieToWatchlist(movie)
     dispatch({ type: ACTIONS.MOVE_TO_WATCHLIST, payload: movie });
   };
+
   const removeFromWatched = (movie) => {
-    toast.info(`You've not watched ${movie?.title} (${movie.release_date.substr(0, 4)})`)
+    const year = getYear(movie.release_date)
+    toast.info(`You've not watched ${movie?.title} (${year})`)
     deleteMovieFromWatched(movie.id)
     dispatch({ type: ACTIONS.REMOVE_FROM_WATCHED, payload: movie });
   };

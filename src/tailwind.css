@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=Source+Sans+Pro:wght@300;400;600;700;900&display=swap');
+
+/* Custom base styles */
+@layer base {
+  body {
+    @apply bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300;
+  }
+  
+  * {
+    @apply transition-colors duration-200;
+  }
+
+  /* Global scrollbar styling for all browsers */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(34, 197, 94) rgb(15, 23, 42);
+  }
+
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: rgb(15, 23, 42);
+    border-radius: 10px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgb(34, 197, 94) 0%, rgb(22, 163, 74) 100%);
+    border-radius: 10px;
+    border: 2px solid rgb(15, 23, 42);
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, rgb(22, 163, 74) 0%, rgb(21, 128, 61) 100%);
+  }
+
+  *::-webkit-scrollbar-corner {
+    background: rgb(15, 23, 42);
+  }
+
+  /* Light mode scrollbar */
+  html:not(.dark) * {
+    scrollbar-color: rgb(34, 197, 94) rgb(241, 245, 249);
+  }
+
+  html:not(.dark) *::-webkit-scrollbar-track {
+    background: rgb(241, 245, 249);
+  }
+
+  html:not(.dark) *::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgb(34, 197, 94) 0%, rgb(22, 163, 74) 100%);
+    border-color: rgb(241, 245, 249);
+  }
+
+  html:not(.dark) *::-webkit-scrollbar-corner {
+    background: rgb(241, 245, 249);
+  }
+}
+
+/* Custom component styles */
+@layer components {
+  .card {
+    @apply bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300;
+  }
+  
+  .btn-primary {
+    @apply bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 font-semibold px-6 py-3 rounded-lg transition-all duration-300;
+  }
+  
+  .input-field {
+    @apply bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 rounded-lg px-4 py-3 focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all;
+  }
+  
+  .nav-link {
+    @apply text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors duration-200 flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800;
+  }
+  
+  .nav-link-active {
+    @apply text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/30 font-semibold;
+  }
+}
+
+/* Custom utilities */
+@layer utilities {
+  .glass {
+    @apply backdrop-blur-md bg-white/10 dark:bg-gray-900/10;
+  }
+  
+  .gradient-primary {
+    @apply bg-gradient-to-r from-green-500 via-emerald-600 to-lime-500;
+  }
+  
+  .gradient-secondary {
+    @apply bg-gradient-to-r from-yellow-400 via-amber-500 to-lime-500;
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+  }
+
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(34, 197, 94) transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-green-500 rounded-full hover:bg-green-600;
+  }
+}

@@ -8,29 +8,36 @@ const MovieControls = ({ type, movie, sync }) => {
     removeMovieFromWatchlist,
     moveToWatchlist,
     removeFromWatched,
+    watchlist,
+    watched
   } = useContext(GlobalContext);
 
+  const isWatchlist = !!watchlist.find((o) => o.id === movie.id);
+  const isWatched = !!watched.find((o) => o.id === movie.id);
+
   return (
-    <div className="inner-card-controls">
+    <div className="flex gap-2">
       {type === "watchlist" && (
         <>
           <button
-            className="ctrl-btn"
+            className="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-sm px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 shadow-sm hover:shadow-md"
             onClick={() => {
               addMovieToWatched(movie)
               if (sync) sync()
             }}
           >
-            <i className="fa-fw far fa-eye"></i>
+            <i className="fa-solid fa-eye"></i>
+            <span>Watched</span>
           </button>
           <button
-            className="ctrl-btn"
+            className="bg-slate-200 dark:bg-slate-700 hover:bg-red-500 dark:hover:bg-red-600 text-slate-700 dark:text-slate-300 hover:text-white font-semibold text-sm px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-center shadow-sm hover:shadow-md"
             onClick={() => {
               removeMovieFromWatchlist(movie)
               if (sync) sync()
             }}
+            title="Remove from Watchlist"
           >
-            <i className="fa-fw fa fa-times"></i>
+            <i className="fa-solid fa-times"></i>
           </button>
         </>
       )}
@@ -38,45 +45,82 @@ const MovieControls = ({ type, movie, sync }) => {
       {type === "watched" && (
         <>
           <button
-            className="ctrl-btn"
+            className="flex-1 bg-blue-500 hover:bg-blue-600 text-white font-semibold text-sm px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 shadow-sm hover:shadow-md"
             onClick={() => {
               moveToWatchlist(movie)
               if (sync) sync()
             }}
           >
-            <i className="fa-fw far fa-eye-slash"></i>
+            <i className="fa-solid fa-bookmark"></i>
+            <span>To Watchlist</span>
           </button>
           <button
-            className="ctrl-btn"
+            className="bg-slate-200 dark:bg-slate-700 hover:bg-red-500 dark:hover:bg-red-600 text-slate-700 dark:text-slate-300 hover:text-white font-semibold text-sm px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-center shadow-sm hover:shadow-md"
             onClick={() => {
               removeFromWatched(movie)
               if (sync) sync()
             }}
+            title="Remove from Watched"
           >
-            <i className="fa-fw fa fa-times"></i>
+            <i className="fa-solid fa-times"></i>
           </button>
         </>
       )}
 
       {(type === "search" || type === "popular" || type === "collection") && (
         <>
-          <button className="ctrl-btn" onClick={() => {
-            addMovieToWatchlist(movie)
-            if (sync) sync()
-          }}>
-            <i className="fa-fw far fa-plus"></i>
-          </button>
-          <button className="ctrl-btn" onClick={() => {
-            // addMovieToWatchlist(movie);
-            addMovieToWatched(movie);
-            if (sync) sync()
-          }}>
-            <i className="fa-fw far fa-eye"></i>
-          </button>
+          {/* Show Remove button if already in watchlist */}
+          {isWatchlist ? (
+            <button 
+              className="flex-1 bg-red-500 hover:bg-red-600 text-white font-semibold text-sm px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 shadow-sm hover:shadow-md"
+              onClick={() => {
+                removeMovieFromWatchlist(movie)
+                if (sync) sync()
+              }}
+            >
+              <i className="fa-solid fa-bookmark-slash"></i>
+              <span>Remove</span>
+            </button>
+          ) : (
+            <button 
+              className="flex-1 bg-blue-500 hover:bg-blue-600 text-white font-semibold text-sm px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 shadow-sm hover:shadow-md"
+              onClick={() => {
+                addMovieToWatchlist(movie)
+                if (sync) sync()
+              }}
+            >
+              <i className="fa-solid fa-bookmark"></i>
+              <span>Watchlist</span>
+            </button>
+          )}
+
+          {/* Show Remove button if already watched */}
+          {isWatched ? (
+            <button 
+              className="flex-1 bg-red-500 hover:bg-red-600 text-white font-semibold text-sm px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 shadow-sm hover:shadow-md"
+              onClick={() => {
+                removeFromWatched(movie)
+                if (sync) sync()
+              }}
+            >
+              <i className="fa-solid fa-eye-slash"></i>
+              <span>Remove</span>
+            </button>
+          ) : (
+            <button 
+              className="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-sm px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 shadow-sm hover:shadow-md"
+              onClick={() => {
+                addMovieToWatched(movie)
+                if (sync) sync()
+              }}
+            >
+              <i className="fa-solid fa-eye"></i>
+              <span>Watched</span>
+            </button>
+          )}
         </>
-      )
-      }
-    </div >
+      )}
+    </div>
   );
 };
 

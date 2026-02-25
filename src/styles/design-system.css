@@ -1,0 +1,221 @@
+/**
+ * Centralized Design System Variables
+ * Single source of truth for spacing, sizing, typography
+ */
+
+:root {
+  /* === COLOR PALETTE === */
+  --primary: #032541;
+  --secondary: #21d07a;
+  --white: #fff;
+  --text-light: #c4c4c4;
+  --border-dark: #BBB;
+  --bg-light: #f1f1f1;
+  
+  /* Status Colors */
+  --watchlist: #2989d8;
+  --watched: #F70505;
+  --cancelled: #ff1515;
+  --returning: #2788d8;
+  --ended: #03003e;
+  --rotten: #ff1414;
+  --good: #efd518;
+  --fresh: #21d07a;
+  
+  /* === SPACING SCALE === */
+  --space-xs: 3px;
+  --space-sm: 5px;
+  --space-md: 10px;
+  --space-lg: 15px;
+  --space-xl: 20px;
+  --space-2xl: 30px;
+  --space-3xl: 50px;
+  
+  /* === TYPOGRAPHY === */
+  --font-primary: "Source Sans Pro", "Poppins", "Inter", sans-serif;
+  --font-size-xs: xx-small;
+  --font-size-sm: small;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: larger;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extra-bold: 900;
+  
+  /* === SIZING === */
+  --size-xs: 20px;
+  --size-sm: 40px;
+  --size-md: 75px;
+  --size-lg: 80px;
+  --size-xl: 100px;
+  
+  /* === BORDER & RADIUS === */
+  --border-radius-sm: 5px;
+  --border-radius-md: 10px;
+  --border-radius-lg: 15px;
+  --border-radius-full: 999px;
+  --border-width: 1px;
+  --border-width-thick: 2px;
+  --border-width-thicker: 3px;
+  
+  /* === SHADOWS === */
+  --shadow-sm: 0 3px 10px -5px rgba(0, 0, 0, 1);
+  
+  /* === TRANSITIONS === */
+  --transition-fast: 0.3s ease;
+  --transition-normal: 0.4s ease;
+  --transition-animation: 1.5s shine linear infinite;
+  
+  /* === Z-INDEX === */
+  --z-header: 99;
+  --z-sticky: 999;
+  --z-modal: 1000;
+}
+
+/* === UTILITY MIXINS / REUSABLE CLASSES === */
+
+.container {
+  padding-right: var(--space-lg);
+  padding-left: var(--space-lg);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.box-shadow-sm {
+  box-shadow: var(--shadow-sm);
+}
+
+.rounded-sm {
+  border-radius: var(--border-radius-sm);
+}
+
+.rounded-md {
+  border-radius: var(--border-radius-md);
+}
+
+.rounded-lg {
+  border-radius: var(--border-radius-lg);
+}
+
+.rounded-full {
+  border-radius: var(--border-radius-full);
+}
+
+.transition-fast {
+  transition: all var(--transition-fast);
+}
+
+.text-muted {
+  color: var(--text-light);
+}
+
+.text-secondary-color {
+  color: var(--secondary);
+}
+
+.text-white {
+  color: var(--white);
+}
+
+.text-primary-color {
+  color: var(--primary);
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.grid-gap {
+  grid-gap: var(--space-md);
+}
+
+.overflow-auto-y {
+  overflow-y: auto;
+}
+
+/* Status Badge Mixin */
+.status-badge {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--border-radius-lg);
+  border: var(--border-width) solid var(--primary);
+  color: var(--primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.status-badge.returning {
+  background-color: var(--returning);
+  color: var(--white);
+  border-color: var(--returning);
+}
+
+.status-badge.canceled {
+  background-color: var(--cancelled);
+  color: var(--white);
+  border-color: var(--cancelled);
+}
+
+.status-badge.ended {
+  background-color: var(--ended);
+  color: var(--white);
+  border-color: var(--ended);
+}
+
+/* Pill Badge Mixin */
+.pill-badge {
+  display: inline-block;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--border-radius-full);
+  font-weight: var(--font-weight-semibold);
+  box-shadow: var(--shadow-sm);
+}
+
+.pill-badge-primary {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+.pill-badge-secondary {
+  background-color: var(--secondary);
+  color: var(--primary);
+}
+
+/* Card Mixin */
+.card {
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-fast);
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+/* Button Mixin */
+.btn-base {
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--border-radius-sm);
+  border: none;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  transition: var(--transition-fast);
+  cursor: pointer;
+  line-height: 1.1;
+}
+
+.btn-base:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}

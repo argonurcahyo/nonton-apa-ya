@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState, useRef } from 'react'
 import { useParams } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import tmdb from '../apis/tmdb'
 import Transitions from '../components/Transition'
 import useCompanyFetch from '../hooks/useCompanyFetch'
@@ -50,51 +51,91 @@ const MovieByCompany = () => {
     fetchCompany(id)
   }, [id])
 
-  return (
+   return (
     <Transitions>
-      <div className="movie-page">
-        <div className="container">
-          {/* <h1>{company.name}</h1> */}
-          <div style={{
-            marginBottom: "20px",
-            padding: "20px",
-            display: "flex",
-            justifyContent: "center"
-          }}>
-            <img
-              style={{ width: "100%" }}
-              src={`${BASE_IMG_URL}${company?.logo_path}`}
-              alt={company.name} />
-          </div>
-          <div style={{ position: 'sticky', top: '70px', zIndex: '1000' }}>
-            <button className='btn' onClick={handleClick}>
-              {showShortMovies ? 'Hide' : 'Show'} Short
+      <main className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 md:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-10"
+          >
+            <div className="flex items-center gap-4 mb-4">
+              {company?.logo_path && (
+                <div className="w-20 h-20 rounded-2xl bg-white dark:bg-slate-800 p-4 shadow-sm border border-slate-200 dark:border-slate-700">
+                  <img
+                    className="w-full h-full object-contain"
+                    src={`${BASE_IMG_URL}${company?.logo_path}`}
+                    alt={company.name}
+                  />
+                </div>
+              )}
+              <div>
+                <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">
+                  <span className="gradient-primary text-gradient">
+                    {company?.name || 'Company'}
+                  </span>
+                </h1>
+                <p className="text-gray-600 dark:text-gray-400 mt-1">
+                  Movies from this studio
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
+          <div className="sticky top-20 z-10 mb-6">
+            <button
+              className="bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 px-4 py-2 rounded-lg shadow-sm hover:shadow-md transition-all text-sm font-semibold"
+              onClick={handleClick}
+            >
+              {showShortMovies ? 'Hide' : 'Show'} Short Movies
             </button>
-          </div><br />
+          </div>
 
           {movies.length > 0 ? (
-            <div className="movie-grid">
-              {movies.map((movie, index) => (
-                <MovieCard
-                  ref={lastGridElementRef}
-                  movie={movie}
-                  index={index}
-                  key={movie.id}
-                  type="search"
-                  showShortMovies={showShortMovies}
-                />
-              ))}
-              {loading && <LoadingCard />}
-            </div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 pb-8">
+                {movies.map((movie, index) => (
+                  <motion.div
+                    key={movie.id}
+                    ref={index === movies.length - 1 ? lastGridElementRef : null}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                  >
+                    <MovieCard
+                      movie={movie}
+                      index={index}
+                      type="search"
+                      showShortMovies={showShortMovies}
+                    />
+                  </motion.div>
+                ))}
+              </div>
+
+              {loading && (
+                <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+                  {[...Array(4)].map((_, i) => (
+                    <LoadingCard key={`loading-${i}`} />
+                  ))}
+                </div>
+              )}
+            </motion.div>
           ) : (
-            <h2 className="no-movies">No movies!! Get some!</h2>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+              <p className="text-gray-600 dark:text-gray-400">No movies found.</p>
+            </motion.div>
           )}
-          {error && <>Error...</>}
+          {error && <p className="text-red-500 mt-4">Error loading movies.</p>}
         </div>
-      </div>
+      </main>
     </Transitions>
 
-  )
+   )
 }
 
 export default MovieByCompany
