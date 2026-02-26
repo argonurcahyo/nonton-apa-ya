@@ -6,6 +6,7 @@ import TVDetail from './TVDetail';
 import OriginCountry from './OriginCountry';
 import LoadingCard from './LoadingCard';
 import { GlobalContext } from '../context/GlobalState';
+import { handleImageError } from "../utils/imageFallback";
 
 const TVCard = forwardRef(({ tv }, ref) => {
   const { tvWatched } = useContext(GlobalContext);
@@ -76,6 +77,7 @@ const TVCard = forwardRef(({ tv }, ref) => {
               src={displayPoster ? `${BASE_IMG_URL}${displayPoster}` : NO_IMG_URL}
               alt={displayTitle}
               onLoad={imageLoaded}
+              onError={(e) => handleImageError(e, 'POSTER')}
               className={`w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 cursor-pointer ${
                 loading ? 'opacity-0' : 'opacity-100'
               }`}

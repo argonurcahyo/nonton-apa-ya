@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Transitions from '../components/Transition';
 import tmdb from '../apis/tmdb';
@@ -8,6 +8,10 @@ const TVSearch = () => {
  const [query, setQuery] = useState("");
  const [results, setResults] = useState([]);
  const [isSearching, setIsSearching] = useState(false);
+
+ useEffect(() => {
+  document.title = "Search TV Series | NontonApaYa";
+ }, []);
 
  const onChange = (e) => {
   e.preventDefault();

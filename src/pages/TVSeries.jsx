@@ -50,6 +50,12 @@ const TVSeries = () => {
     window.scrollTo(0, 0);
   }, [id]);
 
+  useEffect(() => {
+    if (tvDetail?.name) {
+      document.title = `${tvDetail.name} | NontonApaYa`;
+    }
+  }, [tvDetail]);
+
   if (loading) {
     return (
       <Transitions>

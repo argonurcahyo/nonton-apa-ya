@@ -9,6 +9,10 @@ const Upcoming = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    document.title = "Upcoming Movies | NontonApaYa";
+  }, []);
+
+  useEffect(() => {
     const fetchUpcomingMovies = async () => {
       try {
         setLoading(true);

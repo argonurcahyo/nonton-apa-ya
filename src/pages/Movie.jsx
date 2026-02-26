@@ -7,6 +7,7 @@ import CollectionCard from '../components/CollectionCard';
 import ImageSlider from '../components/ImageSlider';
 import VideoSlider from '../components/VideoSlider';
 import Transitions from '../components/Transition';
+import { handleImageError } from '../utils/imageFallback';
 
 const Movie = () => {
   let { movieId } = useParams();
@@ -35,6 +36,12 @@ const Movie = () => {
     // Scroll to top on load
     window.scrollTo(0, 0);
   },[movieId]);
+
+  useEffect(() => {
+    if (movieDetail?.title) {
+      document.title = `${movieDetail.title} | NontonApaYa`;
+    }
+  }, [movieDetail]);
 
   if (loading) {
     return (
@@ -70,6 +77,7 @@ const Movie = () => {
             src={movieDetail.backdrop_path ? `${BASE_IMG_URL}${movieDetail.backdrop_path}` : NO_IMG_URL_LANDSCAPE}
             alt={movieDetail.title}
             className="w-full h-full object-cover opacity-60"
+            onError={(e) => handleImageError(e, 'BACKDROP')}
           />
           {/* Gradient to blend image into background */}
           <div className="absolute inset-0 bg-gradient-to-t from-slate-50 dark:from-slate-900 via-slate-900/40 to-transparent"></div>
@@ -91,6 +99,7 @@ const Movie = () => {
                 src={movieDetail.poster_path ? `${BASE_IMG_URL}${movieDetail.poster_path}` : NO_IMG_URL}
                 alt={movieDetail.title}
                 className="w-full h-full object-cover"
+                onError={(e) => handleImageError(e, 'POSTER')}
               />
             </motion.div>
 
@@ -123,10 +132,12 @@ const Movie = () => {
                   </div>
                 )}
                 {movieDetail.release_date && (
-                  <div className="flex items-center gap-1.5 bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg font-semibold">
-                    <i className="fa-regular fa-calendar text-emerald-500"></i>
-                    <Moment format="MMM Do, YYYY">{movieDetail.release_date}</Moment>
-                  </div>
+                  <Link to={`/movie/year/${new Date(movieDetail.release_date).getFullYear()}`}>
+                    <div className="flex items-center gap-1.5 bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg font-semibold hover:bg-emerald-500 hover:text-white transition-colors cursor-pointer">
+                      <i className="fa-regular fa-calendar text-emerald-500"></i>
+                      <Moment format="MMM Do, YYYY">{movieDetail.release_date}</Moment>
+                    </div>
+                  </Link>
                 )}
                 {movieDetail.runtime > 0 && (
                   <div className="flex items-center gap-1.5 bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg font-semibold">
@@ -183,6 +194,7 @@ const Movie = () => {
                             alt={c.name}
                             src={c.profile_path ? `${BASE_IMG_URL}${c.profile_path}` : NO_IMG_URL}
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            onError={(e) => handleImageError(e, 'PROFILE')}
                           />
                           <div className="absolute inset-0 border-2 border-transparent group-hover:border-emerald-500 rounded-xl transition-colors"></div>
                         </div>

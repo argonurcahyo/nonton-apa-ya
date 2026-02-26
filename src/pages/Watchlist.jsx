@@ -15,6 +15,10 @@ const Watchlist = () => {
   const [watchlistGroupByYear, setWatchlistGroupByYear] = useState([])
 
   useEffect(() => {
+    document.title = "My Watchlist | NontonApaYa";
+  }, []);
+
+  useEffect(() => {
     const wgby = _(watchlist)
       .groupBy(w => parseInt(w.release_date))
       .map((items, year) => ({ year: year, data: items }))

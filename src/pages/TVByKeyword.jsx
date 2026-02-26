@@ -45,6 +45,12 @@ const TVByKeyword = () => {
   setPageNumber(1)
  }, [id]);
 
+ useEffect(() => {
+  if (keyword?.name) {
+   document.title = `${keyword.name} TV Shows | NontonApaYa`;
+  }
+ }, [keyword]);
+
  return (
   <Transitions>
    <main className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 md:py-16">

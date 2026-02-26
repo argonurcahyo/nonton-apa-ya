@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import tmdb from "../apis/tmdb";
 import MovieCard from "../components/MovieCard";
@@ -8,6 +8,10 @@ const Add = () => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
+
+  useEffect(() => {
+    document.title = "Search Movies | NontonApaYa";
+  }, []);
 
   const fetchMovies = async (q) => {
     if (!q.trim()) {

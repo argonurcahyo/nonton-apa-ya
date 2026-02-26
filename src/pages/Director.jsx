@@ -40,6 +40,12 @@ const Director = () => {
     fetchDirectorBio(id)
   }, [id])
 
+  useEffect(() => {
+    if (directorBio?.name) {
+      document.title = `${directorBio.name} - Director | NontonApaYa`;
+    }
+  }, [directorBio]);
+
   return (
     <Transitions>
       <div className="movie-page">

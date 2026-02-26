@@ -27,6 +27,10 @@ const Sync = () => {
   }
 
   useEffect(() => {
+    document.title = "Sync Data | NontonApaYa";
+  }, []);
+
+  useEffect(() => {
     getWatchlistFromAPI()
     getWatchedFromAPI()
   }, [wfapi])

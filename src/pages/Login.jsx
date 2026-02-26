@@ -1,5 +1,5 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 
@@ -9,6 +9,10 @@ const Login = () => {
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState('');
     const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        document.title = "Login | NontonApaYa";
+    }, []);
 
     const handleSubmit = async (event) => {
         event.preventDefault();

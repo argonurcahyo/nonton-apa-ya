@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import { motion } from "framer-motion";
 import Transitions from '../components/Transition';
 import usePopularFetch from "../hooks/usePopularFetch"
@@ -7,6 +7,10 @@ import LoadingCard from "../components/LoadingCard";
 
 const Popular = () => {
   const [pageNumber, setPageNumber] = useState(1)
+
+  useEffect(() => {
+    document.title = "Popular Movies | NontonApaYa";
+  }, []);
 
   const {
     hasMore, loading, error, movies

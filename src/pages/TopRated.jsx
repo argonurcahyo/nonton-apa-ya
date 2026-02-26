@@ -9,6 +9,10 @@ const TopRated = () => {
  const [loading, setLoading] = useState(true);
 
  useEffect(() => {
+  document.title = "Top Rated Movies | NontonApaYa";
+ }, []);
+
+ useEffect(() => {
   const fetchTopRatedMovies = async () => {
    try {
     setLoading(true);

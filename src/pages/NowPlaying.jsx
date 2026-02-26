@@ -12,6 +12,10 @@ const NowPlaying = () => {
   const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
+    document.title = "Now Playing | NontonApaYa";
+  }, []);
+
+  useEffect(() => {
     const fetchNowPlayingMovies = async () => {
       try {
         setLoading(true);

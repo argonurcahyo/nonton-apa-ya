@@ -12,6 +12,10 @@ const Watched = () => {
   const [watchedGroupByYear, setWatchedGroupByYear] = useState([])
 
   useEffect(() => {
+    document.title = "Watched Movies | NontonApaYa";
+  }, []);
+
+  useEffect(() => {
     const wgby = _(watched)
       .groupBy(w => parseInt(w.release_date))
       .map((items, year) => ({ year: year, data: items }))

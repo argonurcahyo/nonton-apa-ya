@@ -55,10 +55,12 @@ export const extractEpisodeData = (episode) => {
  */
 export const getYear = (date) => date?.substring(0, 4) || 'N/A'
 
-export default {
+const dataTransformer = {
   extractMovieData,
   extractEpisodeData,
   getYear,
   MOVIE_FIELDS,
   EPISODE_FIELDS
 }
+
+export default dataTransformer

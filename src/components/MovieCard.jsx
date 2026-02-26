@@ -7,6 +7,7 @@ import LoadingCard from './LoadingCard';
 import tmdb, { BASE_IMG_URL, NO_IMG_URL } from "../apis/tmdb";
 import MovieDetail from "./MovieDetail";
 import MovieNetworkLabel from "./MovieNetworkLabel";
+import { handleImageError } from "../utils/imageFallback";
 
 const MovieCard = forwardRef(({ movie, type, index, showShortMovies = true, sync }, ref) => {
   const { watchlist, watched } = useContext(GlobalContext);
@@ -94,6 +95,7 @@ const MovieCard = forwardRef(({ movie, type, index, showShortMovies = true, sync
               src={movie.poster_path ? `${BASE_IMG_URL}${movie.poster_path}` : NO_IMG_URL}
               alt={movie.title}
               onLoad={imageLoaded}
+              onError={(e) => handleImageError(e, 'POSTER')}
               className={`w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 cursor-pointer ${
                 (isWatchlist || isWatched) ? 'opacity-70 saturate-50' : ''
               } ${loading ? 'opacity-0' : 'opacity-100'}`}
@@ -122,6 +124,11 @@ const MovieCard = forwardRef(({ movie, type, index, showShortMovies = true, sync
                 {isShortMovie && (
                   <div className="bg-orange-500/90 backdrop-blur-md text-white text-[10px] uppercase font-bold px-2.5 py-1 rounded-md shadow-sm border border-white/10">
                     <i className="fa-solid fa-clock mr-1.5"></i> Short
+                  </div>
+                )}
+                {movieDetail?.belongs_to_collection && (
+                  <div className="bg-purple-600/90 backdrop-blur-md text-white text-[10px] uppercase font-bold px-2.5 py-1 rounded-md shadow-sm border border-white/10">
+                    <i className="fa-solid fa-layer-group mr-1.5"></i> Collection
                   </div>
                 )}
               </div>

@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import LoadingCard from "../components/LoadingCard";
 import Transitions from '../components/Transition';
@@ -7,6 +7,10 @@ import useTVPopularFetch from "../hooks/useTVPopularFetch";
 
 const TVPopular = () => {
   const [pageNumber, setPageNumber] = useState(1)
+
+  useEffect(() => {
+    document.title = "Popular TV Series | NontonApaYa";
+  }, []);
 
   const {
     hasMore, loading, error, tv

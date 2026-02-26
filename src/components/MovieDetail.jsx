@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import { motion } from 'framer-motion';
 import { BASE_IMG_URL, NO_IMG_URL, NO_IMG_URL_LANDSCAPE } from "../apis/tmdb";
+import { handleImageError } from "../utils/imageFallback";
 
 const MovieDetail = ({ movieDetail, providers }) => {
   const [loading, setLoading] = useState(true);
@@ -39,6 +40,7 @@ const MovieDetail = ({ movieDetail, providers }) => {
           alt={movieDetail.title}
           src={movieDetail.backdrop_path ? `${BASE_IMG_URL}${movieDetail.backdrop_path}` : NO_IMG_URL_LANDSCAPE}
           onLoad={imageLoaded}
+          onError={(e) => handleImageError(e, 'BACKDROP')}
         />
         {/* Subtle gradient overlay to make text pop if it overlaps */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 sm:opacity-100" />
@@ -81,10 +83,12 @@ const MovieDetail = ({ movieDetail, providers }) => {
             </div>
           )}
           {movieDetail.release_date && (
-            <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300">
-              <i className="fa-regular fa-calendar"></i>
-              <Moment format="YYYY">{movieDetail.release_date}</Moment>
-            </div>
+            <Link to={`/movie/year/${new Date(movieDetail.release_date).getFullYear()}`}>
+              <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-emerald-500 hover:text-white transition-colors cursor-pointer">
+                <i className="fa-regular fa-calendar"></i>
+                <Moment format="YYYY">{movieDetail.release_date}</Moment>
+              </div>
+            </Link>
           )}
         </div>
       </div>
@@ -116,7 +120,8 @@ const MovieDetail = ({ movieDetail, providers }) => {
                       <img
                         className="w-full h-full object-cover bg-slate-200 dark:bg-slate-800"
                         alt={c.name}
-                        src={c.profile_path ? `${BASE_IMG_URL}${c.profile_path}` : NO_IMG_URL} 
+                        src={c.profile_path ? `${BASE_IMG_URL}${c.profile_path}` : NO_IMG_URL}
+                        onError={(e) => handleImageError(e, 'PROFILE')}
                       />
                     </div>
                     <p className="text-xs font-bold text-center leading-tight text-slate-800 dark:text-slate-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors line-clamp-2">
@@ -146,7 +151,8 @@ const MovieDetail = ({ movieDetail, providers }) => {
                       className="w-10 h-10 rounded-lg shadow-sm hover:scale-110 transition-transform"
                       alt={c.provider_name}
                       title={c.provider_name}
-                      src={`${BASE_IMG_URL}${c.logo_path}`} 
+                      src={`${BASE_IMG_URL}${c.logo_path}`}
+                      onError={(e) => handleImageError(e, 'NETWORK')}
                     />
                   </Link>
                 ))}
@@ -214,6 +220,7 @@ const MovieDetail = ({ movieDetail, providers }) => {
                       src={c.iso_3166_1 ? `https://flagsapi.com/${c.iso_3166_1}/flat/64.png` : ""}
                       alt={c.name}
                       title={c.name}
+                      onError={(e) => handleImageError(e, 'FLAG')}
                     />
                   </Link>
                 ))}

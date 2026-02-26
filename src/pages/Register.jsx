@@ -1,11 +1,15 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { auth } from '../apis/firebase'
 
 const Register = () => {
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState('');
+
+    useEffect(() => {
+        document.title = "Register | NontonApaYa";
+    }, []);
 
     const handleSubmit = async (event) => {
         event.preventDefault();

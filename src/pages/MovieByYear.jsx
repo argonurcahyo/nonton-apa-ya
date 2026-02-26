@@ -31,6 +31,10 @@ const MovieByYear = () => {
   setPageNumber(1)
  }, [year])
 
+ useEffect(() => {
+  document.title = `${year} Movies | NontonApaYa`;
+ }, [year]);
+
 
  return (
   <Transitions>

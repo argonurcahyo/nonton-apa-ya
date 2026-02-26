@@ -6,6 +6,17 @@ import { useTheme } from "../context/ThemeContext";
 import { auth } from "../apis/firebase";
 import { signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
+import {
+  Flame,
+  List,
+  Eye,
+  Search,
+  Film,
+  Tv,
+  Sun,
+  Moon,
+  Power
+} from "lucide-react";
 
 const Header = () => {
   const { watchlist } = useContext(GlobalContext);
@@ -24,155 +35,210 @@ const Header = () => {
     }
   };
 
-  const movieLinks = [
-    { to: "/movie/popular", icon: "fa-fire-flame-curved", label: "Popular" },
-    { to: "/movie/watchlist", icon: "fa-list", label: "Watchlist", badge: watchlist.length },
-    { to: "/movie/watched", icon: "fa-eye", label: "Watched" },
-    { to: "/movie/search", icon: "fa-search", label: "Search" },
+  const movieLinks =[
+    { to: "/movie/popular", icon: Flame, label: "Popular" },
+    { to: "/movie/watchlist", icon: List, label: "Watchlist", badge: watchlist.length },
+    { to: "/movie/watched", icon: Eye, label: "Watched" },
+    { to: "/movie/search", icon: Search, label: "Search" },
   ];
 
-  const tvLinks = [
-    { to: "/tv/popular", icon: "fa-fire-flame-curved", label: "Popular" },
-    { to: "/tv/search", icon: "fa-search", label: "Search" },
+  const tvLinks =[
+    { to: "/tv/popular", icon: Flame, label: "Popular" },
+    { to: "/tv/search", icon: Search, label: "Search" },
   ];
+
+  const currentLinks = isMovie ? movieLinks : tvLinks;
 
   return (
-    <header className="sticky top-0 z-50 glass border-b border-gray-200 dark:border-gray-800 backdrop-blur-xl bg-white/80 dark:bg-gray-900/80">
+    <header className="sticky top-0 z-50 border-b border-gray-200/80 dark:border-gray-800/80 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        
+        {/* TOP ROW: Logo, Center Toggle (Desktop), Right Actions */}
+        <div className="flex items-center justify-between h-16 gap-4">
           
-          {/* Left Side: Logo & Controls */}
-          <div className="flex items-center gap-6">
-            {/* Logo */}
-            <motion.div 
-              className="text-2xl font-bold gradient-primary text-gradient cursor-pointer"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => navigate("/")}
-            >
-              🎬 NontonApaYa
-            </motion.div>
-            
-            {/* Movie/TV Toggle */}
-            <div className="hidden md:flex items-center gap-2 bg-gray-100 dark:bg-gray-800 rounded-xl p-1 relative">
+          {/* Logo */}
+          <motion.div 
+            className="text-xl sm:text-2xl font-black gradient-primary text-gradient cursor-pointer flex items-center gap-2 tracking-tight shrink-0"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => navigate("/")}
+          >
+            <span className="text-2xl drop-shadow-sm">🎬</span>
+            NontonApaYa
+          </motion.div>
+          
+          {/* Center: Movie/TV Toggle (Desktop Only) */}
+          <div className="hidden md:flex items-center justify-center flex-1">
+            <div className="flex items-center gap-1 p-1 bg-gray-100/80 dark:bg-gray-800/80 rounded-xl relative shadow-inner border border-gray-200/50 dark:border-gray-700/50">
               <motion.div
                 layout
-                transition={{ type: "spring", stiffness: 500, damping: 35 }}
-                className={`absolute h-[calc(100%-8px)] rounded-lg ${
+                initial={false} // FIX: Prevents sliding glitch on page reload
+                transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                className={`absolute inset-y-1 rounded-lg shadow-sm ${
                   isMovie ? 'gradient-primary' : 'gradient-secondary'
                 }`}
                 style={{
                   width: "calc(50% - 4px)",
-                  left: isMovie ? "4px" : "calc(50% + 2px)",
-                  top: "4px",
+                  left: isMovie ? "4px" : "calc(50% + 4px)",
                 }}
               />
               <motion.button
-                onClick={() => {
-                  navigate("/movie/popular");
-                }}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className={`relative z-10 px-6 py-2 text-sm font-semibold rounded-lg transition-colors ${
-                  isMovie ? 'text-white' : 'text-gray-600 dark:text-gray-400'
+                onClick={() => navigate("/movie/popular")}
+                className={`relative z-10 px-6 py-2 text-sm font-bold rounded-lg transition-colors flex items-center gap-2 ${
+                  isMovie ? 'text-white' : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
                 }`}
               >
-                <i className="fa-solid fa-film mr-2"></i>
-                MOVIES
+                <Film size={16} /> MOVIES
               </motion.button>
               <motion.button
-                onClick={() => {
-                  navigate("/tv/popular");
-                }}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className={`relative z-10 px-6 py-2 text-sm font-semibold rounded-lg transition-colors ${
-                  !isMovie ? 'text-white' : 'text-gray-600 dark:text-gray-400'
+                onClick={() => navigate("/tv/popular")}
+                className={`relative z-10 px-6 py-2 text-sm font-bold rounded-lg transition-colors flex items-center gap-2 ${
+                  !isMovie ? 'text-white' : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
                 }`}
               >
-                <i className="fa-solid fa-tv mr-2"></i>
-                TV SHOWS
+                <Tv size={16} /> TV SHOWS
               </motion.button>
             </div>
           </div>
 
-          {/* Right Side: Navigation & Theme Toggle */}
-          <div className="flex items-center gap-4">
-            {/* Theme Toggle */}
-            <motion.button
-              onClick={toggleTheme}
-              whileHover={{ scale: 1.1, rotate: 180 }}
-              whileTap={{ scale: 0.9 }}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700"
-              title={isDark ? "Light Mode" : "Dark Mode"}
-            >
-              {isDark ? (
-                <i className="fa-solid fa-sun text-yellow-500 text-lg"></i>
-              ) : (
-                <i className="fa-solid fa-moon text-emerald-600 text-lg"></i>
-              )}
-            </motion.button>
-
-            {/* Navigation Links */}
-            <AnimatePresence mode="wait">
+          {/* Right Side: Navigation & Actions */}
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            
+            {/* Desktop Navigation Links */}
+            <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={isMovie ? "movie" : "tv"}
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 10 }}
                 transition={{ duration: 0.2 }}
-                className="hidden md:flex items-center gap-2"
+                className="hidden md:flex items-center gap-1 mr-2"
               >
-                {(isMovie ? movieLinks : tvLinks).map((link, index) => (
-                  <motion.div
-                    key={link.to}
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ 
-                      opacity: 1, 
-                      y: 0,
-                      transition: { delay: index * 0.05 }
-                    }}
-                  >
-                    <NavLink
-                      to={link.to}
-                      className={({ isActive }) =>
-                        `relative p-3 rounded-lg transition-all ${
-                          isActive
-                            ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400'
-                            : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'
-                        }`
-                      }
-                      title={link.label}
+                {currentLinks.map((link, index) => {
+                  const Icon = link.icon;
+                  return (
+                    <motion.div
+                      key={link.to}
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0, transition: { delay: index * 0.05 } }}
                     >
-                      <i className={`fa-solid ${link.icon} text-lg`}></i>
-                      {link.badge > 0 && (
-                        <motion.span
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center"
-                        >
-                          {link.badge}
-                        </motion.span>
-                      )}
-                    </NavLink>
-                  </motion.div>
-                ))}
+                      <NavLink
+                        to={link.to}
+                        title={link.label}
+                        className={({ isActive }) =>
+                          `relative p-2.5 rounded-xl transition-all flex items-center justify-center group ${
+                            isActive
+                              ? 'bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-400'
+                              : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-green-600 dark:hover:text-green-400'
+                          }`
+                        }
+                      >
+                        <Icon size={20} className="transition-transform group-hover:scale-110" />
+                        {link.badge > 0 && (
+                          <motion.span
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold rounded-full min-w-[18px] h-[18px] flex items-center justify-center px-1 shadow-sm ring-2 ring-white dark:ring-gray-900"
+                          >
+                            {link.badge}
+                          </motion.span>
+                        )}
+                      </NavLink>
+                    </motion.div>
+                  );
+                })}
               </motion.div>
             </AnimatePresence>
 
-            {/* Logout Button */}
+            {/* Theme Toggle (Mobile + Desktop) */}
+            <motion.button
+              onClick={toggleTheme}
+              whileHover={{ scale: 1.1, rotate: 180 }}
+              whileTap={{ scale: 0.9 }}
+              className="p-2 sm:p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition-colors shadow-sm"
+              title={isDark ? "Light Mode" : "Dark Mode"}
+            >
+              {isDark ? <Sun size={18} className="text-yellow-500" /> : <Moon size={18} className="text-emerald-500" />}
+            </motion.button>
+
+            {/* Logout Button (Mobile + Desktop) */}
             {user && (
               <motion.button
                 onClick={onLogout}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="p-3 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-600 dark:text-red-400 transition-colors"
+                className="p-2 sm:p-2.5 rounded-xl bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/40 text-red-600 dark:text-red-400 transition-colors shadow-sm"
                 title="Logout"
               >
-                <i className="fa-solid fa-power-off text-lg"></i>
+                <Power size={18} />
               </motion.button>
             )}
           </div>
+        </div>
+
+        {/* BOTTOM SECTION FOR MOBILE (Toggle & Nav Links) */}
+        <div className="md:hidden pb-4 space-y-3">
+          
+          {/* Mobile Movie/TV Toggle */}
+          <div className="flex items-center p-1 bg-gray-100/80 dark:bg-gray-800/80 rounded-xl relative shadow-inner border border-gray-200/50 dark:border-gray-700/50 w-full">
+            <motion.div
+              layout
+              initial={false} // FIX: Prevents sliding glitch on page reload
+              transition={{ type: "spring", stiffness: 400, damping: 30 }}
+              className={`absolute inset-y-1 rounded-lg shadow-sm ${
+                isMovie ? 'gradient-primary' : 'gradient-secondary'
+              }`}
+              style={{
+                width: "calc(50% - 4px)",
+                left: isMovie ? "4px" : "calc(50% + 4px)",
+              }}
+            />
+            <button
+              onClick={() => navigate("/movie/popular")}
+              className={`relative z-10 flex-1 py-2.5 text-xs font-bold rounded-lg transition-colors flex justify-center items-center gap-1.5 ${
+                isMovie ? 'text-white' : 'text-gray-500 dark:text-gray-400'
+              }`}
+            >
+              <Film size={14} /> MOVIES
+            </button>
+            <button
+              onClick={() => navigate("/tv/popular")}
+              className={`relative z-10 flex-1 py-2.5 text-xs font-bold rounded-lg transition-colors flex justify-center items-center gap-1.5 ${
+                !isMovie ? 'text-white' : 'text-gray-500 dark:text-gray-400'
+              }`}
+            >
+              <Tv size={14} /> TV SHOWS
+            </button>
+          </div>
+
+          {/* Mobile Nav Links (App-style dock) */}
+          <div className="flex items-center justify-around w-full bg-gray-50 dark:bg-gray-800/40 p-1.5 rounded-2xl border border-gray-100 dark:border-gray-700/50">
+            {currentLinks.map((link) => {
+              const Icon = link.icon;
+              return (
+                <NavLink
+                  key={link.to}
+                  to={link.to}
+                  className={({ isActive }) =>
+                    `relative flex-1 py-2 flex items-center justify-center rounded-xl transition-all ${
+                      isActive
+                        ? 'bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-400'
+                        : 'text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-green-600 dark:hover:text-green-400'
+                    }`
+                  }
+                  title={link.label}
+                >
+                  <Icon size={20} />
+                  {link.badge > 0 && (
+                    <span className="absolute top-1 right-1/4 sm:right-1/3 translate-x-1/2 -translate-y-1/2 bg-red-500 text-white text-[9px] font-bold rounded-full w-4 h-4 flex items-center justify-center ring-2 ring-white dark:ring-gray-900">
+                      {link.badge}
+                    </span>
+                  )}
+                </NavLink>
+              );
+            })}
+          </div>
+          
         </div>
       </div>
     </header>

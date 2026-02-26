@@ -4,7 +4,7 @@ import { ACTIONS } from "./AppReducer";
 import nonton from '../apis/nonton'
 import { toast } from 'react-toastify'
 import { loadInitialState, persistState } from '../utils/storageHelper'
-import { extractMovieData, extractEpisodeData, getYear } from '../utils/dataTransformer'
+import { extractMovieData, getYear } from '../utils/dataTransformer'
 
 const initialState = loadInitialState();
 

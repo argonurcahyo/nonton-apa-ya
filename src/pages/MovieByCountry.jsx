@@ -32,6 +32,12 @@ const MovieByCountry = () => {
   setPageNumber(1)
  }, [country])
 
+ useEffect(() => {
+  if (country) {
+   document.title = `${country.toUpperCase()} Movies | NontonApaYa`;
+  }
+ }, [country]);
+
  return (
   <Transitions>
    <main className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 md:py-16">

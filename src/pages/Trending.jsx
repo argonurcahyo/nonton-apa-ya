@@ -12,6 +12,10 @@ const Trending = () => {
   const [hasMore, setHasMore] = useState(true);
 
   React.useEffect(() => {
+    document.title = "Trending Movies | NontonApaYa";
+  }, []);
+
+  React.useEffect(() => {
     const fetchTrendingMovies = async () => {
       try {
         setLoading(true);

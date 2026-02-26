@@ -44,6 +44,13 @@ const TVByGenre = () => {
   setPageNumber(1)
  }, [id]);
 
+ useEffect(() => {
+  const genreName = genres?.find(g => g.id === parseInt(id))?.name;
+  if (genreName) {
+   document.title = `${genreName} TV Shows | NontonApaYa`;
+  }
+ }, [genres, id]);
+
  return (
   <Transitions>
    <main className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 md:py-16">

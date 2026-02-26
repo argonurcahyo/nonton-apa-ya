@@ -44,6 +44,12 @@ const TVByNetwork = () => {
     setPageNumber(1)
   }, [id]);
 
+  useEffect(() => {
+    if (network?.name) {
+      document.title = `${network.name} TV Shows | NontonApaYa`;
+    }
+  }, [network]);
+
   return (
     <Transitions>
       <main className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 md:py-16">
